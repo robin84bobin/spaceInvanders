@@ -1,0 +1,50 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Data\DB\SQLiteProxy.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Data\DB\SQLiteProxy.cs" Line="88" Column="1" />
+      <File FileName="Assets\Scripts\Data\DataSource\LevelData.cs" Line="10" Column="12" />
+      <File FileName="Assets\Scripts\Network\DataLoader.cs" Line="32" Column="18" />
+      <File FileName="Assets\Scripts\Data\DataStorages\BaseStorage.cs" Line="33" Column="1" />
+      <File FileName="Assets\Scripts\Data\DataController.cs" Line="27" Column="70" />
+      <File FileName="Assets\Scripts\Events\CustomEvents\EventClasses.cs" Line="9" Column="32" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Data" expanded="True">
+                <Node name="DataStorages" expanded="True" />
+                <Node name="DB" expanded="True">
+                  <Node name="SQLiteProxy.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="Events" expanded="True">
+                <Node name="CustomEvents" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>column._columnName</Value>
+          <Value>column._caption</Value>
+          <Value>mReader</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="Assets\Scripts\Views\Level.cs" line="54" offsetX="661" offsetY="865" expression="position" liveUpdate="False" />
+    <Watch file="Assets\Scripts\Views\Enemy.cs" line="21" offsetX="481" offsetY="291" expression="speed" liveUpdate="False" />
+    <Watch file="Assets\Scripts\Models\LevelModel.cs" line="43" offsetX="1072" offsetY="672" expression="_enemySpeed" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+</Properties>

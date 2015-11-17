@@ -1,0 +1,31 @@
+3ч - разбор Parse.com
+3ч - разработка механизма инициализации данных
+3ч - доработка механизма инициализации данных
+4ч - разбор Unity UI, менеджер окон, окна, 
+2ч... - model-view 
+
+
+GUI:
+- window manager
+- window
+- preloader
+- leaderboard 
+- info window
+
+MODELS:
+- levelModel
+- enemyModel
+- bulletModel
+- weaponModel
+
+- inputmanager
+- IInputTarget
+- HeroModel : IInputTarget;
+
+FSM!:
+- inputManager states: on, off
+- levelStates: win, loose, play
+- warriorSates: alive, dead (destroyed)
+
+TODO:
+- сохранять данные локально!!!
