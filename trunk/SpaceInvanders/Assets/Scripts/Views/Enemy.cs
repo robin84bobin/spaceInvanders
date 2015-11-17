@@ -12,9 +12,9 @@ public class Enemy : BaseActor
 		_model.onMoveGuided += OnMoveGuided;
 	}
 
-	void OnMove (float speed)
+	void OnMove (double speed)
 	{
-		transform.position += new Vector3 (0f, - speed, 0f);
+		transform.position += new Vector3 (0f, - (float)speed, 0f);
 	}
 
 	void OnMoveGuided (Vector3 moveVector)

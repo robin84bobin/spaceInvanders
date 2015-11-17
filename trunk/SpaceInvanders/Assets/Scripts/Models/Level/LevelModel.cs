@@ -14,8 +14,8 @@ public class LevelModel
 	private List<BaseActorModel> _actorsList;
 	private HeroModel _hero;
 
-	private float _waveSpawnTime;
-	private float _enemySpeed;
+	private double _waveSpawnTime;
+	private double _enemySpeed;
 	
 	private BaseStateSwitcher <LevelStates,ILevelState>  _states;
 

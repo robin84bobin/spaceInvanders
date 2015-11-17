@@ -20,8 +20,8 @@ public class LevelParseFactory : IConcreteParseFactory
 		po.TryGetValue<int> ("EnemyWaveRate", out levelData.enemyWaveRate);
 		po.TryGetValue<int> ("EnemyWaveSize", out levelData.enemyWaveSize);
 		po.TryGetValue<int> ("EnemyStartSpeed", out levelData.enemyStartSpeed);
-		po.TryGetValue<float> ("EnemySpeedFactor", out levelData.enemySpeedFactor);
-		po.TryGetValue<float> ("EnemyMovePeriod", out levelData.enemyMovePeriod);
+		po.TryGetValue<double> ("EnemySpeedFactor", out levelData.enemySpeedFactor);
+		po.TryGetValue<double> ("EnemyMovePeriod", out levelData.enemyMovePeriod);
 
 		return levelData;
 	}

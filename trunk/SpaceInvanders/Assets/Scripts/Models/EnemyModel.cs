@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class EnemyModel : BaseActorModel, IGuided
 {
-	public event Action<float> OnMove = delegate{};
+	public event Action<double> OnMove = delegate{};
 	public event Action<Vector3> onMoveGuided = delegate{};
 
 	private EnemyData _enemyData;
-	private float _moveEnemiesTime;
-	private float _movePeriod;
-	private float _speed;
+	private double _moveEnemiesTime;
+	private double _movePeriod;
+	private double _speed;
 
 	public EnemyModel (EnemyData enemyData): base(enemyData)
 	{
 		_enemyData = enemyData;
 	}
 
-	public void Init (float speed, float movePeriod)
+	public void Init (double speed, double movePeriod)
 	{
 		_speed = speed;
 		_movePeriod = movePeriod;

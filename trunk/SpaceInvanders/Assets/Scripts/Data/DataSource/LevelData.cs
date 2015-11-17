@@ -7,8 +7,8 @@ public class LevelData : BaseData
 	public int enemyWaveRate;
 	public int enemyWaveSize;
 	public int enemyStartSpeed;
-	public float enemySpeedFactor;
-	public float enemyMovePeriod;
+	public double enemySpeedFactor;
+	public double enemyMovePeriod;
 	public string enemyId;
 	public string heroId;
 

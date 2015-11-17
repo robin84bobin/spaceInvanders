@@ -112,8 +112,9 @@ public class SQLiteProxy : IDataBaseProxy
 				                       dataType.Name,
 				                       targetField.Name);
 			}
-
-			targetField.SetValue( resultData, fieldValue);
+			else{
+				targetField.SetValue( resultData, fieldValue);
+			}
 		}
 
 		return resultData;
@@ -255,7 +256,7 @@ public class SQLiteHelper
 		{"Int64", INTEGER},
 		{"Int32", INTEGER},
 		{"float", REAL},
-		{"double", REAL},
+		{"Double", REAL},
 		{"Single", REAL},
 		{"String", TEXT}
 	};
