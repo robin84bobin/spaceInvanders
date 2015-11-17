@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public interface IBaseStorage
 {
+	void LoadData();
 	void UpdateWebData();
 	void LoadDBData ();
 }
@@ -18,6 +19,11 @@ public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
 	{
 		_tableName = tableName;
 		_objects = new Dictionary<string, IBaseData> ();
+	}
+
+	public void LoadData()
+	{
+
 	}
 
 	public void UpdateWebData()
@@ -37,7 +43,12 @@ public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
 	public void LoadDBData()
 	{
 		EventManager.Get<LoadProgressEvent> ().Publish (GetLoadMessage ());
-		DataLoader.Instance.LoadDBData<TData> (_tableName, OnLoadDataComplete);
+		DataLoader.Instance.LoadDBData<TData> (_tableName, OnLoadDataComplete, OnLoadDBFail);
+	}
+
+	void OnLoadDBFail(string table)
+	{
+		UpdateWebData ();
 	}
 
 	protected void OnLoadDataComplete(Dictionary<string,IBaseData> objects)

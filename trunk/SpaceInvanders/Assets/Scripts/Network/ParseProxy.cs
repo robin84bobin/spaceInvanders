@@ -7,6 +7,11 @@ public class ParseProxy: IWebDataProxy
 {
 	#region IDataProxy implementation
 
+	public double lastUpdateTime (string tableName)
+	{
+		return 0;
+	}
+
 	public void GetData (string dataType, Action<Dictionary<string, IBaseData>> callback)	
 	{	
 		Dictionary<string, IBaseData> resultDict = new Dictionary<string, IBaseData>();
@@ -33,6 +38,11 @@ public class ParseProxy: IWebDataProxy
 public class ParseProxyREST : IWebDataProxy
 {
 	#region IWebDataProxy implementation
+
+	public double lastUpdateTime (string tableName)
+	{
+		throw new NotImplementedException ();
+	}
 
 	public void GetData (string tableName, Action<Dictionary<string, IBaseData>> callback)
 	{

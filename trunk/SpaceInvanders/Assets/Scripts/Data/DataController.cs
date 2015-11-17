@@ -31,8 +31,6 @@ public sealed class DataController
 		StartUpdateStorages ();
 	}
 
-
-
 	private void InitStorages()
 	{
 		_storages = new List<IBaseStorage>();
@@ -78,11 +76,11 @@ public sealed class DataController
 			return;
 		}
 
-		if (_needUpdate) {
-			_storages [nextStorageIndex].UpdateWebData ();
-		} else {
+		//if (_needUpdate) {
+		//	_storages [nextStorageIndex].UpdateWebData ();
+		//} else {
 			_storages [nextStorageIndex].LoadDBData();
-		}
+		//}
 		nextStorageIndex ++;
 	}
 

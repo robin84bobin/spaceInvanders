@@ -1,7 +1,5 @@
 using UnityEngine;
 
-
-
 public sealed class MoveControlsEvent: siParamEvent<Vector3> {}
 
 public sealed class DataInitCompleteEvent : siEvent {}

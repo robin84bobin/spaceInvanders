@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class DataLoader
 {
-	private SQLiteProxy _dbProxy;
+	private IDataBaseProxy _dbProxy;
 	private IWebDataProxy _webProxy;
 
 	private static DataLoader _instance;
@@ -24,14 +24,22 @@ public class DataLoader
 		_dbProxy.Init ();
 	}
 
+	public bool CheckToUpdate(string tableName)
+	{
+		if (_webProxy.lastUpdateTime (tableName) > _dbProxy.lastUpdateTime (tableName)) {
+
+		}
+		return true;
+	}
+
 	public void SaveDataToDB<TData> (string tableName, Dictionary<string,IBaseData> dataDict) where TData:IBaseData
 	{
 		_dbProxy.SaveDataTable<TData> (tableName, dataDict);
 	}
 
-	public void LoadDBData<TData>(string tableName, Action<Dictionary<string,IBaseData>> callback) where TData:IBaseData, new()
+	public void LoadDBData<TData>(string tableName, Action<Dictionary<string,IBaseData>> callback, Action<string> failCallback) where TData:IBaseData, new()
 	{
-		_dbProxy.GetTableData<TData>(tableName, callback);
+		_dbProxy.GetTableData<TData>(tableName, callback, failCallback);
 	}
 
 	public void LoadWebData(string tableName, Action<Dictionary<string,IBaseData>> callback)

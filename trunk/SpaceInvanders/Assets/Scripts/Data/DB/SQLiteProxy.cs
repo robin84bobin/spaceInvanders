@@ -29,9 +29,9 @@ public class SQLiteProxy : IDataBaseProxy
 	/// <summary>
 	/// DB objects
 	/// </summary>
-	private SqliteConnection mConnection = null;
-	private SqliteCommand mCommand = null;
-	private SqliteDataReader mReader = null;
+	private IDbConnection mConnection = null;
+	private IDbCommand mCommand = null;
+	private IDataReader mReader = null;
 	private string mSQLString;
 
 	public void Init()
@@ -40,7 +40,7 @@ public class SQLiteProxy : IDataBaseProxy
 
 		Debug.Log("SQLiter - Opening SQLite Connection at " + SQL_DB_LOCATION);
 		mConnection = new SqliteConnection(SQL_DB_LOCATION);
-		mCommand = (SqliteCommand)mConnection.CreateCommand();
+		mCommand = mConnection.CreateCommand();
 		mConnection.Open();
 		
 		// WAL = write ahead logging, very huge speed increase
@@ -65,14 +65,37 @@ public class SQLiteProxy : IDataBaseProxy
 			Debug.Log("SQLiter - synchronous value is: " + mReader.GetInt32(0));
 		mReader.Close();
 		
-		//Test ();
 	}
 
-
+	public double lastUpdateTime (string tableName)
+	{
+		if (!IsTableExist (tableName)) {
+			return -1;
+		}
+		return Time.time;
+	}
+	
 	#region READ DATABASE
 
-	public void GetTableData<TBaseData> (string tableName, Action<Dictionary<string, IBaseData>> callback) where TBaseData:IBaseData, new()
+	public bool IsTableExist(string tableName)
 	{
+		mCommand.CommandText = "SELECT name FROM sqlite_master WHERE name='" + tableName + "'";
+		mReader = mCommand.ExecuteReader ();
+		if (!mReader.Read ()) {
+			mReader.Close ();
+			return false;
+		}
+		mReader.Close ();
+		return true;
+	}
+
+	public void GetTableData<TBaseData> (string tableName, Action<Dictionary<string, IBaseData>> callback, Action<string> failCallback) where TBaseData:IBaseData, new()
+	{
+		if (!IsTableExist (tableName)) {
+			failCallback(tableName);
+			return;
+		}
+
 		Dictionary<string,IBaseData> resultObjects = new Dictionary<string, IBaseData> ();
 
 		mCommand.CommandText = "SELECT * FROM " + tableName;
@@ -86,7 +109,7 @@ public class SQLiteProxy : IDataBaseProxy
 		callback (resultObjects);
 	}
 
-	private TBaseData ReadDataItem<TBaseData> (SqliteDataReader mReader) where TBaseData:IBaseData, new()
+	private TBaseData ReadDataItem<TBaseData> (IDataReader mReader) where TBaseData:IBaseData, new()
 	{
 		TBaseData resultData = new TBaseData ();
 		Type dataType = resultData.GetType();
@@ -103,14 +126,17 @@ public class SQLiteProxy : IDataBaseProxy
 			fieldType = mReader.GetFieldType(fieldIndex);
 
 			targetField = dataType.GetField (fieldName);
+			if(targetField == null){
+				continue;
+			}
 
 			if (targetField.FieldType != fieldType){
-				targetField.SetValue( resultData, Convert.ChangeType( fieldValue, targetField.FieldType));
 				Debug.LogWarningFormat("Types mismatch (expected '{0}' => get '{1}') on reading data: {2}.{3}", 
 				                       targetField.FieldType,
 				                       fieldType,
 				                       dataType.Name,
 				                       targetField.Name);
+				targetField.SetValue( resultData, Convert.ChangeType( fieldValue, targetField.FieldType));
 			}
 			else{
 				targetField.SetValue( resultData, fieldValue);
@@ -144,6 +170,8 @@ public class SQLiteProxy : IDataBaseProxy
 		mSQLString = string.Format ("CREATE TABLE IF NOT EXISTS {0} ({1})", tableName, tableColumns);
 		mCommand.CommandText = mSQLString;
 		mCommand.ExecuteNonQuery();
+
+		Debug.Log (mSQLString);
 	}
 
 	private void InsertData<TBaseData>(string tableName, Dictionary<string, IBaseData> dataDictionary) where TBaseData:IBaseData
@@ -190,6 +218,8 @@ public class SQLiteProxy : IDataBaseProxy
 			}
 		}
 
+		sb.Append (", Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP");
+
 		return sb.ToString ();
 	}
 
@@ -229,6 +259,7 @@ public class SQLiteProxy : IDataBaseProxy
 			}
 			
 		}
+
 		return sb.ToString();
 	}
 }
