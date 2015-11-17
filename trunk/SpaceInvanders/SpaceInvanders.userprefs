@@ -1,27 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Data\DB\SQLiteProxy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Network\ParseProxy.cs">
     <Files>
-      <File FileName="Assets\Scripts\Data\DB\SQLiteProxy.cs" Line="88" Column="1" />
-      <File FileName="Assets\Scripts\Data\DataSource\LevelData.cs" Line="10" Column="12" />
-      <File FileName="Assets\Scripts\Network\DataLoader.cs" Line="32" Column="18" />
-      <File FileName="Assets\Scripts\Data\DataStorages\BaseStorage.cs" Line="33" Column="1" />
-      <File FileName="Assets\Scripts\Data\DataController.cs" Line="27" Column="70" />
-      <File FileName="Assets\Scripts\Events\CustomEvents\EventClasses.cs" Line="9" Column="32" />
+      <File FileName="Assets\Scripts\Data\DB\SQLiteProxy.cs" Line="121" Column="3" />
+      <File FileName="Assets\Scripts\Network\DataLoader.cs" Line="22" Column="33" />
+      <File FileName="Assets\Scripts\Data\DataStorages\BaseStorage.cs" Line="46" Column="26" />
+      <File FileName="Assets\Scripts\Data\DataController.cs" Line="83" Column="5" />
+      <File FileName="Assets\Scripts\Data\DB\IDataBaseProxy.cs" Line="7" Column="43" />
+      <File FileName="Assets\Scripts\Network\IWebDataProxy.cs" Line="9" Column="14" />
+      <File FileName="Assets\Scripts\Network\ParseProxy.cs" Line="5" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="Data" expanded="True">
-                <Node name="DataStorages" expanded="True" />
-                <Node name="DB" expanded="True">
-                  <Node name="SQLiteProxy.cs" selected="True" />
-                </Node>
-              </Node>
-              <Node name="Events" expanded="True">
-                <Node name="CustomEvents" expanded="True" />
+              <Node name="Network" expanded="True">
+                <Node name="ParseProxy.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -32,9 +27,8 @@
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State>
-          <Value>column._columnName</Value>
-          <Value>column._caption</Value>
-          <Value>mReader</Value>
+          <Value>targetField</Value>
+          <Value>tableColumns</Value>
         </State>
       </Pad>
     </Pads>
