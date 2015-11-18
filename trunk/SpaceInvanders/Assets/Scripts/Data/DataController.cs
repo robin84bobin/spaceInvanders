@@ -61,7 +61,8 @@ public sealed class DataController
 
 	void OnStoragesUpdateComplete()
 	{
-		EventManager.Get<StorageLoadCompleteEvent>().Unsubscribe(LoadNextStorage);
+		EventManager.Get<StorageLoadCompleteEvent> ().Unsubscribe (LoadNextStorage);
+		EventManager.Get<StorageUpdateCompleteEvent> ().Unsubscribe (LoadStorage);
 		EventManager.Get<DataInitCompleteEvent> ().Publish ();
 	}
 

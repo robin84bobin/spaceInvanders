@@ -27,13 +27,7 @@ public abstract class BaseActorBehaviour<TOwner> : IActorBehaviour
 
 	public BaseActorBehaviour(TOwner owner)
 	{
-		//if (owner is TOwner) {
-			_owner = owner;
-		/*} else {
-			Debug.LogWarning(string.Format("Wrong ActorBehaviour couple: {0} to {1}", owner.ToString(), this.ToString()));
-			_locked = true;
-			_needToRemove = true;
-		}*/
+		_owner = owner;
 	}
 
 	public void OnRemoveCallback(Action<IActorBehaviour> callback)

@@ -34,7 +34,6 @@ public class WindowManager : MonoBehaviour
 		BaseWindow newWindow = InstantiateWindow(windowGO);
 		newWindow.OnShowComplete(param);
 		_shownWindows.Add(newWindow);
-		//Main.inst.input.SetState(InputMode.UI);
 	}
 
 	BaseWindow InstantiateWindow(GameObject windowGO)

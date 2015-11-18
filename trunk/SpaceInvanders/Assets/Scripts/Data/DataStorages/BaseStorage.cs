@@ -43,7 +43,7 @@ public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
 	public TData Get (string objectId)
 	{
 		if (!_objects.ContainsKey(objectId)){
-			Debug.LogError(string.Format("Can't get data from '{0}' storage by objectId:{1}", _dataType ,objectId));
+			Debug.LogError(string.Format("Can't get data from '{0}' storage - objectId:{1}", _dataType ,objectId));
 			return default(TData);
 		}
 

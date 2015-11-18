@@ -11,24 +11,19 @@ public sealed class GameManager : MonoBehaviour
 
 	public void LoadCurrentLevel()
 	{
-		//
-		//EventManager.Instance.Subscribe (EventTypes.LEVEL_START, OnLevelStart);
 		EventManager.Get<LevelStartEvent> ().Subscribe (OnLevelStart);
-		//
 		_currentLevelData = Main.inst.Data.levelStorage.GetByID (_currentLevelID);
 		Application.LoadLevel(_currentLevelData.levelSceneName);
 	}
 
 	private void OnLevelStart()
 	{
-		//
-		//EventManager.Instance.Unsubscribe (EventTypes.LEVEL_START, OnLevelStart);
 		EventManager.Get<LevelStartEvent> ().Unsubscribe (OnLevelStart);
-		//
+
 		Level level = (Level) FindObjectOfType (typeof(Level));
 		_levelModel = new LevelModel (_currentLevelData);
 		level.Attach (_levelModel);
-		//
+
 		_levelModel.Start ();
 	}
 

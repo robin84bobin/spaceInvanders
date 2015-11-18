@@ -12,10 +12,8 @@ public class Level : MonoBehaviour
 	private int _enemySpawnPointIndex;
 	private int _enemySpawnRow;
 
-
 	void Start()
 	{
-		//EventManager.Instance.Publish (EventTypes.LEVEL_START);
 		EventManager.Get<LevelStartEvent> ().Publish ();
 	}
 

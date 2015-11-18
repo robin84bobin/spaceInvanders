@@ -16,39 +16,12 @@ public sealed class EventManager : MonoBehaviour
 		}
 	}
 
-	//private Dictionary<string, List<Action<EventParam>>> _callbacks;// = new Dictionary<string, List<Action<EventParam>>>();
 	private System.Object event_lock = new System.Object();
 
 	void Awake()
 	{
 		_instance = this;
-		//_callbacks = new Dictionary<string, List<Action<EventParam>>>();
 	}
-
-/*	public void Subscribe(string eventName, Action<EventParam> callback)
-	{
-			if (!_callbacks.ContainsKey(eventName)){
-				_callbacks.Add(eventName, new List<Action<EventParam>>());
-			}
-
-			if (_callbacks[eventName].Contains(callback)){
-				Debug.LogWarning(string.Format ("Dublicate event '{0}' subscription callback: {1}", eventName, callback.ToString()));
-				return;
-			}
-
-			_callbacks[eventName].Add(callback);
-	}
-
-	public void Unsubscribe(string eventName, Action<EventParam> callback)
-	{
-			if (!_callbacks.ContainsKey(eventName)){
-				return;
-			}
-
-			if (_callbacks[eventName].Contains(callback)){
-				_callbacks[eventName].Remove(callback);
-			}
-	}*/
 
 	public static T Get<T>() where T: new ()
 	{
