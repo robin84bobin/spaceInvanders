@@ -15,11 +15,7 @@ public class PreloaderWindow : BaseWindow
 	public override void OnShowComplete(WindowParams param = null)
 	{
 		base.OnShowComplete (param);
-		//
-		//EventManager.instance.Subscribe(EventTypes.LOAD_PROGRESS, onLoadProgress);
-		//EventManager.instance.Subscribe(EventTypes.DATA_INIT_COMPLETE, onLoadComplete);
 
-		//
 		EventManager.Get<LoadProgressEvent> ().Subscribe (OnLoadProgressEvent);
 		EventManager.Get<DataInitCompleteEvent> ().Subscribe (OnLoadComplete);
 
@@ -28,11 +24,6 @@ public class PreloaderWindow : BaseWindow
 		startButton.gameObject.SetActive(false);
 	}
 
-	/*private void onLoadProgress (EventParam args)
-	{
-		Debug.Log ("onLoadProgress:"+((LoadEventArgs)args).message);
-		loadingStatusText.text = ((LoadEventArgs)args).message;
-	}*/
 
 	void OnLoadProgressEvent (string message)
 	{
@@ -49,8 +40,6 @@ public class PreloaderWindow : BaseWindow
 	protected override void OnHide ()
 	{
 		base.OnHide ();
-		//EventManager.Instance.Unsubscribe(EventTypes.LOAD_PROGRESS, onLoadProgress);
-		//EventManager.Instance.Unsubscribe(EventTypes.DATA_INIT_COMPLETE, onLoadComplete);
 		EventManager.Get<LoadProgressEvent> ().Unsubscribe (OnLoadProgressEvent);
 		EventManager.Get<DataInitCompleteEvent> ().Unsubscribe (OnLoadComplete);
 	}

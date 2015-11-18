@@ -5,7 +5,18 @@ using System.Collections.Generic;
 public class DataLoader
 {
 	private IDataBaseProxy _dbProxy;
+	public IDataBaseProxy DBProxy {
+		get {
+			return _dbProxy;
+		}
+	}
+
 	private IWebDataProxy _webProxy;
+	public IWebDataProxy WebProxy{
+		get {
+			return _webProxy;
+		}
+	}
 
 	private static DataLoader _instance;
 	public static DataLoader Instance {
@@ -24,27 +35,31 @@ public class DataLoader
 		_dbProxy.Init ();
 	}
 
-	public bool CheckToUpdate(string tableName)
+	private bool NeedUpdate(string tableName)
 	{
-		if (_webProxy.lastUpdateTime (tableName) > _dbProxy.lastUpdateTime (tableName)) {
-
+		if (!_dbProxy.IsTableExist (tableName)) {
+			return true;
 		}
-		return true;
+		else
+		if (_webProxy.lastUpdateTime (tableName) > _dbProxy.lastUpdateTime (tableName)) {
+			return true;
+		}
+		return false;
 	}
 
-	public void SaveDataToDB<TData> (string tableName, Dictionary<string,IBaseData> dataDict) where TData:IBaseData
+	public void LoadData<TData>(string tableName, Action<Dictionary<string,IBaseData>> callback) where TData:IBaseData, new()
 	{
-		_dbProxy.SaveDataTable<TData> (tableName, dataDict);
+		if (NeedUpdate (tableName)) {
+			_webProxy.GetTableData (tableName, OnUpdateComplete<TData>);
+		} else {
+			_dbProxy.GetTableData <TData> (tableName, callback);
+		}
 	}
 
-	public void LoadDBData<TData>(string tableName, Action<Dictionary<string,IBaseData>> callback, Action<string> failCallback) where TData:IBaseData, new()
+	void OnUpdateComplete<TData> (string tableName, Dictionary<string, IBaseData> dataDict)  where TData:IBaseData
 	{
-		_dbProxy.GetTableData<TData>(tableName, callback, failCallback);
-	}
-
-	public void LoadWebData(string tableName, Action<Dictionary<string,IBaseData>> callback)
-	{
-		_webProxy.GetData(tableName, callback);
+		_dbProxy.SaveTableData<TData> (tableName, dataDict);
+		EventManager.Get<StorageUpdateCompleteEvent> ().Publish (tableName);
 	}
 
 	public void SaveResults(string playerName, int score)

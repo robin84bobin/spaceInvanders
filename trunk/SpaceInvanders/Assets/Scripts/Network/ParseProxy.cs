@@ -12,7 +12,7 @@ public class ParseProxy: IWebDataProxy
 		return 0;
 	}
 
-	public void GetData (string dataType, Action<Dictionary<string, IBaseData>> callback)	
+	public void GetTableData (string dataType, Action<string,Dictionary<string, IBaseData>> callback)	
 	{	
 		Dictionary<string, IBaseData> resultDict = new Dictionary<string, IBaseData>();
 		var query = ParseObject.GetQuery (dataType);
@@ -22,7 +22,7 @@ public class ParseProxy: IWebDataProxy
 				IBaseData dataItem = ParseFactory.Instance.Create(dataType,po);
 				resultDict.Add (po.ObjectId, dataItem);
 			}
-			callback(resultDict);
+			callback( dataType, resultDict );
 		});
 	}
 
@@ -41,10 +41,10 @@ public class ParseProxyREST : IWebDataProxy
 
 	public double lastUpdateTime (string tableName)
 	{
-		throw new NotImplementedException ();
+		return 0;
 	}
 
-	public void GetData (string tableName, Action<Dictionary<string, IBaseData>> callback)
+	public void GetTableData (string tableName, Action< string, Dictionary<string, IBaseData> > callback)
 	{
 		throw new NotImplementedException ();
 	}

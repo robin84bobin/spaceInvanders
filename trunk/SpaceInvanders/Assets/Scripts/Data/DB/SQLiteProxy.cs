@@ -69,10 +69,7 @@ public class SQLiteProxy : IDataBaseProxy
 
 	public double lastUpdateTime (string tableName)
 	{
-		if (!IsTableExist (tableName)) {
-			return -1;
-		}
-		return Time.time;
+		return 0;
 	}
 	
 	#region READ DATABASE
@@ -89,13 +86,8 @@ public class SQLiteProxy : IDataBaseProxy
 		return true;
 	}
 
-	public void GetTableData<TBaseData> (string tableName, Action<Dictionary<string, IBaseData>> callback, Action<string> failCallback) where TBaseData:IBaseData, new()
+	public void GetTableData<TBaseData> (string tableName, Action<Dictionary<string, IBaseData>> callback) where TBaseData:IBaseData, new()
 	{
-		if (!IsTableExist (tableName)) {
-			failCallback(tableName);
-			return;
-		}
-
 		Dictionary<string,IBaseData> resultObjects = new Dictionary<string, IBaseData> ();
 
 		mCommand.CommandText = "SELECT * FROM " + tableName;
@@ -150,7 +142,7 @@ public class SQLiteProxy : IDataBaseProxy
 
 	#region WRITE DATABASE
 
-	public void SaveDataTable<TBaseData>(string tableName, Dictionary<string, IBaseData> dataDictionary) where TBaseData:IBaseData
+	public void SaveTableData<TBaseData>(string tableName, Dictionary<string, IBaseData> dataDictionary) where TBaseData:IBaseData
 	{
 		CreateTable<TBaseData>(tableName);
 		InsertData<TBaseData> (tableName, dataDictionary);

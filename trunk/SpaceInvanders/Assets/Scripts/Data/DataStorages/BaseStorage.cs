@@ -5,55 +5,36 @@ using System.Collections.Generic;
 
 public interface IBaseStorage
 {
+	string DataType {get;}
 	void LoadData();
-	void UpdateWebData();
-	void LoadDBData ();
 }
 
 public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
 {
 	protected Dictionary<string,IBaseData> _objects;
-	protected string _tableName;
+	protected string _dataType;
 
-	public BaseStorage(string tableName)
+	public BaseStorage(string dataType)
 	{
-		_tableName = tableName;
+		_dataType = dataType;
 		_objects = new Dictionary<string, IBaseData> ();
+	}
+
+	public string DataType {
+		get { 
+			return _dataType; 
+		}
 	}
 
 	public void LoadData()
 	{
-
-	}
-
-	public void UpdateWebData()
-	{
-		EventManager.Get<LoadProgressEvent> ().Publish (GetUpdateMessage ());
-		DataLoader.Instance.LoadWebData(_tableName, OnUpdateComplete);
-	}
-
-	protected void OnUpdateComplete( Dictionary<string,IBaseData> objects)
-	{
-		Debug.Log (string.Format("UPDATED DATA: {0} ", _tableName));
-		OnLoadDataComplete (objects);
-
-		DataLoader.Instance.SaveDataToDB<TData> (_tableName, _objects);
-	}
-
-	public void LoadDBData()
-	{
-		EventManager.Get<LoadProgressEvent> ().Publish (GetLoadMessage ());
-		DataLoader.Instance.LoadDBData<TData> (_tableName, OnLoadDataComplete, OnLoadDBFail);
-	}
-
-	void OnLoadDBFail(string table)
-	{
-		UpdateWebData ();
+		EventManager.Get<LoadProgressEvent> ().Publish ( GetLoadMessage ());
+		DataLoader.Instance.LoadData<TData> (_dataType, OnLoadDataComplete);
 	}
 
 	protected void OnLoadDataComplete(Dictionary<string,IBaseData> objects)
 	{
-		Debug.Log (string.Format("LOADED DATA: {0} ", _tableName));
+		Debug.Log (string.Format("LOADED DATA: {0} ", _dataType));
 		_objects = objects;
 		Log (_objects);
 		EventManager.Get<StorageLoadCompleteEvent>().Publish();
@@ -62,7 +43,7 @@ public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
 	public TData Get (string objectId)
 	{
 		if (!_objects.ContainsKey(objectId)){
-			Debug.LogError(string.Format("Can't get data from '{0}' storage by objectId:{1}", _tableName ,objectId));
+			Debug.LogError(string.Format("Can't get data from '{0}' storage by objectId:{1}", _dataType ,objectId));
 			return default(TData);
 		}
 
@@ -78,11 +59,11 @@ public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
 
 	string GetLoadMessage ()
 	{
-		return string.Format("Loading: \"{0}\" ...", _tableName);
+		return string.Format("Loading: \"{0}\" ...", _dataType);
 	}
 
 	string GetUpdateMessage()
 	{
-		return string.Format("Updating: \"{0}\" ...", _tableName);
+		return string.Format("Updating: \"{0}\" ...", _dataType);
 	}
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public interface IWebDataProxy
 {
 	double lastUpdateTime (string tableName);
-	void GetData(string tableName, Action<Dictionary<string, IBaseData>> callback);
+	void GetTableData(string tableName, Action< string, Dictionary<string, IBaseData> > callback);
 	void SaveScores(string name, int score);
 }
 

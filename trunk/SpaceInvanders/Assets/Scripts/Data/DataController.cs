@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Parse;
-using System.Collections.Generic;
+
 
 public sealed class DataController
 {
@@ -24,8 +26,8 @@ public sealed class DataController
 
 	public void Init ()
 	{
-		EventManager.Get<StorageLoadCompleteEvent> ().Subscribe (UpdateNextStorage);
-
+		EventManager.Get<StorageLoadCompleteEvent> ().Subscribe (LoadNextStorage);
+		EventManager.Get<StorageUpdateCompleteEvent> ().Subscribe (LoadStorage);
 		DataLoader.Instance.Init ();
 		InitStorages();
 		StartUpdateStorages ();
@@ -54,16 +56,16 @@ public sealed class DataController
 	void StartUpdateStorages ()
 	{
 		nextStorageIndex = 0;
-		UpdateNextStorage();
+		LoadNextStorage();
 	}
 
 	void OnStoragesUpdateComplete()
 	{
-		EventManager.Get<StorageLoadCompleteEvent>().Unsubscribe(UpdateNextStorage);
+		EventManager.Get<StorageLoadCompleteEvent>().Unsubscribe(LoadNextStorage);
 		EventManager.Get<DataInitCompleteEvent> ().Publish ();
 	}
 
-	void UpdateNextStorage ()
+	void LoadNextStorage ()
 	{
 		if ( nextStorageIndex >= _storages.Count){
 			OnStoragesUpdateComplete();
@@ -72,18 +74,18 @@ public sealed class DataController
 
 		if(_storages[nextStorageIndex] == null){
 			nextStorageIndex++;
-			UpdateNextStorage();
+			LoadNextStorage();
 			return;
 		}
 
-		//if (_needUpdate) {
-		//	_storages [nextStorageIndex].UpdateWebData ();
-		//} else {
-			_storages [nextStorageIndex].LoadDBData();
-		//}
+		_storages [nextStorageIndex].LoadData();
 		nextStorageIndex ++;
 	}
 
+	void LoadStorage (string dataType)
+	{
+		_storages.FirstOrDefault (storage => storage.DataType == dataType).LoadData();
+	}
 }
 
 
