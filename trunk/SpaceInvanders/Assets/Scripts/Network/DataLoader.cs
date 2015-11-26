@@ -51,6 +51,7 @@ public class DataLoader
 	{
 		if (NeedUpdate (tableName)) {
 			_webProxy.GetTableData (tableName, OnUpdateComplete<TData>);
+			callback = null;
 		} else {
 			_dbProxy.GetTableData <TData> (tableName, callback);
 		}

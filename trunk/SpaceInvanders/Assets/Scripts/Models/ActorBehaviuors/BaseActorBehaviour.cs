@@ -3,6 +3,7 @@ using UnityEngine;
 
 public interface IActorBehaviour
 {
+	void Init();
 	void Lock ();
 	void Unlock ();
 	void Release();
@@ -13,10 +14,10 @@ public interface IActorBehaviour
 
 public abstract class BaseActorBehaviour<TOwner> : IActorBehaviour 
 {
-	public event Action<IActorBehaviour> RemoveMe;
-	public event Action OnRelease;
+	public event Action<IActorBehaviour> RemoveMe = delegate {};
+	public event Action OnRelease = delegate {};
 	protected TOwner _owner;
-	protected bool _locked = false;
+	protected bool _locked = true;
 
 	protected bool _isSingle = true;	
 	public bool IsSingle{
@@ -33,6 +34,11 @@ public abstract class BaseActorBehaviour<TOwner> : IActorBehaviour
 	public void OnRemoveCallback(Action<IActorBehaviour> callback)
 	{
 		RemoveMe = callback;
+	}
+
+	public virtual void Init()
+	{
+		Unlock ();
 	}
 
 	public void Lock()

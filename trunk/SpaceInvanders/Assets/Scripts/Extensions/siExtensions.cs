@@ -1,7 +1,7 @@
 using System;
 using Parse;
 
-public static class si_Extensions
+public static class siExtensions
 {
 	public static T TryGet<T> (this ParseObject po, string name)
 	{

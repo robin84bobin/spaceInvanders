@@ -27,7 +27,6 @@ public class PreloaderWindow : BaseWindow
 
 	void OnLoadProgressEvent (string message)
 	{
-		Debug.Log ("onLoadProgress:" + message);
 		loadingStatusText.text = message;
 	}
 

@@ -46,6 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CommonComponents\StateSwitcher\BaseStateSwitcher.cs" />
+     <Compile Include="Assets\Scripts\CommonComponents\StateSwitcher\IBaseState.cs" />
      <Compile Include="Assets\Scripts\Data\DB\IDataBaseProxy.cs" />
      <Compile Include="Assets\Scripts\Data\DB\SQLiteProxy.cs" />
      <Compile Include="Assets\Scripts\Data\DataController.cs" />
@@ -66,12 +68,14 @@
      <Compile Include="Assets\Scripts\Data\DataSource\WeaponData.cs" />
      <Compile Include="Assets\Scripts\Data\DataStorages\BaseStorage.cs" />
      <Compile Include="Assets\Scripts\Data\DataStorages\LevelStorage.cs" />
+     <Compile Include="Assets\Scripts\Data\DataStorages\UserStorage.cs" />
      <Compile Include="Assets\Scripts\Data\DataTypes.cs" />
+     <Compile Include="Assets\Scripts\Data\UserData\UserData.cs" />
      <Compile Include="Assets\Scripts\Events\CustomEvents\EventClasses.cs" />
      <Compile Include="Assets\Scripts\Events\EventManager.cs" />
      <Compile Include="Assets\Scripts\Events\EventTypes.cs" />
      <Compile Include="Assets\Scripts\Events\siParamEvent.cs" />
-     <Compile Include="Assets\Scripts\Extensions\si_Extensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\siExtensions.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Input\InputManager.cs" />
      <Compile Include="Assets\Scripts\Input\InputStates\GameInputState.cs" />
@@ -88,13 +92,15 @@
      <Compile Include="Assets\Scripts\Models\Level\LevelModel.cs" />
      <Compile Include="Assets\Scripts\Models\Level\LevelStatePause.cs" />
      <Compile Include="Assets\Scripts\Models\Level\LevelStatePlay.cs" />
-     <Compile Include="Assets\Scripts\Models\StateSwitcher\BaseStateSwitcher.cs" />
-     <Compile Include="Assets\Scripts\Models\StateSwitcher\IBaseState.cs" />
+     <Compile Include="Assets\Scripts\Models\WeaponModel.cs" />
      <Compile Include="Assets\Scripts\Network\DataLoader.cs" />
      <Compile Include="Assets\Scripts\Network\IWebDataProxy.cs" />
      <Compile Include="Assets\Scripts\Network\ParseProxy.cs" />
      <Compile Include="Assets\Scripts\UI\WindowManager.cs" />
      <Compile Include="Assets\Scripts\UI\WindowParams.cs" />
+     <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\AuthWindow.cs" />
+     <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\LoginController.cs" />
+     <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\SignupController.cs" />
      <Compile Include="Assets\Scripts\UI\Windows\BaseWindow.cs" />
      <Compile Include="Assets\Scripts\UI\Windows\GameOverWindow.cs" />
      <Compile Include="Assets\Scripts\UI\Windows\InfoWindows\InfoWindow.cs" />

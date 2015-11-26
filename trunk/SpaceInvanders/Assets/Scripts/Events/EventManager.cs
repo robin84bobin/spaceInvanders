@@ -47,11 +47,11 @@ public sealed class EventManager : MonoBehaviour
 	}
 
 
-	private List<IEventCallbackWrapper> _eventParamQueueList = new List<IEventCallbackWrapper>();
+	private List<IEventCallbackWrapper> _eventQueue = new List<IEventCallbackWrapper>();
 	public void AddToQueue(IEventCallbackWrapper callbackWrapper)
 	{
 		lock (event_lock) {
-			_eventParamQueueList.Add(callbackWrapper);
+			_eventQueue.Add(callbackWrapper);
 		}
 	}
 
@@ -64,9 +64,9 @@ public sealed class EventManager : MonoBehaviour
 	void CheckEventQueue ()
 	{
 		lock(event_lock){
-			while (_eventParamQueueList.Count > 0) {
-				 _eventParamQueueList[0].Execute();
-				_eventParamQueueList.RemoveAt(0);
+			while (_eventQueue.Count > 0) {
+				 _eventQueue[0].Execute();
+				_eventQueue.RemoveAt(0);
 			}
 		}
 	}

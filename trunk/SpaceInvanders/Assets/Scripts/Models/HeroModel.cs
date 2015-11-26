@@ -5,11 +5,16 @@ public class HeroModel: BaseActorModel, IGuided
 {
 	public event Action<Vector3> OnMove = delegate{};
 
+	private WeaponModel _weapon;
 	private HeroData _data;
 
 	public HeroModel (HeroData data):base(data)
 	{
 		_data = data;
+		if (_data.weapon != null) {
+			_weapon = new WeaponModel (_data.weapon);
+		}
+
 		AddBehaviour (new GuidedBehaviuor (this));
 	}
 

@@ -35,6 +35,7 @@ public abstract class BaseActorModel
 	{
 		Type type = behaviour.GetType();
 		if (behaviour.IsSingle && _behaviours.ContainsKey (type) && _behaviours [type].Count > 0) {
+			behaviour.Release();
 			return;
 		}
 
@@ -43,6 +44,7 @@ public abstract class BaseActorModel
 			_behaviours.Add(type, new List<IActorBehaviour>());
 		}
 		_behaviours[type].Add (behaviour);
+		behaviour.Init ();
 	}
 
 	void OnRemoveBehaviour (IActorBehaviour behaviour)

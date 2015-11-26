@@ -5,6 +5,12 @@ public class GuidedBehaviuor: BaseActorBehaviour<IGuided>
 {
 	public GuidedBehaviuor (IGuided owner): base(owner)
 	{
+
+	}
+
+	public override void Init()
+	{
+		base.Init ();
 		EventManager.Get<MoveControlsEvent> ().Subscribe (OnUpdateControl);
 		OnRelease += onReleaseCompleted;
 	}
