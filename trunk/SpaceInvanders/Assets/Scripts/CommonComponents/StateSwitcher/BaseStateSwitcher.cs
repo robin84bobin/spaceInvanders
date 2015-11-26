@@ -17,7 +17,9 @@ public class BaseStateSwitcher <K,T> where T:IBaseState
 
 	public void Add(K key,T value)
 	{
-		_states.Add(key,value);
+		if (!_states.ContainsKey (key)) {
+			_states.Add (key, value);
+		}
 	}
 
 	public void Remove(K key)

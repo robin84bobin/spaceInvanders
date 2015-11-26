@@ -37,8 +37,10 @@ public sealed class Main : MonoBehaviour
 	void Init ()
 	{
 		EventManager.Get<DataInitCompleteEvent> ().Subscribe (OnDataInited);
-		PreloaderWindow.Show();
-		StartLoadData();
+		//PreloaderWindow.Show();
+
+		AuthWindow.Show ();
+		//StartLoadData();
 	}
 
 	void StartLoadData()

@@ -13,7 +13,6 @@ public class HeroParseFactory : IConcreteParseFactory
 		heroData.weaponId = po.TryGetPointerObjectId (DataTypes.WEAPON);
 
 		return heroData;
-
 	}
 
 	#endregion
