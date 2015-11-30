@@ -29,10 +29,10 @@ public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
 	public void LoadData()
 	{
 		EventManager.Get<LoadProgressEvent> ().Publish ( GetLoadMessage ());
-		DataLoader.Instance.LoadData<TData> (_dataType, OnLoadDataComplete);
+		DataProxy.Instance.LoadData<TData> (_dataType, OnLoadDataComplete);
 	}
 
-	protected void OnLoadDataComplete(Dictionary<string,IBaseData> objects)
+	protected void OnLoadDataComplete(string tableName, Dictionary<string,IBaseData> objects)
 	{
 		Debug.Log (string.Format("LOADED DATA: {0} ", _dataType));
 		_objects = objects;

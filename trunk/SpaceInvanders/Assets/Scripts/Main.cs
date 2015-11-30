@@ -27,6 +27,8 @@ public sealed class Main : MonoBehaviour
 		}
 	}
 
+	public AuthController auth;
+
 	void Start()
 	{
 		_instance = this;
@@ -37,10 +39,11 @@ public sealed class Main : MonoBehaviour
 	void Init ()
 	{
 		EventManager.Get<DataInitCompleteEvent> ().Subscribe (OnDataInited);
-		//PreloaderWindow.Show();
+		PreloaderWindow.Show();
 
-		AuthWindow.Show ();
-		//StartLoadData();
+		auth.ShowAuthWindow ();
+
+		StartLoadData();
 	}
 
 	void StartLoadData()

@@ -33,6 +33,7 @@ public class LoginAuthState : AuthWindowState
 		this.gameObject.SetActive (true);
 
 		signUpButton.onClick.AddListener ( () => { OnSignUpClick(_authData);});
+		submitButton.onClick.AddListener ( Submit );
 	}
 
 	public override void OnExitState ()
@@ -50,5 +51,18 @@ public class LoginAuthState : AuthWindowState
 
 	#endregion
 
+	void Submit ()
+	{
+		Main.inst.auth.Login (_authData, OnLoginSuccess, OnLoginFail);
+	}
 
+	void OnLoginSuccess ()
+	{
+		throw new NotImplementedException ();
+	}
+
+	void OnLoginFail ()
+	{
+		throw new NotImplementedException ();
+	}
 }

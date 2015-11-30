@@ -4,6 +4,8 @@ using System.Collections;
 
 public class BaseWindow : MonoBehaviour 
 {
+	protected WindowParams _windowsParameters;
+
 	public void Hide ()
 	{
 		OnHide();
@@ -12,7 +14,7 @@ public class BaseWindow : MonoBehaviour
 
 	public virtual void OnShowComplete(WindowParams param = null)
 	{
-
+		_windowsParameters = param;
 	}
 
 	protected virtual void OnHide()

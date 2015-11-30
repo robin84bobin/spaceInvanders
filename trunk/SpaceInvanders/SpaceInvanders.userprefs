@@ -1,40 +1,34 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Extensions\siExtensions.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Controllers\AuthController.cs">
     <Files>
-      <File FileName="SpaceInvanders.sln" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\Windows\AuthWindow\AuthWindow.cs" Line="9" Column="1" />
-      <File FileName="Assets\Scripts\Events\EventManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Main.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\Windows\PreloaderWindow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Events\siParamEvent.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Controllers\AuthController.cs" Line="23" Column="4" />
+      <File FileName="Assets\Scripts\UI\Windows\AuthWindow\AuthWindow.cs" Line="15" Column="2" />
+      <File FileName="Assets\Scripts\Network\DataProxy.cs" Line="76" Column="2" />
+      <File FileName="Assets\Scripts\Main.cs" Line="44" Column="18" />
+      <File FileName="Assets\Scripts\Network\IWebDataProxy.cs" Line="14" Column="11" />
+      <File FileName="Assets\Scripts\Network\ParseProxy.cs" Line="65" Column="18" />
       <File FileName="Assets\Scripts\Data\DataController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\Windows\BaseWindow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\Windows\LeaderboardWindow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\Windows\AuthWindow\LoginController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\Windows\AuthWindow\SignupController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Models\Level\LevelModel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Models\Level\ILevelState.cs" Line="3" Column="1" />
-      <File FileName="Assets\Scripts\Models\Level\LevelStatePause.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Data\DataFactories\ParseFactories\EnemyParseFactory.cs" Line="13" Column="36" />
-      <File FileName="Assets\Scripts\Extensions\siExtensions.cs" Line="16" Column="2" />
+      <File FileName="Assets\Scripts\Data\UserData\UserData.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Data\DataSource\BaseData.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Input\InputManager.cs" Line="39" Column="15" />
+      <File FileName="Assets\Scripts\Data\DataFactories\ParseFactories\BulletParseFactory.cs" Line="18" Column="1" />
+      <File FileName="Assets\Scripts\Data\DataFactories\ParseFactories\ParseFactory.cs" Line="35" Column="20" />
+      <File FileName="Assets\Scripts\Data\DataFactories\ParseFactories\UserParseFactory.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Data\DataFactories\ParseFactories\LevelParseFactory.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Data\DataFactories\ParseFactories\IConcreteParseFactory.cs" Line="6" Column="14" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="Data" expanded="True">
-                <Node name="DataFactories" expanded="True">
-                  <Node name="ParseFactories" expanded="True" />
-                </Node>
-                <Node name="DataStorages" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="AuthController.cs" selected="True" />
               </Node>
-              <Node name="Events" expanded="True" />
-              <Node name="Extensions" expanded="True">
-                <Node name="si_Extensions.cs" selected="True" />
-              </Node>
-              <Node name="Models" expanded="True" />
+              <Node name="Data" expanded="True" />
+              <Node name="Input" expanded="True" />
+              <Node name="Network" expanded="True" />
               <Node name="UI" expanded="True">
                 <Node name="Windows" expanded="True">
                   <Node name="AuthWindow" expanded="True" />
@@ -51,12 +45,15 @@
         <State>
           <Value>targetField</Value>
           <Value>tableColumns</Value>
+          <Value>connectionStatus</Value>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="F:\DropBox\Dropbox\SpaceInvanders_SVN\SpaceInvanders\Assets\Scripts\UI\Windows\AuthWindow\AuthWindowState.cs" line="19" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="Assets\Scripts\Views\Level.cs" line="54" offsetX="661" offsetY="865" expression="position" liveUpdate="False" />

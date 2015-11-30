@@ -32,6 +32,7 @@ public class ParseFactory
 	private ParseFactory()
 	{
 		_factories = new Dictionary<string, IConcreteParseFactory>();
+		_factories.Add ( DataTypes.USER, new UserParseFactory ());
 		_factories.Add ( DataTypes.LEVEL, new LevelParseFactory());
 		_factories.Add ( DataTypes.HERO, new HeroParseFactory());
 		_factories.Add ( DataTypes.ENEMY, new EnemyParseFactory());

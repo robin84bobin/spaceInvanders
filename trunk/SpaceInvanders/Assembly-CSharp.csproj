@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CommonComponents\StateSwitcher\BaseStateSwitcher.cs" />
      <Compile Include="Assets\Scripts\CommonComponents\StateSwitcher\IBaseState.cs" />
+     <Compile Include="Assets\Scripts\Controllers\AuthController.cs" />
      <Compile Include="Assets\Scripts\Data\DB\IDataBaseProxy.cs" />
      <Compile Include="Assets\Scripts\Data\DB\SQLiteProxy.cs" />
      <Compile Include="Assets\Scripts\Data\DataController.cs" />
@@ -57,6 +58,7 @@
      <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\IConcreteParseFactory.cs" />
      <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\LevelParseFactory.cs" />
      <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\ParseFactory.cs" />
+     <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\UserParseFactory.cs" />
      <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\WeaponParseFactory.cs" />
      <Compile Include="Assets\Scripts\Data\DataSource\AbstractWarriorData.cs" />
      <Compile Include="Assets\Scripts\Data\DataSource\BaseData.cs" />
@@ -93,14 +95,15 @@
      <Compile Include="Assets\Scripts\Models\Level\LevelStatePause.cs" />
      <Compile Include="Assets\Scripts\Models\Level\LevelStatePlay.cs" />
      <Compile Include="Assets\Scripts\Models\WeaponModel.cs" />
-     <Compile Include="Assets\Scripts\Network\DataLoader.cs" />
+     <Compile Include="Assets\Scripts\Network\DataProxy.cs" />
      <Compile Include="Assets\Scripts\Network\IWebDataProxy.cs" />
      <Compile Include="Assets\Scripts\Network\ParseProxy.cs" />
      <Compile Include="Assets\Scripts\UI\WindowManager.cs" />
      <Compile Include="Assets\Scripts\UI\WindowParams.cs" />
      <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\AuthWindow.cs" />
-     <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\LoginController.cs" />
-     <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\SignupController.cs" />
+     <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\AuthWindowState.cs" />
+     <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\LoginAuthState.cs" />
+     <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\SignupAuthState.cs" />
      <Compile Include="Assets\Scripts\UI\Windows\BaseWindow.cs" />
      <Compile Include="Assets\Scripts\UI\Windows\GameOverWindow.cs" />
      <Compile Include="Assets\Scripts\UI\Windows\InfoWindows\InfoWindow.cs" />

@@ -1,28 +1,29 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class DataLoader
+public class DataProxy
 {
 	private IDataBaseProxy _dbProxy;
-	public IDataBaseProxy DBProxy {
+	public IDataBaseProxy LocalDB {
 		get {
 			return _dbProxy;
 		}
 	}
 
 	private IWebDataProxy _webProxy;
-	public IWebDataProxy WebProxy{
+	public IWebDataProxy WebDB{
 		get {
 			return _webProxy;
 		}
 	}
 
-	private static DataLoader _instance;
-	public static DataLoader Instance {
+	private static DataProxy _instance;
+	public static DataProxy Instance {
 		get {
 			if (_instance == null){
-				_instance = new DataLoader();
+				_instance = new DataProxy();
 			}
 			return _instance;
 		}
@@ -37,6 +38,10 @@ public class DataLoader
 
 	private bool NeedUpdate(string tableName)
 	{
+		if (!CheckConnection ()) {
+			return false;
+		}
+
 		if (!_dbProxy.IsTableExist (tableName)) {
 			return true;
 		}
@@ -47,7 +52,7 @@ public class DataLoader
 		return false;
 	}
 
-	public void LoadData<TData>(string tableName, Action<Dictionary<string,IBaseData>> callback) where TData:IBaseData, new()
+	public void LoadData<TData>(string tableName, Action<string, Dictionary<string,IBaseData>> callback) where TData:IBaseData, new()
 	{
 		if (NeedUpdate (tableName)) {
 			_webProxy.GetTableData (tableName, OnUpdateComplete<TData>);
@@ -68,7 +73,16 @@ public class DataLoader
 		_webProxy.SaveScores(playerName,score);
 	}
 
-	private DataLoader (){}
+	public bool CheckConnection()
+	{
+		ConnectionTesterStatus connectionStatus = Network.TestConnection ();
+		if (connectionStatus == ConnectionTesterStatus.Error){
+			return false;
+		}
+		return true;
+	}
+
+	private DataProxy (){}
 }
 
 

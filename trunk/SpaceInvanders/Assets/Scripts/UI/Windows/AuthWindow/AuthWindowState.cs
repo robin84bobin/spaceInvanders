@@ -1,12 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AuthData
-{
-	public string username = string.Empty;
-	public string password = string.Empty;
-	public string email = string.Empty;
-}
 
 public abstract class AuthWindowState : MonoBehaviour , IBaseState
 {

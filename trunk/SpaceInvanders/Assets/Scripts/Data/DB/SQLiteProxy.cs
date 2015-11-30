@@ -86,7 +86,7 @@ public class SQLiteProxy : IDataBaseProxy
 		return true;
 	}
 
-	public void GetTableData<TBaseData> (string tableName, Action<Dictionary<string, IBaseData>> callback) where TBaseData:IBaseData, new()
+	public void GetTableData<TBaseData> (string tableName, Action<string, Dictionary<string, IBaseData>> callback) where TBaseData:IBaseData, new()
 	{
 		Dictionary<string,IBaseData> resultObjects = new Dictionary<string, IBaseData> ();
 
@@ -98,7 +98,7 @@ public class SQLiteProxy : IDataBaseProxy
 			resultObjects.Add(data.ObjectId, data);
 		}
 
-		callback (resultObjects);
+		callback (tableName,resultObjects);
 	}
 
 	private TBaseData ReadDataItem<TBaseData> (IDataReader mReader) where TBaseData:IBaseData, new()

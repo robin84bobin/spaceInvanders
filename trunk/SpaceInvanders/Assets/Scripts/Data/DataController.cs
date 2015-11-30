@@ -14,31 +14,26 @@ public sealed class DataController
 	public BaseStorage<WeaponData> WeaponStorage;
 	public BaseStorage<EnemyData> EnemyStorage;
 	//------------------
+	private List<IBaseStorage> _referenceStorages;
+	//------------------
+	private UserStorage _userStorage;
 
-	private List<IBaseStorage> _storages;
-
-	public DataController()
-	{
-
-	}
-	
-	bool _needUpdate = false;
 
 	public void Init ()
 	{
 		EventManager.Get<StorageLoadCompleteEvent> ().Subscribe (LoadNextStorage);
 		EventManager.Get<StorageUpdateCompleteEvent> ().Subscribe (LoadStorage);
-		DataLoader.Instance.Init ();
+		DataProxy.Instance.Init ();
 		InitStorages();
-		StartUpdateStorages ();
+		StartLoadStorages ();
 	}
 
 	private void InitStorages()
 	{
-		_storages = new List<IBaseStorage>();
+		_referenceStorages = new List<IBaseStorage>();
 
 		levelStorage = new LevelStorage(DataTypes.LEVEL);
-		_storages.Add (levelStorage);
+		_referenceStorages.Add (levelStorage);
 		EnemyStorage = RegisterBaseStorage<EnemyData>(DataTypes.ENEMY);
 		BulletStorage = RegisterBaseStorage<BulletData>(DataTypes.BULLET);
 		HeroStorage = RegisterBaseStorage<HeroData>(DataTypes.HERO);
@@ -48,12 +43,12 @@ public sealed class DataController
 	private BaseStorage<T> RegisterBaseStorage<T>(string table) where T:BaseData, new()
 	{
 		BaseStorage<T> storage = new BaseStorage<T>(table);
-		_storages.Add(storage);
+		_referenceStorages.Add(storage);
 		return storage;
 	}
 
 	int nextStorageIndex = -1;
-	void StartUpdateStorages ()
+	void StartLoadStorages ()
 	{
 		nextStorageIndex = 0;
 		LoadNextStorage();
@@ -68,24 +63,24 @@ public sealed class DataController
 
 	void LoadNextStorage ()
 	{
-		if ( nextStorageIndex >= _storages.Count){
+		if ( nextStorageIndex >= _referenceStorages.Count){
 			OnStoragesUpdateComplete();
 			return;
 		}
 
-		if(_storages[nextStorageIndex] == null){
+		if(_referenceStorages[nextStorageIndex] == null){
 			nextStorageIndex++;
 			LoadNextStorage();
 			return;
 		}
 
-		_storages [nextStorageIndex].LoadData();
+		_referenceStorages [nextStorageIndex].LoadData();
 		nextStorageIndex ++;
 	}
 
 	void LoadStorage (string dataType)
 	{
-		_storages.FirstOrDefault (storage => storage.DataType == dataType).LoadData();
+		_referenceStorages.FirstOrDefault (storage => storage.DataType == dataType).LoadData();
 	}
 }
 
