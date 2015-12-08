@@ -1,11 +1,12 @@
 using System;
 
+namespace Data{
+
 public class WeaponData : BaseData
 {
-	public int frequency;
-	public int bulletSpeed;
-
-	public string bulletId;
+	public int frequency { get; internal set;}
+	public int bulletSpeed { get; internal set;}
+	public string bulletId { get; internal set;}
 
 	private BulletData _bullet;
 	public BulletData bullet {
@@ -16,6 +17,7 @@ public class WeaponData : BaseData
 			return _bullet;
 		}
 	}
+}
 }
 
 

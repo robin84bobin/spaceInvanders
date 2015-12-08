@@ -6,6 +6,7 @@ using Mono.Data.SqliteClient;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
+using Data;
 
 public class SQLiteProxy : IDataBaseProxy
 {
@@ -95,7 +96,7 @@ public class SQLiteProxy : IDataBaseProxy
 
 		while (mReader.Read()) {
 			TBaseData data = ReadDataItem<TBaseData>(mReader);
-			resultObjects.Add(data.ObjectId, data);
+			resultObjects.Add(data.objectId, data);
 		}
 
 		callback (tableName,resultObjects);
@@ -106,10 +107,14 @@ public class SQLiteProxy : IDataBaseProxy
 		TBaseData resultData = new TBaseData ();
 		Type dataType = resultData.GetType();
 
+		PropertyInfo[] props = dataType.GetProperties ();
+
 		string fieldName;
 		object fieldValue;
 		Type fieldType;
 		FieldInfo targetField;
+		MethodInfo targetSetter;
+		PropertyInfo targetProperty;
 
 		for (int fieldIndex = 0; fieldIndex < mReader.FieldCount; ++ fieldIndex) 
 		{
@@ -117,7 +122,27 @@ public class SQLiteProxy : IDataBaseProxy
 			fieldValue = mReader.GetValue (fieldIndex); 
 			fieldType = mReader.GetFieldType(fieldIndex);
 
-			targetField = dataType.GetField (fieldName);
+			targetProperty = dataType.GetProperty(fieldName);
+			if (targetProperty == null){
+				continue;
+			}
+
+			targetSetter = targetProperty.GetSetMethod(true);
+			if (targetSetter == null){
+				continue;
+			}
+
+			if (targetProperty.PropertyType != fieldType){
+				Debug.LogWarningFormat("Types mismatch (expected '{0}' => get '{1}') on reading data: {2}.{3}", 
+				                       targetProperty.PropertyType.Name,
+				                       fieldType,
+				                       dataType.Name,
+				                       targetProperty.Name);
+			}
+			else {
+				targetSetter.Invoke( resultData, new object[] {fieldValue});
+			}
+			/*targetField = dataType.GetField (fieldName);
 			if(targetField == null){
 				continue;
 			}
@@ -132,7 +157,7 @@ public class SQLiteProxy : IDataBaseProxy
 			}
 			else{
 				targetField.SetValue( resultData, fieldValue);
-			}
+			}*/
 		}
 
 		return resultData;

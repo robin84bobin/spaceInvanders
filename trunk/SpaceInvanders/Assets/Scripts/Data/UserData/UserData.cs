@@ -1,5 +1,5 @@
 using System;
-
+namespace Data{
 public class UserData : BaseData
 {
 	public string username;
@@ -15,6 +15,7 @@ public class UserData : BaseData
 	}
 
 
+}
 }
 
 

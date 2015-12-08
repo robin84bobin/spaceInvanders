@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using Data;
 
 public interface IBaseStorage
 {
@@ -53,7 +54,7 @@ public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
 	void Log(Dictionary<string,IBaseData> dict)
 	{
 		foreach (var item in dict) {
-			Debug.Log(string.Format(">> {0} : {1}", item.Value.Type, item.Value.ObjectId));
+			Debug.Log(string.Format(">> {0} : {1}", item.Value.type, item.Value.objectId));
 		}
 	}
 
@@ -66,4 +67,5 @@ public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
 	{
 		return string.Format("Updating: \"{0}\" ...", _dataType);
 	}
+
 }

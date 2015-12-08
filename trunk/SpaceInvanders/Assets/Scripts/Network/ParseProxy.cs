@@ -3,6 +3,7 @@ using Parse;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
+using Data;
 
 public class ParseProxy: IWebDataProxy
 {

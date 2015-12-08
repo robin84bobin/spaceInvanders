@@ -2,27 +2,25 @@ using System;
 using Parse;
 using UnityEngine;
 using System.Reflection;
-
+using Data;
+namespace Data{
 public class LevelParseFactory : IConcreteParseFactory
 {
 	#region IConcreteParseFactory implementation
 	public IBaseData Create(ParseObject po) 
 	{
 		LevelData levelData = new LevelData();
-
-		levelData.Type = po.ClassName;
-		levelData.ObjectId = po.ObjectId;
-		po.TryGetValue<int>("ID", out levelData.ID);
-		po.TryGetValue<string>("LevelSceneName", out levelData.levelSceneName);
+		levelData.type = po.ClassName;
+		levelData.objectId = po.ObjectId;
+		levelData.ID = po.TryGet<int> ("ID");
+		levelData.levelSceneName = po.TryGet<string> ("LevelSceneName");
 		levelData.heroId = po.TryGetPointerObjectId (DataTypes.HERO);
 		levelData.enemyId = po.TryGetPointerObjectId (DataTypes.ENEMY);
-
-		po.TryGetValue<int> ("EnemyWaveRate", out levelData.enemyWaveRate);
-		po.TryGetValue<int> ("EnemyWaveSize", out levelData.enemyWaveSize);
-		po.TryGetValue<int> ("EnemyStartSpeed", out levelData.enemyStartSpeed);
-		po.TryGetValue<double> ("EnemySpeedFactor", out levelData.enemySpeedFactor);
-		po.TryGetValue<double> ("EnemyMovePeriod", out levelData.enemyMovePeriod);
-
+		levelData.enemyWaveRate = po.TryGet<int> ("EnemyWaveRate");
+		levelData.enemyWaveSize = po.TryGet<int> ("EnemyWaveSize");
+		levelData.enemyStartSpeed = po.TryGet<int> ("EnemyStartSpeed");
+		levelData.enemySpeedFactor = po.TryGet<double> ("EnemySpeedFactor");
+		levelData.enemyMovePeriod = po.TryGet<double> ("EnemyMovePeriod");
 		return levelData;
 	}
 
@@ -30,7 +28,7 @@ public class LevelParseFactory : IConcreteParseFactory
 
 
 }
-
+}
 
 
 

@@ -1,15 +1,13 @@
 using System;
 using UnityEngine;
+using Data;
 
 public class EnemyModel : BaseActorModel, IGuided
 {
-	public event Action<double> OnMove = delegate{};
-	public event Action<Vector3> onMoveGuided = delegate{};
-
 	private EnemyData _enemyData;
 	private double _moveEnemiesTime;
 	private double _movePeriod;
-	private double _speed;
+	private Vector3 _speedVector;
 
 	public EnemyModel (EnemyData enemyData): base(enemyData)
 	{
@@ -18,7 +16,7 @@ public class EnemyModel : BaseActorModel, IGuided
 
 	public void Init (double speed, double movePeriod)
 	{
-		_speed = speed;
+		_speedVector = new Vector3(0f,-(float)speed,0f);
 		_movePeriod = movePeriod;
 		_moveEnemiesTime = Time.time + _movePeriod;
 	}
@@ -32,7 +30,7 @@ public class EnemyModel : BaseActorModel, IGuided
 	{
 		if (Time.time > _moveEnemiesTime) {
 			_moveEnemiesTime += _movePeriod;
-			OnMove(_speed);
+			OnMove_Handle(_speedVector);
 		}
 	}
 
@@ -45,7 +43,7 @@ public class EnemyModel : BaseActorModel, IGuided
 
 	public Vector3 MoveVector {
 		set {
-			onMoveGuided(value);
+			OnMove_Handle(value);
 		}
 	}
 
@@ -54,7 +52,6 @@ public class EnemyModel : BaseActorModel, IGuided
 	protected override void Release()
 	{
 		base.Release ();
-		OnMove = null;
 	}
 }
 

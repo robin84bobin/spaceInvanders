@@ -1,8 +1,11 @@
 using System;
 
-public class GameData : BaseData
-{
-	public int height;
-	public int width;
-}
+namespace Data{
 
+	public class GameData : BaseData
+	{
+		public int height { get; internal set;}
+		public int width  { get; internal set;}
+	}
+
+}

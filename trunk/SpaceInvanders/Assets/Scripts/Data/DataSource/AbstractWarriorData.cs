@@ -1,10 +1,14 @@
 using System;
-
+namespace Data{
 public abstract class AbstractWarriorData : BaseData
 {
-	public int maxHealth;
-	public string weaponId;
-	public float weight;
+	private int _maxHealth;
+	public int maxHealth { 
+		get{ return _maxHealth; }
+		internal set { _maxHealth = value;}
+	}
+	public string weaponId { get; internal set;}
+	public float weight { get; internal set;}
 
 	[NonSerialized]
 	private WeaponData _weapon;
@@ -16,5 +20,6 @@ public abstract class AbstractWarriorData : BaseData
 			return _weapon;
 		}
 	}
+}
 }
 

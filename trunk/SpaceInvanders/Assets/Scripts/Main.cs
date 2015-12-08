@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Parse;
 using System;
+using Data;
 
 public sealed class Main : MonoBehaviour 
 {
@@ -41,7 +42,7 @@ public sealed class Main : MonoBehaviour
 		EventManager.Get<DataInitCompleteEvent> ().Subscribe (OnDataInited);
 		PreloaderWindow.Show();
 
-		auth.ShowAuthWindow ();
+		//auth.ShowAuthWindow ();
 
 		StartLoadData();
 	}
@@ -50,6 +51,8 @@ public sealed class Main : MonoBehaviour
 	{
 		_dataController = new DataController();
 		_dataController.Init ();
+		LevelData level = new LevelData ();
+		level.enemyId = "6";
 	}
 
 	void OnDataInited ()

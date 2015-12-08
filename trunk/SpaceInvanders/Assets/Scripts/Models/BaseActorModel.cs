@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Data;
 
 public abstract class BaseActorModel
 {
@@ -14,7 +15,7 @@ public abstract class BaseActorModel
 
 	public BaseActorModel (BaseData data)
 	{
-		dataType = data.Type;
+		dataType = data.type;
 	}
 
 	public void Destroy()
@@ -58,6 +59,7 @@ public abstract class BaseActorModel
 
 	protected virtual void Release ()
 	{
+		OnMove = null;
 		OnDeath = null;
 		OnDamage = null;
 
@@ -69,6 +71,29 @@ public abstract class BaseActorModel
 
 		_behaviours = null;
 	}
+
+	#region EVENT HANDLERS
+	protected void OnMove_Handle(Vector3 value)
+	{
+		if (OnMove != null) {
+			OnMove (value);
+		}
+	}
+
+	protected void OnDamage_Handle(int value)
+	{
+		if (OnDamage != null) {
+			OnDamage(value);
+		}
+	}
+
+	protected void OnDeath_Handle(BaseActorModel value)
+	{
+		if (OnDeath != null) {
+			OnDeath(value);
+		}
+	}
+	#endregion
 }
 
 

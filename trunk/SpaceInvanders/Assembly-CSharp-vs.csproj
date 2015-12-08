@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Data\DataSource\HeroData.cs" />
      <Compile Include="Assets\Scripts\Data\DataSource\LevelData.cs" />
      <Compile Include="Assets\Scripts\Data\DataSource\WeaponData.cs" />
+     <Compile Include="Assets\Scripts\Data\DataSource\newClass.cs" />
      <Compile Include="Assets\Scripts\Data\DataStorages\BaseStorage.cs" />
      <Compile Include="Assets\Scripts\Data\DataStorages\LevelStorage.cs" />
      <Compile Include="Assets\Scripts\Data\DataStorages\UserStorage.cs" />
@@ -77,7 +78,7 @@
      <Compile Include="Assets\Scripts\Events\EventManager.cs" />
      <Compile Include="Assets\Scripts\Events\EventTypes.cs" />
      <Compile Include="Assets\Scripts\Events\siParamEvent.cs" />
-     <Compile Include="Assets\Scripts\Extensions\siExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\ParseComExtensions.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Input\InputManager.cs" />
      <Compile Include="Assets\Scripts\Input\InputStates\GameInputState.cs" />
@@ -116,6 +117,7 @@
      <Compile Include="Assets\Scripts\Views\GameObjectPool\Pool.cs" />
      <Compile Include="Assets\Scripts\Views\Hero.cs" />
      <Compile Include="Assets\Scripts\Views\Level.cs" />
+     <Compile Include="Assets\Scripts\Views\Spinner.cs" />
      <Compile Include="Assets\TestParse.cs" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\Parse\README.txt" />

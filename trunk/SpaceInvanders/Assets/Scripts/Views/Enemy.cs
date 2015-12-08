@@ -9,15 +9,9 @@ public class Enemy : BaseActor
 	{
 		_model = (EnemyModel)model;
 		_model.OnMove += OnMove;
-		_model.onMoveGuided += OnMoveGuided;
 	}
 
-	void OnMove (double speed)
-	{
-		transform.position += new Vector3 (0f, - (float)speed, 0f);
-	}
-
-	void OnMoveGuided (Vector3 moveVector)
+	void OnMove (Vector3 moveVector)
 	{
 		transform.Translate (moveVector * 3f);
 	}

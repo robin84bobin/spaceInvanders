@@ -2,17 +2,19 @@ using System;
 using Parse;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Data;
+namespace Data{
 class WeaponParseFactory : IConcreteParseFactory
 {
 	public IBaseData Create (ParseObject po)
 	{
 		WeaponData weaponData = new WeaponData();
-		weaponData.Type = po.ClassName;
-		weaponData.ObjectId = po.ObjectId;
+		weaponData.type = po.ClassName;
+		weaponData.objectId = po.ObjectId;
 		weaponData.bulletId = po.TryGetPointerObjectId (DataTypes.BULLET);
 		return weaponData;
 	}
+}
 }
 
 

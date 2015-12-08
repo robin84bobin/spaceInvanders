@@ -1,16 +1,16 @@
 using System;
 using UnityEngine;
+using Data;
 
 public class HeroModel: BaseActorModel, IGuided
 {
-	public event Action<Vector3> OnMove = delegate{};
-
 	private WeaponModel _weapon;
 	private HeroData _data;
 
 	public HeroModel (HeroData data):base(data)
 	{
 		_data = data;
+		_data.maxHealth = 4;
 		if (_data.weapon != null) {
 			_weapon = new WeaponModel (_data.weapon);
 		}
@@ -27,7 +27,7 @@ public class HeroModel: BaseActorModel, IGuided
 
 	public Vector3 MoveVector {
 		set {
-			OnMove (value);
+			OnMove_Handle (value);
 		}
 	}
 	#endregion
@@ -35,7 +35,6 @@ public class HeroModel: BaseActorModel, IGuided
 	protected override void Release()
 	{
 		base.Release ();
-		OnMove = null;
 	}
 }
 

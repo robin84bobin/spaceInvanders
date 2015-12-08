@@ -1,6 +1,7 @@
 using System;
 using Parse;
-
+using Data;
+namespace Data{
 public class HeroParseFactory : IConcreteParseFactory
 {
 	#region IConcreteParseFactory implementation
@@ -8,8 +9,8 @@ public class HeroParseFactory : IConcreteParseFactory
 	public IBaseData Create (ParseObject po)
 	{
 		HeroData heroData = new HeroData();
-		heroData.Type = po.ClassName;
-		heroData.ObjectId = po.ObjectId;
+		heroData.type = po.ClassName;
+		heroData.objectId = po.ObjectId;
 		heroData.weaponId = po.TryGetPointerObjectId (DataTypes.WEAPON);
 
 		return heroData;
@@ -19,3 +20,4 @@ public class HeroParseFactory : IConcreteParseFactory
 }
 
 
+}
