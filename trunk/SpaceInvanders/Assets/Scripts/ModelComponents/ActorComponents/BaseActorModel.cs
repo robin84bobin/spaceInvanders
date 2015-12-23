@@ -38,6 +38,15 @@ public abstract class BaseActorModel : BaseComponent
 		dataType = data.type;
 	}
 
+	public void SetSkill(string skill, double value)
+	{
+		if (!skills.ContainsKey (skill)) {
+			Debug.LogWarning(string.Format ("Try to modify unexisted skill {0}::{1}", this.GetType().Name, skill));
+		}
+		skills [skill] = value;
+		//TODO dispatch skill update event
+	}
+
 	public void Destroy()
 	{
 		Release ();
