@@ -1,5 +1,5 @@
 using System;
-namespace Data{
+
 public abstract class AbstractWarriorData : BaseData
 {
 
@@ -18,5 +18,5 @@ public abstract class AbstractWarriorData : BaseData
 		}
 	}
 }
-}
+
 

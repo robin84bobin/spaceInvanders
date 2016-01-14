@@ -2,8 +2,7 @@ using System;
 using Parse;
 using System.Collections.Generic;
 using UnityEngine;
-using Data;
-namespace Data{
+
 class EnemyParseFactory : IConcreteParseFactory
 {
 	public IBaseData Create (ParseObject po)
@@ -15,8 +14,4 @@ class EnemyParseFactory : IConcreteParseFactory
 		//TODO
 		return enemyData;
 	}
-}
-
-
-
 }

@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
-using Data;
+using UnityEngine.SceneManagement;
 
 public sealed class GameManager : MonoBehaviour 
 {
 	private int _currentLevelID = 1;
 
-	private Level _currentLevel;
+	private LevelController _currentLevel;
 	private LevelModel _levelModel;
 	private LevelData _currentLevelData;
 
@@ -14,16 +14,15 @@ public sealed class GameManager : MonoBehaviour
 	{
 		EventManager.Get<LevelStartEvent> ().Subscribe (OnLevelStart);
 		_currentLevelData = Main.inst.Data.levelStorage.GetByID (_currentLevelID);
-		Application.LoadLevel(_currentLevelData.levelSceneName);
+		SceneManager.LoadScene(_currentLevelData.levelSceneName);
 	}
 
 	private void OnLevelStart()
 	{
 		EventManager.Get<LevelStartEvent> ().Unsubscribe (OnLevelStart);
-
-		Level level = (Level) FindObjectOfType (typeof(Level));
+		_currentLevel = (LevelController) FindObjectOfType (typeof(LevelController));
 		_levelModel = new LevelModel (_currentLevelData);
-		level.Attach (_levelModel);
+		_currentLevel.Attach (_levelModel);
 
 		_levelModel.Start ();
 	}

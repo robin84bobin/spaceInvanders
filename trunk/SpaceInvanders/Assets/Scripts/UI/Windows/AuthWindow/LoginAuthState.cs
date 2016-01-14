@@ -24,8 +24,8 @@ public class LoginAuthState : AuthWindowState
 		passwordInput.text = _authData.password;
 		errorText.text = string.Empty;
 
-		emailInput.onValueChange.AddListener (onEmailChange);
-		passwordInput.onValueChange.AddListener (onPasswordChange);
+		emailInput.onValueChanged.AddListener (onEmailChange);
+		passwordInput.onValueChanged.AddListener (onPasswordChange);
 	}
 
 	public override void OnEnterState ()
@@ -41,8 +41,8 @@ public class LoginAuthState : AuthWindowState
 		this.gameObject.SetActive (false);
 
 		signUpButton.onClick.RemoveAllListeners ();
-		emailInput.onValueChange.RemoveAllListeners();
-		passwordInput.onValueChange.RemoveAllListeners();
+		emailInput.onValueChanged.RemoveAllListeners();
+		passwordInput.onValueChanged.RemoveAllListeners();
 
 		emailInput.text = string.Empty;
 		passwordInput.text = string.Empty;

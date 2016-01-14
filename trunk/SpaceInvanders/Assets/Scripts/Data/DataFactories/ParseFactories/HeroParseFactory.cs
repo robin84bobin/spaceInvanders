@@ -1,7 +1,6 @@
 using System;
 using Parse;
-using Data;
-namespace Data{
+
 public class HeroParseFactory : IConcreteParseFactory
 {
 	#region IConcreteParseFactory implementation
@@ -19,5 +18,3 @@ public class HeroParseFactory : IConcreteParseFactory
 	#endregion
 }
 
-
-}

@@ -2,8 +2,7 @@ using System;
 using Parse;
 using UnityEngine;
 using System.Reflection;
-using Data;
-namespace Data{
+
 public class LevelParseFactory : IConcreteParseFactory
 {
 	#region IConcreteParseFactory implementation
@@ -28,7 +27,7 @@ public class LevelParseFactory : IConcreteParseFactory
 
 
 }
-}
+
 
 
 

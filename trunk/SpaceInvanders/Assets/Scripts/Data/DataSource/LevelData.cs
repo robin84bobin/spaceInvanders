@@ -1,7 +1,5 @@
 using System;
 
-namespace Data{
-
 public class LevelData : BaseData
 {
 	public int ID { get; set;}
@@ -37,6 +35,6 @@ public class LevelData : BaseData
 		}
 	}
 }
-}
+
 
 

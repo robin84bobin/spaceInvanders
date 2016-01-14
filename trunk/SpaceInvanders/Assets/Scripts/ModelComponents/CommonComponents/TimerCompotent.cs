@@ -7,9 +7,9 @@ public class TimerComponent : BaseComponent
 	private float _targetTime;
 	private Action _callback;
 
-	public TimerComponent(float time, Action callback)
+	public TimerComponent(float deltaTime, Action callback)
 	{
-		_targetTime = time + Time.time;
+		_targetTime = deltaTime + Time.time;
 		_callback = callback;
 	}
 

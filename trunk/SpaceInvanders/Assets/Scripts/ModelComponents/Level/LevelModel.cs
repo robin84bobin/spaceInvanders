@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Data;
 
 public class LevelModel : BaseComponent
 {
@@ -25,7 +24,7 @@ public class LevelModel : BaseComponent
 		Init ();
 	}
 
-	public void Init()
+	public override void Init()
 	{	
 		_states = new BaseStateMachine<LevelStates,ILevelState>();
 		_states.Add (LevelStates.PLAY, new LevelStatePlay (this));
@@ -75,6 +74,7 @@ public class LevelModel : BaseComponent
 		for (int i = 0; i < _levelData.enemyWaveSize; i++) {
 			EnemyModel enemy = new EnemyModel(_levelData.enemy);
 			enemy.Init(_enemySpeed, _levelData.enemyMovePeriod);
+			AddComponent(enemy);
 			OnEnemyCreate (enemy);
 		}
 		Debug.Log ("");
@@ -108,15 +108,11 @@ public class LevelModel : BaseComponent
 
 	private float _pauseTime;
 	private bool _pause;
-	public void Pause ()
+	public void Pause (bool pause)
 	{
-		_pause = true;
+		_pause = pause;
 	}
 
-	public void Continue()
-	{
-		_pause = false;
-	}
 
 
 	#region implemented abstract members of BaseComponent

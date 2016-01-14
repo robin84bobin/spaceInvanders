@@ -2,8 +2,7 @@ using System;
 using Parse;
 using System.Collections.Generic;
 using UnityEngine;
-using Data;
-namespace Data{
+
 public class ParseFactory
 {
 	private static ParseFactory _instance;
@@ -42,4 +41,4 @@ public class ParseFactory
 	}
 }
 
-}
+

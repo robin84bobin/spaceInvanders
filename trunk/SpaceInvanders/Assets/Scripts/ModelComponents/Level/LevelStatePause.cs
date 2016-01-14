@@ -18,7 +18,7 @@ public class LevelStatePause  : ILevelState
 	public void OnEnterState ()
 	{
 		Main.inst.input.SetState (InputMode.UI);
-		_ownerModel.Pause ();
+		_ownerModel.Pause (true);
 	}
 
 	public void OnExitState ()

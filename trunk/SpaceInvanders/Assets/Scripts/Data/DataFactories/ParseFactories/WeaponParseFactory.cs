@@ -2,8 +2,7 @@ using System;
 using Parse;
 using System.Collections.Generic;
 using UnityEngine;
-using Data;
-namespace Data{
+
 class WeaponParseFactory : IConcreteParseFactory
 {
 	public IBaseData Create (ParseObject po)
@@ -15,7 +14,7 @@ class WeaponParseFactory : IConcreteParseFactory
 		return weaponData;
 	}
 }
-}
+
 
 
 

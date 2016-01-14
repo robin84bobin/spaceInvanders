@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Data;
 
 public class HeroModel: BaseActorModel
 {

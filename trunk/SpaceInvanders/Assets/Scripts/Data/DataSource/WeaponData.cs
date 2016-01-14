@@ -1,7 +1,5 @@
 using System;
 
-namespace Data{
-
 public class WeaponData : BaseData
 {
 	public int frequency { get; set;}
@@ -18,6 +16,6 @@ public class WeaponData : BaseData
 		}
 	}
 }
-}
+
 
 
