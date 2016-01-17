@@ -1,17 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class HeroController: BaseActorController
+public class HeroController: BaseActorController<HeroModel>
 {
-
-	private HeroModel _model;
-
-	protected override void OnInit(BaseActorModel model)
-	{
-		_model = (HeroModel)model;
-		_model.MoveEvent += OnMove;
-	}
-
 	Vector3 _moveVector = Vector3.zero;
 	void OnMove (Vector3 moveVector)
 	{
@@ -19,4 +10,17 @@ public class HeroController: BaseActorController
 		transform.Translate (_moveVector * 5f);
 	}
 
+	#region implemented abstract members of BaseActorController
+
+	protected override void OnInit()
+	{
+		_model.MoveEvent += OnMove;
+	}
+
+	protected override void Release ()
+	{
+
+	}
+
+	#endregion
 }

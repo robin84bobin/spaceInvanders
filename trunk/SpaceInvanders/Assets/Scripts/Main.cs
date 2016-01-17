@@ -14,7 +14,7 @@ public sealed class Main : MonoBehaviour
 	public ParseInitializeBehaviour parse;
 
 	private DataController _dataController;
-	public DataController Data{
+	public DataController Data {
 		get {
 			return _dataController;
 		}

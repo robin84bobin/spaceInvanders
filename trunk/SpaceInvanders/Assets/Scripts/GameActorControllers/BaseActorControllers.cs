@@ -1,22 +1,23 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-public abstract class BaseActorController : MonoBehaviour 
+
+public abstract class BaseActorController <TModel> : MonoBehaviour where TModel:BaseActorModel
 {
-
-	public void Init(BaseActorModel model)
+	protected TModel _model;
+	public void Init(TModel model)
 	{
-		GameObject go = new GameObject();
-		go.name = model.GetType().Name;
-		go.transform.parent = this.transform;
-
-		OnInit(model);
+		_model = model;
+		OnInit();
 	}
 
-	public virtual void OnCollision(BaseActorController other)
+	void OnDestroy()
 	{
-
+		_model.Remove();
+		_model = null;
+		Release();
 	}
 
-	abstract protected void OnInit(BaseActorModel model);
+	abstract protected void OnInit();
+	abstract protected void Release();
 }

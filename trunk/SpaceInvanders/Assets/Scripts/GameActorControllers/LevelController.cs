@@ -42,13 +42,14 @@ public class LevelController : MonoBehaviour
 
 	void SpawnHero (HeroModel model)
 	{
-		HeroController hero =  CreateActor<HeroController> (model);
+		HeroController hero =  CreateActor<HeroController, HeroModel> (model);
 		hero.transform.localPosition = heroSpawnPoint.transform.localPosition;
 	}
 
+
 	void SpawnEnemy(EnemyModel model)
 	{
-		EnemyController enemy = CreateActor<EnemyController> ( model);
+		EnemyController enemy = CreateActor<EnemyController, EnemyModel> ( model);
 
 		Vector3 position = enemySpawnPoints[_enemySpawnPointIndex].transform.localPosition;
 		position.y += _enemySpawnRow * (SpawnRowDistance + enemy.GetYSize());
@@ -61,7 +62,12 @@ public class LevelController : MonoBehaviour
 		}
 	}
 
-	T CreateActor<T>(BaseActorModel model)  where T:BaseActorController
+	/// <summary>
+	/// Creates the actor.
+	/// Where T:BaseActorController<M>
+	/// Where M:BaseActorModel 
+	/// </summary>
+	T CreateActor<T,M>(M model)  where M:BaseActorModel where T:BaseActorController<M>
 	{
 		GameObject prefab = (GameObject)Resources.Load ("Prefabs/GameEntities/" + model.dataType);
 		GameObject go = GameObject.Instantiate (prefab) as GameObject;

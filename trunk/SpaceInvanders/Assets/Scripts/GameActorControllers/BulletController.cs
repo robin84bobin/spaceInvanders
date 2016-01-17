@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletController : BaseActorController 
+public class BulletController : BaseActorController<BulletModel> 
 {
-	#region implemented abstract members of BaseActor
 
-	protected override void OnInit (BaseActorModel model)
+	#region implemented abstract members of BaseActorController
+
+	protected override void Release ()
+	{
+		throw new System.NotImplementedException ();
+	}
+
+	protected override void OnInit ()
 	{
 		throw new System.NotImplementedException ();
 	}

@@ -1,15 +1,21 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnemyController : BaseActorController
+public class EnemyController : BaseActorController<EnemyModel>
 {
-	private EnemyModel _model;
+	#region implemented abstract members of BaseActorController
 
-	protected override void OnInit (BaseActorModel model)
+	protected override void OnInit ()
 	{
-		_model = (EnemyModel)model;
 		_model.MoveEvent += OnMove;
 	}
+
+	protected override void Release ()
+	{
+		_model = null;
+	}
+
+	#endregion
 
 	void OnMove (Vector3 moveVector)
 	{
@@ -19,11 +25,6 @@ public class EnemyController : BaseActorController
 	public float GetYSize ()
 	{
 		return transform.localScale.y;
-	}
-
-	public override void OnCollision(BaseActorController other)
-	{
-		_model.AddComponent (new GuidedBehaviuorComponent ());
 	}
 
 }
