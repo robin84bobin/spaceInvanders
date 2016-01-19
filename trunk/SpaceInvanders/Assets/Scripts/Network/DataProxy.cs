@@ -52,7 +52,7 @@ public class DataProxy
 		return false;
 	}
 
-	public void LoadData<TData>(string tableName, Action<string, Dictionary<string,IBaseData>> callback) where TData:IBaseData, new()
+	public void LoadData<TData>(string tableName, Action<string, Dictionary<string,TData>> callback) where TData:IBaseData, new()
 	{
 		if (NeedUpdate (tableName)) {
 			_webProxy.GetTableData (tableName, OnUpdateComplete<TData>);
@@ -65,7 +65,7 @@ public class DataProxy
 	void OnUpdateComplete<TData> (string tableName, Dictionary<string, IBaseData> dataDict)  where TData:IBaseData
 	{
 		_dbProxy.SaveTableData<TData> (tableName, dataDict);
-		EventManager.Get<StorageUpdateCompleteEvent> ().Publish (tableName);
+		EventManager.Get<StorageUpdateCompleteEvent> ().Publish (typeof(TData));
 	}
 
 	public void SaveResults(string playerName, int score)

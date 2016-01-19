@@ -7,7 +7,7 @@ public interface IDataBaseProxy
 	double lastUpdateTime (string tableName);
 	bool IsTableExist(string tableName);
 	void SaveTableData<TBaseData>(string tableName, Dictionary<string, IBaseData> dataDictionary) where TBaseData:IBaseData;
-	void GetTableData<TBaseData> (string tableName, Action<string, Dictionary<string, IBaseData>> callback) where TBaseData:IBaseData, new();
+	void GetTableData<TBaseData> (string tableName, Action<string, Dictionary<string, TBaseData>> callback) where TBaseData:IBaseData, new();
 }
 
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public sealed class GameManager : MonoBehaviour 
 {
@@ -13,7 +14,7 @@ public sealed class GameManager : MonoBehaviour
 	public void LoadCurrentLevel()
 	{
 		EventManager.Get<LevelStartEvent> ().Subscribe (OnLevelStart);
-		_currentLevelData = Main.inst.Data.levelStorage.GetByID (_currentLevelID);
+		_currentLevelData =	Main.inst.Data.Get<LevelData>(level => level.ID == _currentLevelID);
 		SceneManager.LoadScene(_currentLevelData.levelSceneName);
 	}
 

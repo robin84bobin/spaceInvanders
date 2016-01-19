@@ -7,14 +7,8 @@ using Parse;
 
 public sealed class DataController
 {
-	//-----storages-----
-	public LevelStorage levelStorage;
-	public BaseStorage<HeroData> HeroStorage;
-	public BaseStorage<BulletData> BulletStorage;
-	public BaseStorage<WeaponData> WeaponStorage;
-	public BaseStorage<EnemyData> EnemyStorage;
 	//------------------
-	private List<IBaseStorage> _referenceStorages;
+	private Dictionary<Type, IBaseStorage> _storageMap;
 	//------------------
 	private UserStorage _userStorage;
 
@@ -36,27 +30,47 @@ public sealed class DataController
 
 	private void InitStorages()
 	{
-		_referenceStorages = new List<IBaseStorage>();
+		_storageMap = new Dictionary<Type, IBaseStorage>();
 
-		levelStorage = new LevelStorage(DataTypes.LEVEL);
-		_referenceStorages.Add (levelStorage);
-		EnemyStorage = RegisterBaseStorage<EnemyData>(DataTypes.ENEMY);
-		BulletStorage = RegisterBaseStorage<BulletData>(DataTypes.BULLET);
-		HeroStorage = RegisterBaseStorage<HeroData>(DataTypes.HERO);
-		WeaponStorage = RegisterBaseStorage<WeaponData>(DataTypes.WEAPON);
+		RegisterBaseStorage<LevelData>(DataTypes.LEVEL);
+		RegisterBaseStorage<EnemyData>(DataTypes.ENEMY);
+		RegisterBaseStorage<BulletData>(DataTypes.BULLET);
+		RegisterBaseStorage<HeroData>(DataTypes.HERO);
+		RegisterBaseStorage<WeaponData>(DataTypes.WEAPON);
+	}
+
+	public BaseStorage<T> Storage<T>() where T:BaseData, new()
+	{
+		Type type = typeof(T);
+		if (_storageMap.ContainsKey(type)){
+			return ((BaseStorage<T>)_storageMap[type]);
+		}
+		return null;
+	}
+
+	public T Get<T>(string objectId) where T:BaseData, new() 
+	{
+		return Storage<T>().Get(objectId);
+	}
+
+	public T Get<T>(Func<T,bool> predicate) where T:BaseData, new() 
+	{
+		return Storage<T>().Get(predicate);
 	}
 
 	private BaseStorage<T> RegisterBaseStorage<T>(string table) where T:BaseData, new()
 	{
 		BaseStorage<T> storage = new BaseStorage<T>(table);
-		_referenceStorages.Add(storage);
+		_storageMap.Add(typeof(T),storage);
 		return storage;
 	}
 
 	int nextStorageIndex = -1;
+	private Queue<IBaseStorage> _storageLoadQueue;
 	void StartLoadStorages ()
 	{
 		nextStorageIndex = 0;
+		_storageLoadQueue = new Queue<IBaseStorage>( _storageMap.Values);
 		LoadNextStorage();
 	}
 
@@ -69,24 +83,27 @@ public sealed class DataController
 
 	void LoadNextStorage ()
 	{
-		if ( nextStorageIndex >= _referenceStorages.Count){
+		if ( _storageLoadQueue.Count <= 0){
 			OnStoragesUpdateComplete();
 			return;
 		}
 
-		if(_referenceStorages[nextStorageIndex] == null){
-			nextStorageIndex++;
+		IBaseStorage currentStorage = _storageLoadQueue.Dequeue();
+		if(currentStorage == null){
 			LoadNextStorage();
 			return;
 		}
 
-		_referenceStorages [nextStorageIndex].LoadData();
-		nextStorageIndex ++;
+		currentStorage.LoadData();
 	}
 
-	void LoadStorage (string dataType)
+	void LoadStorage (Type dataType)
 	{
-		_referenceStorages.FirstOrDefault (storage => storage.DataType == dataType).LoadData();
+		if (!_storageMap.ContainsKey(dataType)){
+			Debug.Log("Data storage does not exist:" + dataType.Name);
+			return;
+		}
+		_storageMap[typeof(Type)].LoadData();
 	}
 }
 

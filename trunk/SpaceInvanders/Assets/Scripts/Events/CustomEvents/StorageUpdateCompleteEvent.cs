@@ -1,3 +1,4 @@
 using UnityEngine;
+using System;
 
-public sealed class StorageUpdateCompleteEvent : siParamEvent<string> {}
+public sealed class StorageUpdateCompleteEvent : siParamEvent<Type> {}

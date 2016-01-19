@@ -2,37 +2,40 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public interface IBaseStorage
 {
-	string DataType {get;}
+	string DataTypeName {get;}
 	void LoadData();
 }
 
-public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
+public class BaseStorage <T> : IBaseStorage where T : IBaseData, new()
 {
-	protected Dictionary<string,IBaseData> _objects;
+
+	protected Dictionary<string,T> _objects;
+
 	protected string _dataType;
 
 	public BaseStorage(string dataType)
 	{
 		_dataType = dataType;
-		_objects = new Dictionary<string, IBaseData> ();
+		_objects = new Dictionary<string, T> ();
 	}
 
-	public string DataType {
-		get { 
-			return _dataType; 
+	public string DataTypeName {
+		get {
+			return _dataType;
 		}
 	}
 
 	public void LoadData()
 	{
 		EventManager.Get<LoadProgressEvent> ().Publish ( GetLoadMessage ());
-		DataProxy.Instance.LoadData<TData> (_dataType, OnLoadDataComplete);
+		DataProxy.Instance.LoadData<T> (_dataType, OnLoadDataComplete);
 	}
 
-	protected void OnLoadDataComplete(string tableName, Dictionary<string,IBaseData> objects)
+	protected void OnLoadDataComplete(string tableName, Dictionary<string,T> objects)
 	{
 		Debug.Log (string.Format("LOADED DATA: {0} ", _dataType));
 		_objects = objects;
@@ -40,20 +43,25 @@ public class BaseStorage <TData> : IBaseStorage where TData : IBaseData, new()
 		EventManager.Get<StorageLoadCompleteEvent>().Publish();
 	}
 
-	public TData Get (string objectId)
+	public T Get (string objectId)
 	{
 		if (!_objects.ContainsKey(objectId)){
 			Debug.LogError(string.Format("Can't get data from '{0}' storage - objectId:{1}", _dataType ,objectId));
-			return default(TData);
+			return default(T);
 		}
 
-		return (TData)_objects[objectId];
+		return _objects[objectId];
 	}
 
-	void Log(Dictionary<string,IBaseData> dict)
+	public T Get (Func<T,bool> predicate)
+	{
+		return _objects.Values.FirstOrDefault(predicate);
+	}
+
+	void Log(Dictionary<string,T> dict)
 	{
 		foreach (var item in dict) {
-			Debug.Log(string.Format(">> {0} : {1}", item.Value.type, item.Value.objectId));
+			Debug.Log(string.Format(" {0} > {1}", item.Value.type, item.Value.objectId));
 		}
 	}
 

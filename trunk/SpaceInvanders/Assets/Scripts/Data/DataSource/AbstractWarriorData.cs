@@ -12,7 +12,7 @@ public abstract class AbstractWarriorData : BaseData
 	public WeaponData weapon {
 		get {
 			if (_weapon == null){
-				_weapon = Main.inst.Data.WeaponStorage.Get(weaponId);
+				_weapon = Main.inst.Data.Get<WeaponData>(weaponId);
 			}
 			return _weapon;
 		}

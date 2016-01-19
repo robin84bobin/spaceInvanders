@@ -18,7 +18,7 @@ public class LevelData : BaseData
 	public EnemyData enemy {
 			get {
 				if (_enemy == null) {
-					_enemy = Main.inst.Data.EnemyStorage.Get (enemyId);
+					_enemy = Main.inst.Data.Get<EnemyData>(enemyId);
 				}
 				return _enemy;
 			}
@@ -29,7 +29,7 @@ public class LevelData : BaseData
 	public HeroData hero {
 		get {
 			if (_hero == null)	{
-				_hero = Main.inst.Data.HeroStorage.Get(heroId);
+				_hero = Main.inst.Data.Get<HeroData>(heroId);
 			}
 			return _hero;
 		}

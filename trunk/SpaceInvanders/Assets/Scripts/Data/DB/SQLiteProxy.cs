@@ -86,9 +86,9 @@ public class SQLiteProxy : IDataBaseProxy
 		return true;
 	}
 
-	public void GetTableData<TBaseData> (string tableName, Action<string, Dictionary<string, IBaseData>> callback) where TBaseData:IBaseData, new()
+	public void GetTableData<TBaseData> (string tableName, Action<string, Dictionary<string, TBaseData>> callback) where TBaseData:IBaseData, new()
 	{
-		Dictionary<string,IBaseData> resultObjects = new Dictionary<string, IBaseData> ();
+		Dictionary<string,TBaseData> resultObjects = new Dictionary<string, TBaseData> ();
 
 		mCommand.CommandText = "SELECT * FROM " + tableName;
 		mReader = mCommand.ExecuteReader();

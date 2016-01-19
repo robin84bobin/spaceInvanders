@@ -10,7 +10,7 @@ public class WeaponData : BaseData
 	public BulletData bullet {
 		get {
 			if(_bullet == null){
-				_bullet = Main.inst.Data.BulletStorage.Get(bulletId);
+				_bullet = Main.inst.Data.Get<BulletData>(bulletId);
 			}
 			return _bullet;
 		}
