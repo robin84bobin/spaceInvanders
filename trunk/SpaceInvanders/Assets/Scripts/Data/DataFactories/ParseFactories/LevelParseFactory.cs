@@ -1,31 +1,33 @@
-using System;
+using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Extensions;
 using Parse;
-using UnityEngine;
-using System.Reflection;
 
-public class LevelParseFactory : IConcreteParseFactory
+namespace Assets.Scripts.Data.DataFactories.ParseFactories
 {
-	#region IConcreteParseFactory implementation
-	public IBaseData Create(ParseObject po) 
-	{
-		LevelData levelData = new LevelData();
-		levelData.type = po.ClassName;
-		levelData.objectId = po.ObjectId;
-		levelData.ID = po.TryGet<int> ("ID");
-		levelData.levelSceneName = po.TryGet<string> ("LevelSceneName");
-		levelData.heroId = po.TryGetPointerObjectId (DataTypes.HERO);
-		levelData.enemyId = po.TryGetPointerObjectId (DataTypes.ENEMY);
-		levelData.enemyWaveRate = po.TryGet<int> ("EnemyWaveRate");
-		levelData.enemyWaveSize = po.TryGet<int> ("EnemyWaveSize");
-		levelData.enemyStartSpeed = po.TryGet<int> ("EnemyStartSpeed");
-		levelData.enemySpeedFactor = po.TryGet<double> ("EnemySpeedFactor");
-		levelData.enemyMovePeriod = po.TryGet<double> ("EnemyMovePeriod");
-		return levelData;
-	}
+    public class LevelParseFactory : IConcreteParseFactory
+    {
+        #region IConcreteParseFactory implementation
+        public IBaseData Create(ParseObject po_) 
+        {
+            LevelData levelData = new LevelData();
+            levelData.Type = po_.ClassName;
+            levelData.ObjectId = po_.ObjectId;
+            levelData.Id = po_.TryGet<int> ("ID");
+            levelData.LevelSceneName = po_.TryGet<string> ("LevelSceneName");
+            levelData.HeroId = po_.TryGetPointerObjectId (DataTypes.HERO);
+            levelData.EnemyId = po_.TryGetPointerObjectId (DataTypes.ENEMY);
+            levelData.EnemyWaveRate = po_.TryGet<int> ("EnemyWaveRate");
+            levelData.EnemyWaveSize = po_.TryGet<int> ("EnemyWaveSize");
+            levelData.EnemyStartSpeed = po_.TryGet<int> ("EnemyStartSpeed");
+            levelData.EnemySpeedFactor = po_.TryGet<double> ("EnemySpeedFactor");
+            levelData.EnemyMovePeriod = po_.TryGet<double> ("EnemyMovePeriod");
+            return levelData;
+        }
 
-	#endregion
+        #endregion
 
 
+    }
 }
 
 

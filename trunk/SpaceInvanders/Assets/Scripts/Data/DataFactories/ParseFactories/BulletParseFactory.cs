@@ -1,17 +1,18 @@
-using System;
+using Assets.Scripts.Data.DataSource;
 using Parse;
-using System.Collections.Generic;
-using UnityEngine;
 
-class BulletParseFactory : IConcreteParseFactory
+namespace Assets.Scripts.Data.DataFactories.ParseFactories
 {
-	public IBaseData Create (ParseObject po)
-	{
-		BulletData bulletData = new BulletData();
-		bulletData.type = po.ClassName;
-		bulletData.objectId = po.ObjectId;
-		return bulletData;
-	}
+    class BulletParseFactory : IConcreteParseFactory
+    {
+        public IBaseData Create (ParseObject po_)
+        {
+            BulletData bulletData = new BulletData();
+            bulletData.Type = po_.ClassName;
+            bulletData.ObjectId = po_.ObjectId;
+            return bulletData;
+        }
+    }
 }
 
 

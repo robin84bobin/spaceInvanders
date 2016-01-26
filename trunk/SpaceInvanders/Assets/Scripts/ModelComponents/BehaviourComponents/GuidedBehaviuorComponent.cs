@@ -1,28 +1,32 @@
-using System;
+using Assets.Scripts.Events;
+using Assets.Scripts.Events.CustomEvents;
+using Assets.Scripts.ModelComponents.CommonComponents;
 using UnityEngine;
 
-
-public class GuidedBehaviuorComponent: BaseComponent
+namespace Assets.Scripts.ModelComponents.BehaviourComponents
 {
+    public class GuidedBehaviuorComponent: BaseComponent
+    {
 
-	protected override void OnInit()
-	{
-		AddComponent( new TimerComponent(5f, Remove));
-		EventManager.Get<MoveControlsEvent> ().Subscribe (OnUpdateControl);
-	}
+        protected override void OnInit()
+        {
+            AddComponent( new TimerComponent(5f, Remove));
+            EventManager.Get<MoveControlsEvent> ().Subscribe (OnUpdateControl);
+        }
 
-	void OnUpdateControl (Vector3 moveVector)
-	{
-		if (_locked) {
-			return;
-		}
-		parent.SendMessage("Move",moveVector);
-	}
+        void OnUpdateControl (Vector3 moveVector_)
+        {
+            if (locked) {
+                return;
+            }
+            Parent.SendMessage("Move",moveVector_);
+        }
 
-	protected override void OnRelease()
-	{
-		EventManager.Get<MoveControlsEvent> ().Unsubscribe (OnUpdateControl);
-	}
+        protected override void OnRelease()
+        {
+            EventManager.Get<MoveControlsEvent> ().Unsubscribe (OnUpdateControl);
+        }
+    }
 }
 
 

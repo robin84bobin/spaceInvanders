@@ -1,8 +1,13 @@
-using System;
+using Assets.Scripts.Data.Attributes;
 
-	public class GameData : BaseData
-	{
-		public int height { get; set;}
-		public int width  { get; set;}
-	}
+namespace Assets.Scripts.Data.DataSource
+{
+    public class GameData : BaseData
+    {
+        [DbField]
+        public int Height { get; set;}
+        [DbField]
+        public int Width  { get; set;}
+    }
+}
 

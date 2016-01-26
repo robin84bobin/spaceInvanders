@@ -1,3 +1,4 @@
-using UnityEngine;
-
-public sealed class StorageLoadCompleteEvent : siEvent {}
+namespace Assets.Scripts.Events.CustomEvents
+{
+    public sealed class StorageLoadCompleteEvent : SiEvent {}
+}

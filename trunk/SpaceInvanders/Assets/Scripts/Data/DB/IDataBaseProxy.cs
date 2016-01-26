@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.Data.DataSource;
 
-public interface IDataBaseProxy
+namespace Assets.Scripts.Data.DB
 {
-	void Init();
-	double lastUpdateTime (string tableName);
-	bool IsTableExist(string tableName);
-	void SaveTableData<TBaseData>(string tableName, Dictionary<string, IBaseData> dataDictionary) where TBaseData:IBaseData;
-	void GetTableData<TBaseData> (string tableName, Action<string, Dictionary<string, TBaseData>> callback) where TBaseData:IBaseData, new();
+    public interface IDataBaseProxy
+    {
+        void Init();
+        double LastUpdateTime (string tableName_);
+        bool IsTableExist(string tableName_);
+        void SaveTableData<TBaseData>(string tableName_, Dictionary<string, IBaseData> dataDictionary_) where TBaseData:IBaseData;
+        void GetTableData<TBaseData> (string tableName_, Action<string, Dictionary<string, TBaseData>> callback_) where TBaseData:IBaseData, new();
+    }
 }
 
 

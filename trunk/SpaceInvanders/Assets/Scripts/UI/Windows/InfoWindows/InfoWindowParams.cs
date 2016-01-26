@@ -1,12 +1,13 @@
-using System;
-
-public class InfoWindowParams : WindowParams
+namespace Assets.Scripts.UI.Windows.InfoWindows
 {
-	public string message;
+    public class InfoWindowParams : WindowParams
+    {
+        public string Message { get; private set; }
 
-	public InfoWindowParams (string message)
-	{
-		this.message = message;
-	}
+        public InfoWindowParams (string message_)
+        {
+            Message = message_;    
+        }
+    }
 }
 

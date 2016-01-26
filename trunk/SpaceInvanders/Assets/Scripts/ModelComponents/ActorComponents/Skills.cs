@@ -1,8 +1,9 @@
-using System;
-
-public class Skills
+namespace Assets.Scripts.ModelComponents.ActorComponents
 {
-	public const string HEALTH = "health";
+    public class Skills
+    {
+        public const string HEALTH = "health";
+    }
 }
 
 

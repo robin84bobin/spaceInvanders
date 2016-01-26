@@ -1,124 +1,131 @@
 using System;
-using Parse;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Assets.Scripts.Controllers;
+using Assets.Scripts.Data;
+using Assets.Scripts.Data.DataFactories.ParseFactories;
+using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Data.UserData;
+using Parse;
 using UnityEngine;
 
-public class ParseProxy: IWebDataProxy
+namespace Assets.Scripts.Network
 {
-	#region IDataProxy implementation
+    public class ParseProxy: IWebDataProxy
+    {
+        #region IDataProxy implementation
 
-	public double lastUpdateTime (string tableName)
-	{
-		return 0;
-	}
+        public double LastUpdateTime (string tableName_)
+        {
+            return 0;
+        }
 
-	public void GetTableData (string dataType, Action<string,Dictionary<string, IBaseData>> callback)	
-	{	
-		Dictionary<string, IBaseData> resultDict = new Dictionary<string, IBaseData>();
-		var query = ParseObject.GetQuery (dataType);
-		query.FindAsync().ContinueWith( t => {
-			IEnumerable<ParseObject> result = t.Result;
-			foreach(ParseObject po in result){
-				IBaseData dataItem = ParseFactory.Instance.Create(dataType,po);
-				resultDict.Add (po.ObjectId, dataItem);
-			}
-			callback( dataType, resultDict );
-		});
-	}
+        public void GetTableData (string tableName_, Action<string,Dictionary<string, IBaseData>> callback_)	
+        {	
+            Dictionary<string, IBaseData> resultDict = new Dictionary<string, IBaseData>();
+            var query = ParseObject.GetQuery (tableName_);
+            query.FindAsync().ContinueWith( t_ => {
+                                                     IEnumerable<ParseObject> result = t_.Result;
+                                                     foreach(ParseObject po in result){
+                                                         IBaseData dataItem = ParseFactory.Instance.Create(tableName_,po);
+                                                         resultDict.Add (po.ObjectId, dataItem);
+                                                     }
+                                                     callback_( tableName_, resultDict );
+            });
+        }
 
-	public void LogIn (string username, string password, Action onSuccess, Action onFail)
-	{
-		ParseUser.LogInAsync (username, password).ContinueWith ((Task task) => 
-		{
-			if (task.IsFaulted || task.IsCanceled){
-				onFail();
-			}
-			else{
-				onSuccess();
-			}
-		});
-	}
+        public void LogIn (string username_, string password_, Action onSuccess_, Action onFail_)
+        {
+            ParseUser.LogInAsync (username_, password_).ContinueWith ((Task task_) => 
+            {
+                if (task_.IsFaulted || task_.IsCanceled){
+                    onFail_();
+                }
+                else{
+                    onSuccess_();
+                }
+            });
+        }
 
-	public void SaveScores (string name, int score)
-	{
-		throw new NotImplementedException ();
-	}
+        public void SaveScores (string name_, int score_)
+        {
+            throw new NotImplementedException ();
+        }
 
-	public void SignUp (AuthData _authData, Action OnSuccess, Action OnFail)
-	{
-		ParseUser user = new ParseUser ();
-		user.Add("Username", _authData.username);
-		user.Add("Email", _authData.email);
-		user.Add("Password", _authData.password);
-		user.SignUpAsync ().ContinueWith((Task task) => {
-			if (task.IsCanceled || task.IsFaulted){
-				OnFail();
-			}
-			else{
-				OnSuccess();
-			}
-		});
-	}
+        public void SignUp (AuthData authData_, Action onSuccess_, Action onFail_)
+        {
+            ParseUser user = new ParseUser ();
+            user.Add("Username", authData_.username);
+            user.Add("Email", authData_.email);
+            user.Add("Password", authData_.password);
+            user.SignUpAsync ().ContinueWith((Task task_) => {
+                                                                if (task_.IsCanceled || task_.IsFaulted){
+                                                                    onFail_();
+                                                                }
+                                                                else{
+                                                                    onSuccess_();
+                                                                }
+            });
+        }
 
 
-	public UserData CurrentUser ()
-	{
-		if (ParseUser.CurrentUser == null) {
-			return null;
-		}
-		return (UserData)ParseFactory.Instance.Create (DataTypes.USER, ParseUser.CurrentUser);
-	}
+        public UserData CurrentUser ()
+        {
+            if (ParseUser.CurrentUser == null) {
+                return null;
+            }
+            return (UserData)ParseFactory.Instance.Create (DataTypes.USER, ParseUser.CurrentUser);
+        }
 
-	#endregion
+        #endregion
+    }
+
+    public class ParseProxyRest : IWebDataProxy
+    {
+        public const string URL = "https://api.parse.com/1/";
+
+        #region IWebDataProxy implementation
+
+        public double LastUpdateTime (string tableName_)
+        {
+            return 0;
+        }
+
+        public void GetTableData (string tableName_, Action< string, Dictionary<string, IBaseData> > callback_)
+        {
+            throw new NotImplementedException ();
+        }
+
+        public void SaveScores (string name_, int score_)
+        {
+            throw new NotImplementedException ();
+        }
+
+        public void SignUp (AuthData authData_)
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("Username", authData_.username);
+            form.AddField("Email", authData_.email);
+            form.AddField("Password",authData_.password);
+            WWW connect = new WWW (URL + "users", form);
+        }
+
+        public void LogIn (string username_, string password_, Action onSuccess_, Action onFail_)
+        {
+            throw new NotImplementedException ();
+        }
+
+        public void SignUp (AuthData authData_, Action onSuccess_, Action onFail_)
+        {
+            throw new NotImplementedException ();
+        }
+
+        public UserData CurrentUser ()
+        {
+            throw new NotImplementedException ();
+        }
+
+        #endregion
+
+    }
 }
-
-public class ParseProxyREST : IWebDataProxy
-{
-	public const string url = "https://api.parse.com/1/";
-
-	#region IWebDataProxy implementation
-
-	public double lastUpdateTime (string tableName)
-	{
-		return 0;
-	}
-
-	public void GetTableData (string tableName, Action< string, Dictionary<string, IBaseData> > callback)
-	{
-		throw new NotImplementedException ();
-	}
-
-	public void SaveScores (string name, int score)
-	{
-		throw new NotImplementedException ();
-	}
-
-	public void SignUp (AuthData _authData)
-	{
-		WWWForm form = new WWWForm();
-		form.AddField("Username", _authData.username);
-		form.AddField("Email", _authData.email);
-		form.AddField("Password",_authData.password);
-		WWW connect = new WWW (url + "users", form);
-	}
-
-	public void LogIn (string username, string password, Action onSuccess, Action onFail)
-	{
-		throw new NotImplementedException ();
-	}
-
-	public void SignUp (AuthData _authData, Action onSuccess, Action onFail)
-	{
-		throw new NotImplementedException ();
-	}
-
-	public UserData CurrentUser ()
-	{
-		throw new NotImplementedException ();
-	}
-
-	#endregion
-
-}
-

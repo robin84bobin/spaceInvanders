@@ -1,68 +1,74 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Events;
+using Assets.Scripts.Events.CustomEvents;
+using Assets.Scripts.Input.InputStates;
+using UnityEngine;
 
-public enum InputMode
+namespace Assets.Scripts.Input
 {
-	UI,
-	GAME
-}
+    public enum InputMode
+    {
+        UI,
+        GAME
+    }
 
-/// <summary>
-/// Input manager.
-/// Just an input manager...
-/// </summary>
-public sealed class InputManager : MonoBehaviour 
-{
-	public string horizontalAxis = "Horizontal";
-	public string verticalAxis = "Vertical";
-	public KeyCode fireButton = KeyCode.Space;
+    /// <summary>
+    /// Input manager.
+    /// Just an input manager...
+    /// </summary>
+    public sealed class InputManager : MonoBehaviour 
+    {
+        public string horizontalAxis = "Horizontal";
+        public string verticalAxis = "Vertical";
+        public KeyCode fireButton = KeyCode.Space;
 
-	private Dictionary<InputMode,IInputState> _states;
-	private IInputState _currentState;
+        private Dictionary<InputMode,IInputState> _states;
+        private IInputState _currentState;
 
-	void Awake()
-	{
-		_states = new Dictionary<InputMode, IInputState>()
-		{
-			{InputMode.UI, new UIInputState()},
-			{InputMode.GAME, new GameInputState()}
-		};
-	}
+        void Awake()
+        {
+            _states = new Dictionary<InputMode, IInputState>()
+            {
+                {InputMode.UI, new UiInputState()},
+                {InputMode.GAME, new GameInputState()}
+            };
+        }
 
-	public bool FirePressed{
-		get{
-			return Input.GetKey (Main.inst.input.fireButton);
-		}
-	}
+        public bool FirePressed{
+            get{
+                return UnityEngine.Input.GetKey (Main.Inst.input.fireButton);
+            }
+        }
 
-	float xInput;
-	float yInput;
-	Vector3 _moveVector;
-	public Vector3 GetMoveVector ()
-	{
-		xInput = Input.GetAxis ( Main.inst.input.horizontalAxis );
-		yInput = Input.GetAxis ( Main.inst.input.verticalAxis );
-		return new Vector3(xInput, yInput, 0f);
-	}
+        float _xInput;
+        float _yInput;
+        Vector3 _moveVector;
+        public Vector3 GetMoveVector ()
+        {
+            _xInput = UnityEngine.Input.GetAxis ( Main.Inst.input.horizontalAxis );
+            _yInput = UnityEngine.Input.GetAxis ( Main.Inst.input.verticalAxis );
+            return new Vector3(_xInput, _yInput, 0f);
+        }
 
-	public void SetState(InputMode mode)
-	{
-		if (_currentState == _states[mode]){
-			return;
-		}
-		_currentState = _states[mode];
+        public void SetState(InputMode mode_)
+        {
+            if (_currentState == _states[mode_]){
+                return;
+            }
+            _currentState = _states[mode_];
 
-		Cursor.lockState = _currentState.CursorLockMode;
-		Cursor.visible = _currentState.CursorLockMode != CursorLockMode.Locked;
-	}
+            Cursor.lockState = _currentState.CursorLockMode;
+            Cursor.visible = _currentState.CursorLockMode != CursorLockMode.Locked;
+        }
 
 
-	void Update()
-	{
-		_moveVector = GetMoveVector();
-		if (_moveVector != Vector3.zero) {
-			EventManager.Get<MoveControlsEvent>().Publish(_moveVector);
-		}
-	}
+        void Update()
+        {
+            _moveVector = GetMoveVector();
+            if (_moveVector != Vector3.zero) {
+                EventManager.Get<MoveControlsEvent>().Publish(_moveVector);
+            }
+        }
+    }
 }

@@ -1,20 +1,26 @@
-using System;
+using Assets.Scripts.Data.Attributes;
 
-public class WeaponData : BaseData
+namespace Assets.Scripts.Data.DataSource
 {
-	public int frequency { get; set;}
-	public int bulletSpeed { get; set;}
-	public string bulletId { get; set;}
+    public class WeaponData : BaseData
+    {
+        [DbField]
+        public int Frequency { get; set;}
+        [DbField]
+        public int BulletSpeed { get; set;}
+        [DbField]
+        public string BulletId { get; set;}
 
-	private BulletData _bullet;
-	public BulletData bullet {
-		get {
-			if(_bullet == null){
-				_bullet = Main.inst.Data.Get<BulletData>(bulletId);
-			}
-			return _bullet;
-		}
-	}
+        private BulletData _bullet;
+        public BulletData Bullet {
+            get {
+                if(_bullet == null){
+                    _bullet = Main.Inst.Data.Get<BulletData>(BulletId);
+                }
+                return _bullet;
+            }
+        }
+    }
 }
 
 

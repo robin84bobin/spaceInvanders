@@ -1,18 +1,21 @@
 using System;
-using Parse;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using Assets.Scripts.Controllers;
+using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Data.UserData;
 
-
-public interface IWebDataProxy
+namespace Assets.Scripts.Network
 {
-	double lastUpdateTime (string tableName);
-	void GetTableData(string tableName, Action< string, Dictionary<string, IBaseData> > callback);
-	void LogIn (string username, string password, Action onSuccess, Action onFail);
-	void SignUp (AuthData _authData, Action onSuccess, Action onFail);
+    public interface IWebDataProxy
+    {
+        double LastUpdateTime (string tableName_);
+        void GetTableData(string tableName_, Action< string, Dictionary<string, IBaseData>> callback_);
+        void LogIn (string username_, string password_, Action onSuccess_, Action onFail_);
+        void SignUp (AuthData authData_, Action onSuccess_, Action onFail_);
 
-	UserData CurrentUser ();
+        UserData CurrentUser ();
 
-	void SaveScores(string name, int score);
+        void SaveScores(string name_, int score_);
+    }
 }
 

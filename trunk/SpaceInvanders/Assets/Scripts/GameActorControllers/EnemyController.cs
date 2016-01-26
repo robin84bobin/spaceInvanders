@@ -1,30 +1,33 @@
+using Assets.Scripts.ModelComponents.ActorComponents;
 using UnityEngine;
-using System.Collections;
 
-public class EnemyController : BaseActorController<EnemyModel>
+namespace Assets.Scripts.GameActorControllers
 {
-	#region implemented abstract members of BaseActorController
+    public class EnemyController : BaseActorController<EnemyModel>
+    {
+        #region implemented abstract members of BaseActorController
 
-	protected override void OnInit ()
-	{
-		_model.MoveEvent += OnMove;
-	}
+        protected override void OnInit ()
+        {
+            model.MoveEvent += OnMove;
+        }
 
-	protected override void Release ()
-	{
-		_model = null;
-	}
+        protected override void Release ()
+        {
+            model = null;
+        }
 
-	#endregion
+        #endregion
 
-	void OnMove (Vector3 moveVector)
-	{
-		transform.Translate (moveVector * 3f);
-	}
+        void OnMove (Vector3 moveVector_)
+        {
+            transform.Translate (moveVector_ * 3f);
+        }
 
-	public float GetYSize ()
-	{
-		return transform.localScale.y;
-	}
+        public float GetYSize ()
+        {
+            return transform.localScale.y;
+        }
 
+    }
 }

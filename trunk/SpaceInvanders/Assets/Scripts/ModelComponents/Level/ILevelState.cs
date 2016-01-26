@@ -1,15 +1,18 @@
 using System;
+using Assets.Scripts.CommonComponents.StateSwitcher;
+using Assets.Scripts.Input;
 
-public enum LevelStates
+namespace Assets.Scripts.ModelComponents.Level
 {
-	PLAY,
-	PAUSE
+    public enum LevelStates
+    {
+        PLAY,
+        PAUSE
+    }
+
+    public interface ILevelState : IBaseState
+    {
+        void Update();
+        InputMode LevelInputMode { get; }
+    }
 }
-
-public interface ILevelState : IBaseState
-{
-	void Update();
-	InputMode LevelInputMode { get; }
-}
-
-

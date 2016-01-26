@@ -1,51 +1,54 @@
-using UnityEngine;
-using System.Collections;
+using Assets.Scripts.Events;
+using Assets.Scripts.Events.CustomEvents;
 using UnityEngine.UI;
 
-public class PreloaderWindow : BaseWindow 
+namespace Assets.Scripts.UI.Windows
 {
-	public Text loadingStatusText;
-	public Button startButton;
+    public class PreloaderWindow : BaseWindow 
+    {
+        public Text loadingStatusText;
+        public Button startButton;
 
-	public static void Show()
-	{
-		Main.inst.windows.Show(	"PreloaderWindow");
-	}
+        public static void Show()
+        {
+            Main.Inst.windows.Show(	"PreloaderWindow");
+        }
 
-	public override void OnShowComplete(WindowParams param = null)
-	{
-		base.OnShowComplete (param);
+        public override void OnShowComplete(WindowParams param_ = null)
+        {
+            base.OnShowComplete (param_);
 
-		EventManager.Get<LoadProgressEvent> ().Subscribe (OnLoadProgressEvent);
-		EventManager.Get<DataInitCompleteEvent> ().Subscribe (OnLoadComplete);
+            EventManager.Get<LoadProgressEvent> ().Subscribe (OnLoadProgressEvent);
+            EventManager.Get<DataInitCompleteEvent> ().Subscribe (OnLoadComplete);
 
-		loadingStatusText.text = "please wait...";
-		startButton.onClick.AddListener (OnStartButton);
-		startButton.gameObject.SetActive(false);
-	}
+            loadingStatusText.text = "please wait...";
+            startButton.onClick.AddListener (OnStartButton);
+            startButton.gameObject.SetActive(false);
+        }
 
 
-	void OnLoadProgressEvent (string message)
-	{
-		loadingStatusText.text = message;
-	}
+        void OnLoadProgressEvent (string message_)
+        {
+            loadingStatusText.text = message_;
+        }
 
-	void OnLoadComplete ()
-	{
-		loadingStatusText.text = "Loading Complete!";
-		startButton.gameObject.SetActive(true);
-	}
+        void OnLoadComplete ()
+        {
+            loadingStatusText.text = "Loading Complete!";
+            startButton.gameObject.SetActive(true);
+        }
 
-	protected override void OnHide ()
-	{
-		base.OnHide ();
-		EventManager.Get<LoadProgressEvent> ().Unsubscribe (OnLoadProgressEvent);
-		EventManager.Get<DataInitCompleteEvent> ().Unsubscribe (OnLoadComplete);
-	}
+        protected override void OnHide ()
+        {
+            base.OnHide ();
+            EventManager.Get<LoadProgressEvent> ().Unsubscribe (OnLoadProgressEvent);
+            EventManager.Get<DataInitCompleteEvent> ().Unsubscribe (OnLoadComplete);
+        }
 
-	public void OnStartButton ()
-	{
-		Hide ();
-		Main.inst.game.LoadCurrentLevel();
-	}
+        public void OnStartButton ()
+        {
+            Hide ();
+            Main.Inst.game.LoadCurrentLevel();
+        }
+    }
 }

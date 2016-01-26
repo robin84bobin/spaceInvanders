@@ -1,6 +1,7 @@
-using System;
-
-public class HeroData : AbstractWarriorData
+namespace Assets.Scripts.Data.DataSource
 {
+    public class HeroData : AbstractWarriorData
+    {
+    }
 }
 

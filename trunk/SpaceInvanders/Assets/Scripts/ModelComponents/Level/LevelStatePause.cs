@@ -1,37 +1,40 @@
-using System;
+using Assets.Scripts.Input;
 
-public class LevelStatePause  : ILevelState
+namespace Assets.Scripts.ModelComponents.Level
 {
-	LevelModel _ownerModel;
-	public LevelStatePause (LevelModel ownermodel)
-	{
-		_ownerModel = ownermodel;
-	}
+    public class LevelStatePause  : ILevelState
+    {
+        LevelModel _ownerModel;
+        public LevelStatePause (LevelModel ownermodel_)
+        {
+            _ownerModel = ownermodel_;
+        }
 
-	#region ILevelState implementation
+        #region ILevelState implementation
 
-	public void Update ()
-	{
-		//
-	}
+        public void Update ()
+        {
+            //
+        }
 
-	public void OnEnterState ()
-	{
-		Main.inst.input.SetState (InputMode.UI);
-		_ownerModel.Pause (true);
-	}
+        public void OnEnterState ()
+        {
+            Main.Inst.input.SetState (InputMode.UI);
+            _ownerModel.Pause (true);
+        }
 
-	public void OnExitState ()
-	{
-		//
-	}
+        public void OnExitState ()
+        {
+            //
+        }
 
-	public InputMode LevelInputMode {
-		get {
-			return InputMode.UI;
-		}
-	}
+        public InputMode LevelInputMode {
+            get {
+                return InputMode.UI;
+            }
+        }
 
-	#endregion
+        #endregion
+    }
 }
 

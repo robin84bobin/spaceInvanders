@@ -1,33 +1,36 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using Assets.Scripts.CommonComponents.StateSwitcher;
+using Assets.Scripts.Controllers;
+using UnityEngine;
 
-
-public abstract class AuthWindowState : MonoBehaviour , IBaseState
+namespace Assets.Scripts.UI.Windows.AuthWindow
 {
-	protected AuthData _authData;
-	public AuthData AuthData {
-		get { return _authData;}
-	}
+    public abstract class AuthWindowState : MonoBehaviour , IBaseState
+    {
+        protected AuthData authData;
+        public AuthData AuthData {
+            get { return authData;}
+        }
 
-	protected void onUserNameChange(string value)
-	{
-		_authData.username = value;
-	}
+        protected void OnUserNameChange(string value_)
+        {
+            authData.username = value_;
+        }
 
-	protected void onEmailChange(string value)
-	{
-		_authData.email = value;
-	}
+        protected void OnEmailChange(string value_)
+        {
+            authData.email = value_;
+        }
 
-	protected void onPasswordChange(string value)
-	{
-		_authData.password = value;
-	}
+        protected void OnPasswordChange(string value_)
+        {
+            authData.password = value_;
+        }
 
-	public abstract void Init(AuthData authData);
+        public abstract void Init(AuthData authData_);
 
-	#region IBaseState implementation
-	public abstract void OnEnterState ();
-	public abstract void OnExitState ();
-	#endregion
+        #region IBaseState implementation
+        public abstract void OnEnterState ();
+        public abstract void OnExitState ();
+        #endregion
+    }
 }

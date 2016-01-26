@@ -1,57 +1,61 @@
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.Data.DataSource;
 using UnityEngine;
 
-public abstract class BaseActorModel : BaseComponent
+namespace Assets.Scripts.ModelComponents.ActorComponents
 {
-	protected Dictionary<string,double> skills = new Dictionary<string, double> ();
+    public abstract class BaseActorModel : BaseComponent
+    {
+        protected Dictionary<string,double> skills = new Dictionary<string, double> ();
 
-	public event Action<Vector3> MoveEvent = delegate{};
-	protected virtual void OnMoveEvent (Vector3 obj)
-	{
-		var handler = MoveEvent;
-		if (handler != null)
-			handler (obj);
-	}
+        public event Action<Vector3> MoveEvent = delegate{};
+        protected virtual void OnMoveEvent (Vector3 obj_)
+        {
+            var handler = MoveEvent;
+            if (handler != null)
+                handler (obj_);
+        }
 
-	public event Action<int> DamageEvent = delegate{};
-	protected virtual void OnDamageEvent (int obj)
-	{
-		var handler = DamageEvent;
-		if (handler != null)
-			handler (obj);
-	}
+        public event Action<int> DamageEvent = delegate{};
+        protected virtual void OnDamageEvent (int obj_)
+        {
+            var handler = DamageEvent;
+            if (handler != null)
+                handler (obj_);
+        }
 
-	public event Action<BaseActorModel> DeathEvent = delegate{};
-	protected virtual void OnDeathEvent (BaseActorModel obj)
-	{
-		var handler = DeathEvent;
-		if (handler != null)
-			handler (obj);
-	}
+        public event Action<BaseActorModel> DeathEvent = delegate{};
+        protected virtual void OnDeathEvent (BaseActorModel obj_)
+        {
+            var handler = DeathEvent;
+            if (handler != null)
+                handler (obj_);
+        }
 
-	public string dataType { get; private set; }
+        public string DataType { get; private set; }
 
-	public BaseActorModel (BaseData data)
-	{
-		dataType = data.type;
-	}
+        protected BaseActorModel (IBaseData data_)
+        {
+            DataType = data_.Type;
+        }
 
-	public void SetSkill(string skill, double value)
-	{
-		if (!skills.ContainsKey (skill)) {
-			Debug.LogWarning(string.Format ("Try to modify unexisted skill {0}::{1}", this.GetType().Name, skill));
-		}
-		skills [skill] = value;
-		//TODO dispatch skill update event
-	}
+        public void SetSkill(string skill_, double value_)
+        {
+            if (!skills.ContainsKey (skill_)) {
+                Debug.LogWarning(string.Format ("Try to modify unexisted skill {0}::{1}", this.GetType().Name, skill_));
+            }
+            skills [skill_] = value_;
+            //TODO dispatch skill update event
+        }
 
-	public void Destroy()
-	{
-		Release ();
-	} 
+        public void Destroy()
+        {
+            Release ();
+        } 
 
 
+    }
 }
 
 

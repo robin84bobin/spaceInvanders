@@ -1,15 +1,16 @@
-using System;
 using UnityEngine;
 
-
-public class UIInputState : IInputState
+namespace Assets.Scripts.Input.InputStates
 {
-	#region IInputState implementation
-	public CursorLockMode CursorLockMode {
-		get {
-			return CursorLockMode.None;
-		}
-	}
-	#endregion
+    public class UiInputState : IInputState
+    {
+        #region IInputState implementation
+        public CursorLockMode CursorLockMode {
+            get {
+                return CursorLockMode.None;
+            }
+        }
+        #endregion
+    }
 }
 

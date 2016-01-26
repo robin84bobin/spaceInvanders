@@ -1,38 +1,41 @@
-using System;
+using Assets.Scripts.Input;
 
-public class LevelStatePlay  : ILevelState
+namespace Assets.Scripts.ModelComponents.Level
 {
-	LevelModel _ownerModel;
+    public class LevelStatePlay  : ILevelState
+    {
+        readonly LevelModel _ownerModel;
 
-	public LevelStatePlay (LevelModel ownerModel)
-	{
-		_ownerModel = ownerModel;
-	}
+        public LevelStatePlay (LevelModel ownerModel_)
+        {
+            _ownerModel = ownerModel_;
+        }
 
-	#region ILevelState implementation
+        #region ILevelState implementation
 
-	public void Update ()
-	{
-		_ownerModel.UpdateGamePlay ();
-	}
+        public void Update ()
+        {
+            _ownerModel.UpdateGamePlay ();
+        }
 
-	public void OnEnterState ()
-	{
-		Main.inst.input.SetState (LevelInputMode);
-	}
+        public void OnEnterState ()
+        {
+            Main.Inst.input.SetState (LevelInputMode);
+        }
 
-	public void OnExitState ()
-	{
-		//
-	}
+        public void OnExitState ()
+        {
+            //
+        }
 
-	public InputMode LevelInputMode {
-		get {
-			return InputMode.GAME;
-		}
-	}
-	#endregion
+        public InputMode LevelInputMode {
+            get {
+                return InputMode.GAME;
+            }
+        }
+        #endregion
 
 
+    }
 }
 

@@ -1,16 +1,19 @@
 using System;
+using Assets.Scripts.Data.Attributes;
 
-public interface IBaseData
+namespace Assets.Scripts.Data.DataSource
 {
-	string type { get;}
-	string objectId { get;}
+    public interface IBaseData
+    {
+        string Type { get;}
+        string ObjectId { get;}
+    }
+
+    public class BaseData : IBaseData
+    {
+        [DbField]
+        public string Type { get; set;}
+        [DbField]
+        public string ObjectId { get; set;}
+    }
 }
-
-public class BaseData : IBaseData
-{
-	public string type { get; set;}
-	public string objectId { get; set;}
-}
-
-
-

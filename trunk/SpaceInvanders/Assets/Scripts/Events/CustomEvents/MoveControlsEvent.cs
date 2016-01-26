@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public sealed class MoveControlsEvent: siParamEvent<Vector3> {}
+namespace Assets.Scripts.Events.CustomEvents
+{
+    public sealed class MoveControlsEvent: SiParamEvent<Vector3> {}
+}
 
 
 

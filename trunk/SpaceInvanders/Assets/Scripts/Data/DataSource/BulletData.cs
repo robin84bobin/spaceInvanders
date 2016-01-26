@@ -1,10 +1,13 @@
-using System;
+using Assets.Scripts.Data.Attributes;
 
-
-	public class BulletData : BaseData
-	{
-		public int damage { get; set;}
-	}
+namespace Assets.Scripts.Data.DataSource
+{
+    public class BulletData : BaseData
+    {
+        [DbField]
+        public int Damage { get; set;}
+    }
+}
 
 
 

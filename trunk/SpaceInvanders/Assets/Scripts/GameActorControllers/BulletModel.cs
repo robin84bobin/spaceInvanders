@@ -1,11 +1,14 @@
-using UnityEngine;
-using System.Collections;
+using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.ModelComponents.ActorComponents;
 
-public class BulletModel : BaseActorModel
+namespace Assets.Scripts.GameActorControllers
 {
-	public BulletModel(BulletData data):base(data)
-	{
+    public class BulletModel : BaseActorModel
+    {
+        public BulletModel(BulletData data_):base(data_)
+        {
 
-	}
+        }
+    }
 }
 

@@ -1,27 +1,31 @@
 using System;
+using Assets.Scripts.Data.DataSource;
 using UnityEngine;
 
-public class WeaponModel
+namespace Assets.Scripts.ModelComponents.ActorComponents
 {
-	public event Action<Vector3, BulletData> OnShot = delegate {};
+    public class WeaponModel
+    {
+        public event Action<Vector3, BulletData> OnShot = delegate {};
 
-	private WeaponData _data;
-	private Vector3 _direction;
+        private readonly WeaponData _data;
+        private Vector3 _direction;
 
-	public WeaponModel (WeaponData data)
-	{
-		_data = data;
-	}
+        public WeaponModel (WeaponData data_)
+        {
+            _data = data_;
+        }
 
-	public void SetDirection(Vector3 direction)
-	{
-		_direction = direction;
-	}
+        public void SetDirection(Vector3 direction_)
+        {
+            _direction = direction_;
+        }
 
-	public void Shot()
-	{
-		OnShot (_data.bulletSpeed * _direction, _data.bullet);
-	}
+        public void Shot()
+        {
+            OnShot (_data.BulletSpeed * _direction, _data.Bullet);
+        }
+    }
 }
 
 

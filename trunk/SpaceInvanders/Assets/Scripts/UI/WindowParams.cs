@@ -1,8 +1,8 @@
-using UnityEngine;
-using System.Collections;
-
-public class WindowParams
+namespace Assets.Scripts.UI
 {
-	public bool over = false;
+    public class WindowParams
+    {
+        public bool over = false;
+    }
 }
 

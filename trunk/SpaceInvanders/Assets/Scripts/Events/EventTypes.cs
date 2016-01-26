@@ -1,12 +1,14 @@
-using System;
-public class EventTypes
+namespace Assets.Scripts.Events
 {
-	public const string LOAD_PROGRESS = "LoadProgress";
-	public const string DATA_INIT_COMPLETE = "DataInitComplete";
-	public const string STORAGE_LOAD_COMPLETE = "StorageLoadComplete";
+    public class EventTypes
+    {
+        public const string LOAD_PROGRESS = "LoadProgress";
+        public const string DATA_INIT_COMPLETE = "DataInitComplete";
+        public const string STORAGE_LOAD_COMPLETE = "StorageLoadComplete";
 
-	public const string LEVEL_START = "LevelStart";
+        public const string LEVEL_START = "LevelStart";
 
-	public const string UPDATE_CONTROL = "UpdateControl";
+        public const string UPDATE_CONTROL = "UpdateControl";
+    }
 }
 

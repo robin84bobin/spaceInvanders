@@ -1,20 +1,24 @@
-using System;
+using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Extensions;
 using Parse;
 
-public class HeroParseFactory : IConcreteParseFactory
+namespace Assets.Scripts.Data.DataFactories.ParseFactories
 {
-	#region IConcreteParseFactory implementation
+    public class HeroParseFactory : IConcreteParseFactory
+    {
+        #region IConcreteParseFactory implementation
 
-	public IBaseData Create (ParseObject po)
-	{
-		HeroData heroData = new HeroData();
-		heroData.type = po.ClassName;
-		heroData.objectId = po.ObjectId;
-		heroData.weaponId = po.TryGetPointerObjectId (DataTypes.WEAPON);
+        public IBaseData Create (ParseObject po_)
+        {
+            HeroData heroData = new HeroData();
+            heroData.Type = po_.ClassName;
+            heroData.ObjectId = po_.ObjectId;
+            heroData.WeaponId = po_.TryGetPointerObjectId (DataTypes.WEAPON);
 
-		return heroData;
-	}
+            return heroData;
+        }
 
-	#endregion
+        #endregion
+    }
 }
 

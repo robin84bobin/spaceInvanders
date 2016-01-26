@@ -1,4 +1,6 @@
-using UnityEngine;
 using System;
 
-public sealed class StorageUpdateCompleteEvent : siParamEvent<Type> {}
+namespace Assets.Scripts.Events.CustomEvents
+{
+    public sealed class StorageUpdateCompleteEvent : SiParamEvent<Type> {}
+}

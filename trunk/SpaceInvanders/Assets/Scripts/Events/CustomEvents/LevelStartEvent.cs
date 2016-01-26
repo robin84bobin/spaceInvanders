@@ -1,3 +1,4 @@
-using UnityEngine;
-
-public sealed class LevelStartEvent : siEvent {}
+namespace Assets.Scripts.Events.CustomEvents
+{
+    public sealed class LevelStartEvent : SiEvent {}
+}

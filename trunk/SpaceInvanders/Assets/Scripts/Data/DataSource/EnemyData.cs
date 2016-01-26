@@ -1,8 +1,9 @@
-using System;
-
-public class EnemyData : AbstractWarriorData
+namespace Assets.Scripts.Data.DataSource
 {
+    public class EnemyData : AbstractWarriorData
+    {
 
+    }
 }
 
 

@@ -1,32 +1,32 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class BulletController : BaseActorController<BulletModel> 
+﻿namespace Assets.Scripts.GameActorControllers
 {
+    public class BulletController : BaseActorController<BulletModel> 
+    {
 
-	#region implemented abstract members of BaseActorController
+        #region implemented abstract members of BaseActorController
 
-	protected override void Release ()
-	{
-		throw new System.NotImplementedException ();
-	}
+        protected override void Release ()
+        {
+            throw new System.NotImplementedException ();
+        }
 
-	protected override void OnInit ()
-	{
-		throw new System.NotImplementedException ();
-	}
+        protected override void OnInit ()
+        {
+            throw new System.NotImplementedException ();
+        }
 
-	#endregion
+        #endregion
 
 
 
-	// Use this for initialization
-	void Start () {
+        // Use this for initialization
+        void Start () {
 	
-	}
+        }
 	
-	// Update is called once per frame
-	void Update () {
+        // Update is called once per frame
+        void Update () {
 	
-	}
+        }
+    }
 }

@@ -1,311 +1,309 @@
 using System;
-using System.Data;
-using UnityEngine;
-using System.IO;
-using Mono.Data.SqliteClient;
 using System.Collections.Generic;
-using System.Text;
+using System.Data;
+using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using Assets.Scripts.Data.Attributes;
+using Assets.Scripts.Data.DataSource;
+using Mono.Data.SqliteClient;
+using UnityEngine;
 
-public class SQLiteProxy : IDataBaseProxy
+namespace Assets.Scripts.Data.DB
 {
-	private const string SQL_TABLE_NAME = "TestTable";
-	private const string SQL_DB_NAME = "SpaceInvandersDB";
+    public class SqLiteProxy : IDataBaseProxy
+    {
+        private const string SqlTableName = "TestTable";
+        private const string SqlDbName = "SpaceInvandersDB";
 
-	private static readonly string SQL_DB_LOCATION = 
-			"URI=file:"
-			+ Application.dataPath + Path.DirectorySeparatorChar
-			+ "Plugins" + Path.DirectorySeparatorChar
-			+ "SQLiter" + Path.DirectorySeparatorChar
-			+ "Databases" + Path.DirectorySeparatorChar
-			+ SQL_DB_NAME + ".db";
+        private static readonly string SqlDbLocation = 
+            "URI=file:"
+            + Application.dataPath + Path.DirectorySeparatorChar
+            + "Plugins" + Path.DirectorySeparatorChar
+            + "SQLiter" + Path.DirectorySeparatorChar
+            + "Databases" + Path.DirectorySeparatorChar
+            + SqlDbName + ".db";
 	
-	public SQLiteProxy ()
-	{
-	}
+        public SqLiteProxy ()
+        {
+        }
 
-	private bool mCreateNewTable = false;
+        private bool _mCreateNewTable = false;
 
-	/// <summary>
-	/// DB objects
-	/// </summary>
-	private IDbConnection mConnection = null;
-	private IDbCommand mCommand = null;
-	private IDataReader mReader = null;
-	private string mSQLString;
+        /// <summary>
+        /// DB objects
+        /// </summary>
+        private IDbConnection _mConnection = null;
+        private IDbCommand _mCommand = null;
+        private IDataReader _mReader = null;
+        private string _mSqlString;
 
-	public void Init()
-	{
-		mCreateNewTable = false;
+        public void Init()
+        {
+            _mCreateNewTable = false;
 
-		Debug.Log("SQLiter - Opening SQLite Connection at " + SQL_DB_LOCATION);
-		mConnection = new SqliteConnection(SQL_DB_LOCATION);
-		mCommand = mConnection.CreateCommand();
-		mConnection.Open();
+            Debug.Log("SQLiter - Opening SQLite Connection at " + SqlDbLocation);
+            _mConnection = new SqliteConnection(SqlDbLocation);
+            _mCommand = _mConnection.CreateCommand();
+            _mConnection.Open();
 		
-		// WAL = write ahead logging, very huge speed increase
-		mCommand.CommandText = "PRAGMA journal_mode = WAL;";
-		mCommand.ExecuteNonQuery();
+            // WAL = write ahead logging, very huge speed increase
+            _mCommand.CommandText = "PRAGMA journal_mode = WAL;";
+            _mCommand.ExecuteNonQuery();
 		
-		// journal mode = look it up on google, I don't remember
-		mCommand.CommandText = "PRAGMA journal_mode";
-		mReader = mCommand.ExecuteReader();
-		if (mReader.Read())
-			Debug.Log("SQLiter - WAL value is: " + mReader.GetString(0));
-		mReader.Close();
+            // journal mode = look it up on google, I don't remember
+            _mCommand.CommandText = "PRAGMA journal_mode";
+            _mReader = _mCommand.ExecuteReader();
+            if (_mReader.Read())
+                Debug.Log("SQLiter - WAL value is: " + _mReader.GetString(0));
+            _mReader.Close();
 		
-		// more speed increases
-		mCommand.CommandText = "PRAGMA synchronous = OFF";
-		mCommand.ExecuteNonQuery();
+            // more speed increases
+            _mCommand.CommandText = "PRAGMA synchronous = OFF";
+            _mCommand.ExecuteNonQuery();
 		
-		// and some more
-		mCommand.CommandText = "PRAGMA synchronous";
-		mReader = mCommand.ExecuteReader();
-		if (mReader.Read())
-			Debug.Log("SQLiter - synchronous value is: " + mReader.GetInt32(0));
-		mReader.Close();
+            // and some more
+            _mCommand.CommandText = "PRAGMA synchronous";
+            _mReader = _mCommand.ExecuteReader();
+            if (_mReader.Read())
+                Debug.Log("SQLiter - synchronous value is: " + _mReader.GetInt32(0));
+            _mReader.Close();
 		
-	}
+        }
 
-	public double lastUpdateTime (string tableName)
-	{
-		return 0;
-	}
+        public double LastUpdateTime (string tableName_)
+        {
+            return 0;
+        }
 	
-	#region READ DATABASE
+        #region READ DATABASE
 
-	public bool IsTableExist(string tableName)
-	{
-		mCommand.CommandText = "SELECT name FROM sqlite_master WHERE name='" + tableName + "'";
-		mReader = mCommand.ExecuteReader ();
-		if (!mReader.Read ()) {
-			mReader.Close ();
-			return false;
-		}
-		mReader.Close ();
-		return true;
-	}
+        public bool IsTableExist(string tableName_)
+        {
+            _mCommand.CommandText = "SELECT name FROM sqlite_master WHERE name='" + tableName_ + "'";
+            _mReader = _mCommand.ExecuteReader ();
+            if (!_mReader.Read ()) {
+                _mReader.Close ();
+                return false;
+            }
+            _mReader.Close ();
+            return true;
+        }
 
-	public void GetTableData<TBaseData> (string tableName, Action<string, Dictionary<string, TBaseData>> callback) where TBaseData:IBaseData, new()
-	{
-		Dictionary<string,TBaseData> resultObjects = new Dictionary<string, TBaseData> ();
+        public void GetTableData<TBaseData> (string tableName_, Action<string, Dictionary<string, TBaseData>> callback_) where TBaseData:IBaseData, new()
+        {
+            Dictionary<string,TBaseData> resultObjects = new Dictionary<string, TBaseData> ();
 
-		mCommand.CommandText = "SELECT * FROM " + tableName;
-		mReader = mCommand.ExecuteReader();
+            _mCommand.CommandText = "SELECT * FROM " + tableName_;
+            _mReader = _mCommand.ExecuteReader();
 
-		while (mReader.Read()) {
-			TBaseData data = ReadDataItem<TBaseData>(mReader);
-			resultObjects.Add(data.objectId, data);
-		}
+            while (_mReader.Read()) {
+                TBaseData data = ReadDataItem<TBaseData>(_mReader);
+                resultObjects.Add(data.ObjectId, data);
+            }
 
-		callback (tableName,resultObjects);
-	}
+            callback_ (tableName_,resultObjects);
+        }
 
-	private TBaseData ReadDataItem<TBaseData> (IDataReader mReader) where TBaseData:IBaseData, new()
-	{
-		TBaseData resultData = new TBaseData ();
-		Type dataType = resultData.GetType();
 
-		PropertyInfo[] props = dataType.GetProperties ();
+        string _fieldName;
+        object _fieldValue;
+        Type _fieldType;
+        MethodInfo _targetSetter;
+        PropertyInfo _targetProperty;
 
-		string fieldName;
-		object fieldValue;
-		Type fieldType;
-		FieldInfo targetField;
-		MethodInfo targetSetter;
-		PropertyInfo targetProperty;
+        private TBaseData ReadDataItem<TBaseData> (IDataReader mReader_) where TBaseData:IBaseData, new()
+        {
+            TBaseData resultData = new TBaseData ();
+            Type dataType = resultData.GetType();
 
-		for (int fieldIndex = 0; fieldIndex < mReader.FieldCount; ++ fieldIndex) 
-		{
-			fieldName = mReader.GetName (fieldIndex);
-			fieldValue = mReader.GetValue (fieldIndex); 
-			fieldType = mReader.GetFieldType(fieldIndex);
+            for (int fieldIndex = 0; fieldIndex < mReader_.FieldCount; ++ fieldIndex) 
+            {
+                _fieldName = mReader_.GetName (fieldIndex);
+                _fieldValue = mReader_.GetValue (fieldIndex); 
+                _fieldType = mReader_.GetFieldType(fieldIndex);
 
-			targetProperty = dataType.GetProperty(fieldName);
-			if (targetProperty == null){
-				continue;
-			}
+                _targetProperty = dataType.GetProperty(_fieldName);
+                if (_targetProperty == null){
+                    continue;
+                }
 
-			targetSetter = targetProperty.GetSetMethod(true);
-			if (targetSetter == null){
-				continue;
-			}
+                _targetSetter = _targetProperty.GetSetMethod();
+                if (_targetSetter == null) {
+                    continue;
+                }
 
-			if (targetProperty.PropertyType != fieldType){
-				Debug.LogWarningFormat("Types mismatch (expected '{0}' => get '{1}') on reading data: {2}.{3}", 
-				                       targetProperty.PropertyType.Name,
-				                       fieldType,
-				                       dataType.Name,
-				                       targetProperty.Name);
-			}
-			else {
-				targetSetter.Invoke( resultData, new object[] {fieldValue});
-			}
-			/*targetField = dataType.GetField (fieldName);
-			if(targetField == null){
-				continue;
-			}
+                if (_targetProperty.PropertyType != _fieldType){
+                    Debug.LogWarningFormat("Types mismatch (expected '{0}' => get '{1}') on reading data: {2}.{3}", 
+                        _targetProperty.PropertyType.Name,
+                        _fieldType,
+                        dataType.Name,
+                        _targetProperty.Name);
+                }
+                else {
+                    _targetSetter.Invoke( resultData, new object[] {_fieldValue});
+                }
+            }
 
-			if (targetField.FieldType != fieldType){
-				Debug.LogWarningFormat("Types mismatch (expected '{0}' => get '{1}') on reading data: {2}.{3}", 
-				                       targetField.FieldType,
-				                       fieldType,
-				                       dataType.Name,
-				                       targetField.Name);
-				targetField.SetValue( resultData, Convert.ChangeType( fieldValue, targetField.FieldType));
-			}
-			else{
-				targetField.SetValue( resultData, fieldValue);
-			}*/
-		}
+            return resultData;
+        }
 
-		return resultData;
-	}
+        #endregion
 
-	#endregion
+        #region WRITE DATABASE
 
-	#region WRITE DATABASE
+        public void SaveTableData<TBaseData>(string tableName_, Dictionary<string, IBaseData> dataDictionary_) where TBaseData:IBaseData
+        {
+            CreateTable<TBaseData>(tableName_);
+            InsertData<TBaseData> (tableName_, dataDictionary_);
+        }
 
-	public void SaveTableData<TBaseData>(string tableName, Dictionary<string, IBaseData> dataDictionary) where TBaseData:IBaseData
-	{
-		CreateTable<TBaseData>(tableName);
-		InsertData<TBaseData> (tableName, dataDictionary);
-	}
-
-	private void CreateTable<TBaseData>(string tableName) where TBaseData:IBaseData
-	{
-		Debug.Log (string.Format ("SQLiter - Dropping old SQLite table if Exists: {0}", tableName));
+        private void CreateTable<TBaseData>(string tableName_) where TBaseData:IBaseData
+        {
+            Debug.Log (string.Format ("SQLiter - Dropping old SQLite table if Exists: {0}", tableName_));
 		
-		// insurance policy, drop table
-		mCommand.CommandText = "DROP TABLE IF EXISTS " + tableName;
-		mCommand.ExecuteNonQuery();
+            // insurance policy, drop table
+            _mCommand.CommandText = "DROP TABLE IF EXISTS " + tableName_;
+            _mCommand.ExecuteNonQuery();
 		
-		Debug.Log (string.Format ("SQLiter - Creating new SQLite table: {0}", tableName));
+            Debug.Log (string.Format ("SQLiter - Creating new SQLite table: {0}", tableName_));
 
-		string tableColumns = CreateTableColumnsString<TBaseData>();
-		mSQLString = string.Format ("CREATE TABLE IF NOT EXISTS {0} ({1})", tableName, tableColumns);
-		mCommand.CommandText = mSQLString;
-		mCommand.ExecuteNonQuery();
+            string tableColumns = CreateTableColumnsString<TBaseData>();
+            _mSqlString = string.Format ("CREATE TABLE IF NOT EXISTS {0} ({1})", tableName_, tableColumns);
+            _mCommand.CommandText = _mSqlString;
+            _mCommand.ExecuteNonQuery();
 
-		Debug.Log (mSQLString);
-	}
+            Debug.Log (_mSqlString);
+        }
 
-	private void InsertData<TBaseData>(string tableName, Dictionary<string, IBaseData> dataDictionary) where TBaseData:IBaseData
-	{
-		string columnNames = string.Empty;
-		string values = string.Empty;
-		foreach (KeyValuePair<string, IBaseData> pair in dataDictionary) {
-			columnNames = GetFieldsNames(pair.Value);
-			values = GetDataValues(pair.Value);
+        private void InsertData<TBaseData>(string tableName_, Dictionary<string, IBaseData> dataDictionary_) where TBaseData:IBaseData
+        {
+            string columnNames = string.Empty;
+            string values = string.Empty;
+            foreach (KeyValuePair<string, IBaseData> pair in dataDictionary_) {
+                columnNames = GetFieldsNames(pair.Value);
+                values = GetDataValues(pair.Value);
 
-			StringBuilder sb = new StringBuilder();
-			sb.Append("INSERT OR REPLACE INTO ");
-			sb.Append(tableName);
-			sb.Append("("); 
-			sb.Append(columnNames); 
-			sb.Append(") VALUES (");
-			sb.Append(values); sb.Append(");");
-			mSQLString = sb.ToString();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("INSERT OR REPLACE INTO ");
+                sb.Append(tableName_);
+                sb.Append("("); 
+                sb.Append(columnNames); 
+                sb.Append(") VALUES (");
+                sb.Append(values); sb.Append(");");
+                _mSqlString = sb.ToString();
 
-			Debug.Log (mSQLString);
-			mCommand.CommandText = mSQLString;
-			mCommand.ExecuteNonQuery ();
-		}
+                Debug.Log (_mSqlString);
+                _mCommand.CommandText = _mSqlString;
+                _mCommand.ExecuteNonQuery ();
+            }
 
-	}
+        }
 
-	#endregion
+        #endregion
 
-	private string CreateTableColumnsString<TBaseData>() where TBaseData:IBaseData
-	{
-		FieldInfo[] fields = typeof(TBaseData).GetFields ();
-		
-		StringBuilder sb = new StringBuilder ();
-		string fieldType = string.Empty;
-		FieldInfo fieldInfo;
-		for (int i = 0; i < fields.Length; i++) {
-			fieldInfo = fields[i];
-			fieldType = SQLiteHelper.GetColumnType( fieldInfo.FieldType.Name );
-			if (i==0){
-				sb.AppendFormat("{0} {1}", fieldInfo.Name, fieldType);
-			}
-			else{
-				sb.AppendFormat(", {0} {1}", fieldInfo.Name, fieldType);
-			}
-		}
+        private string CreateTableColumnsString<TBaseData>() where TBaseData:IBaseData
+        {
+            List<PropertyInfo> propertyInfos = new List<PropertyInfo>(
+                typeof(TBaseData).GetProperties().Where(prop_ => Attribute.IsDefined(prop_, typeof(DbFieldAttribute)))
+                );
 
-		sb.Append (", Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP");
+            StringBuilder sb = new StringBuilder ();
+            string fieldType = string.Empty;
 
-		return sb.ToString ();
-	}
+            for (int i = 0; i < propertyInfos.Count; i++) {
 
-	private string GetFieldsNames (IBaseData data)
-	{
-		FieldInfo[] fields = data.GetType().GetFields ();;
-		StringBuilder sb = new StringBuilder ();
-		for (int i = 0; i < fields.Length; i++) {
-			if (i==0){
-				sb.Append(fields[i].Name);
-			}
-			else{
-				sb.Append (string.Format (",{0}", fields[i].Name));
-			}
-		}
-		return sb.ToString();
-	}
+                fieldType = SqLiteHelper.GetColumnType( propertyInfos[i].PropertyType.Name );
+                if (i==0){
+                    sb.AppendFormat("{0} {1}", propertyInfos[i].Name, fieldType);
+                }
+                else{
+                    sb.AppendFormat(", {0} {1}", propertyInfos[i].Name, fieldType);
+                }
+            }
 
-	private string GetDataValues (IBaseData data)
-	{
-		FieldInfo[] fields = data.GetType().GetFields ();
-		string type;
-		FieldInfo fieldInfo;
-		object fieldValue;
-		string valueString = string.Empty;
-		StringBuilder sb = new StringBuilder ();
-		for (int i = 0; i < fields.Length; i++) {
-			fieldInfo = fields[i];
-			fieldValue = fieldInfo.GetValue(data);
-			type = SQLiteHelper.GetColumnType(fieldInfo.FieldType.Name);
-			valueString = type == SQLiteHelper.TEXT ? string.Format("{0}{1}{2}", "'",fieldValue.ToString(),"'") : fieldValue.ToString();
-			if (i==0){
-				sb.Append( valueString );
-			}
-			else{
-				sb.Append (string.Format (",{0}", valueString));
-			}
+            sb.Append (", Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP");
+
+            return sb.ToString ();
+        }
+
+        private string GetFieldsNames (IBaseData data_)
+        {
+             List<PropertyInfo> propertyInfos = new List<PropertyInfo>(
+                 data_.GetType().GetProperties().Where(prop_ => Attribute.IsDefined(prop_, typeof(DbFieldAttribute)))
+                 );
+
+            StringBuilder sb = new StringBuilder ();
+            for (int i = 0; i < propertyInfos.Count; i++) {
+                if (propertyInfos[i].GetSetMethod(true) == null) {
+                    continue;
+                }
+                if (i==0){
+                    sb.Append(propertyInfos[i].Name);
+                }
+                else{
+                    sb.Append (string.Format (",{0}", propertyInfos[i].Name));
+                }
+            }
+            return sb.ToString();
+        }
+
+        private string GetDataValues (IBaseData data_)
+        {
+            PropertyInfo[] propertyInfos = data_.GetType().GetProperties();
+            string type;
+            PropertyInfo propertyInfo;
+            object fieldValue;
+            string valueString = string.Empty;
+            StringBuilder sb = new StringBuilder ();
+            for (int i = 0; i < propertyInfos.Length; i++) {
+                propertyInfo = propertyInfos[i];
+                if (propertyInfo.GetSetMethod(true) == null) {
+                    continue;
+                }
+                fieldValue = propertyInfo.GetValue(data_, null);
+                type = SqLiteHelper.GetColumnType(propertyInfo.PropertyType.Name);
+                valueString = type == SqLiteHelper.TEXT ? string.Format("{0}{1}{2}", "'",fieldValue.ToString(),"'") : fieldValue.ToString();
+                if (i==0){
+                    sb.Append( valueString );
+                }
+                else{
+                    sb.Append (string.Format (",{0}", valueString));
+                }
 			
-		}
+            }
 
-		return sb.ToString();
-	}
+            return sb.ToString();
+        }
+    }
+
+
+    public class SqLiteHelper
+    {
+        public const string TEXT = "TEXT";
+        public const string TEXT_UNIQUE = "TEXT_UNIQUE";
+        public const string REAL = "REAL";
+        public const string INTEGER = "INTEGER";
+
+        public static string GetColumnType (string name_)
+        {
+            if (_typeMap.ContainsKey (name_)) {
+                return _typeMap [name_];
+            } else {
+                Debug.LogException(new Exception(string.Format ("SQLite type mismatch: {0} - not declared in SQLiteHelper", name_)));
+                return null;
+            }
+        }
+
+        private static Dictionary<string,string> _typeMap = new Dictionary<string, string> ()
+        {
+            {"Int64", INTEGER},
+            {"Int32", INTEGER},
+            {"float", REAL},
+            {"Double", REAL},
+            {"Single", REAL},
+            {"String", TEXT}
+        };
+    }
 }
-
-
-public class SQLiteHelper
-{
-	public const string TEXT = "TEXT";
-	public const string TEXT_UNIQUE = "TEXT_UNIQUE";
-	public const string REAL = "REAL";
-	public const string INTEGER = "INTEGER";
-
-	public static string GetColumnType (string name)
-	{
-		if (_typeMap.ContainsKey (name)) {
-			return _typeMap [name];
-		} else {
-			Debug.LogException(new Exception(string.Format ("SQLite type mismatch: {0} - not declared in SQLiteHelper", name)));
-			return null;
-		}
-	}
-
-	private static Dictionary<string,string> _typeMap = new Dictionary<string, string> ()
-	{
-		{"Int64", INTEGER},
-		{"Int32", INTEGER},
-		{"float", REAL},
-		{"Double", REAL},
-		{"Single", REAL},
-		{"String", TEXT}
-	};
-}
-

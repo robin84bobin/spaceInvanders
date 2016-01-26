@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Leaderboardwindow : MonoBehaviour {
+namespace Assets.Scripts.UI.Windows
+{
+    public class Leaderboardwindow : MonoBehaviour {
 
-	public static void Show ()
-	{
-		Main.inst.windows.Show(	"Leaderboardwindow");
-	}
+        public static void Show ()
+        {
+            Main.Inst.windows.Show(	"Leaderboardwindow");
+        }
+    }
 }

@@ -1,44 +1,47 @@
-using System;
+using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.ModelComponents.BehaviourComponents;
 using UnityEngine;
 
-public class HeroModel: BaseActorModel
+namespace Assets.Scripts.ModelComponents.ActorComponents
 {
-	private WeaponModel _weapon;
-	private HeroData _data;
+    public class HeroModel: BaseActorModel
+    {
+        private WeaponModel _weapon;
 
-	public HeroModel (HeroData data):base(data)
-	{
-		_data = data;
-		//
-		_data.maxHealth = 4;
+        public HeroModel (HeroData data_):base(data_)
+        {
+            var data = data_;
+            //
+            data.MaxHealth = 4;
 
-		if (_data.weapon != null) {
-			_weapon = new WeaponModel (_data.weapon);
-		}
-	}
+            if (data.Weapon != null) {
+                _weapon = new WeaponModel (data.Weapon);
+            }
+        }
 
 
-	public void Move(Vector3 vector)
-	{
-		OnMoveEvent (vector);
-	}
+        public void Move(Vector3 vector_)
+        {
+            OnMoveEvent (vector_);
+        }
 
 	
-	#region implemented abstract members of BaseComponent
+        #region implemented abstract members of BaseComponent
 
-	protected override void OnRelease ()
-	{
-		//;
-	}
+        protected override void OnRelease ()
+        {
+            //;
+        }
 
 
-	protected override void OnInit ()
-	{
-		AddComponent (new GuidedBehaviuorComponent ());
-	}
+        protected override void OnInit ()
+        {
+            AddComponent (new GuidedBehaviuorComponent ());
+        }
 
-	#endregion
+        #endregion
 
+    }
 }
 
 

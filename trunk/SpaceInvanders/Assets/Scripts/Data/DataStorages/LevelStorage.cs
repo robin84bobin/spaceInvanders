@@ -1,23 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
+using Assets.Scripts.Data.DataSource;
 
-public class LevelStorage: BaseStorage<LevelData>  
+namespace Assets.Scripts.Data.DataStorages
 {
-	public LevelStorage (string table):base(table)
-	{}
+    public class LevelStorage: BaseStorage<LevelData>  
+    {
+        public LevelStorage (string table_):base(table_)
+        {}
 
-	public LevelData GetByID(int id)
-	{
-		LevelData levelData;
+        public LevelData GetById(int id_)
+        {
+            LevelData levelData;
 
-		foreach (var item in _objects) {
-			levelData = (LevelData)item.Value;
-			if(levelData.ID == id){
-				return levelData;
-			}
-		}
-		return  null;
-	}
+            foreach (var item in objects) {
+                levelData = (LevelData)item.Value;
+                if(levelData.Id == id_){
+                    return levelData;
+                }
+            }
+            return  null;
+        }
+    }
 }
 

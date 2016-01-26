@@ -1,26 +1,29 @@
+using Assets.Scripts.ModelComponents.ActorComponents;
 using UnityEngine;
-using System.Collections;
 
-public class HeroController: BaseActorController<HeroModel>
+namespace Assets.Scripts.GameActorControllers
 {
-	Vector3 _moveVector = Vector3.zero;
-	void OnMove (Vector3 moveVector)
-	{
-		_moveVector.x = moveVector.x;
-		transform.Translate (_moveVector * 5f);
-	}
+    public class HeroController: BaseActorController<HeroModel>
+    {
+        Vector3 _moveVector = Vector3.zero;
+        void OnMove (Vector3 moveVector_)
+        {
+            _moveVector.x = moveVector_.x;
+            transform.Translate (_moveVector * 5f);
+        }
 
-	#region implemented abstract members of BaseActorController
+        #region implemented abstract members of BaseActorController
 
-	protected override void OnInit()
-	{
-		_model.MoveEvent += OnMove;
-	}
+        protected override void OnInit()
+        {
+            model.MoveEvent += OnMove;
+        }
 
-	protected override void Release ()
-	{
+        protected override void Release ()
+        {
 
-	}
+        }
 
-	#endregion
+        #endregion
+    }
 }

@@ -1,9 +1,10 @@
-using System;
-
-public interface IBaseState
+namespace Assets.Scripts.CommonComponents.StateSwitcher
 {
-	void OnEnterState();
-	void OnExitState();
+    public interface IBaseState
+    {
+        void OnEnterState();
+        void OnExitState();
+    }
 }
 
 

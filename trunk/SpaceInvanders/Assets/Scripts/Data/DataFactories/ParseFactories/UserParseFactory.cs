@@ -1,21 +1,24 @@
-using System;
+using Assets.Scripts.Data.DataSource;
 using Parse;
 
-public class UserParseFactory : IConcreteParseFactory
+namespace Assets.Scripts.Data.DataFactories.ParseFactories
 {
-	#region IConcreteParseFactory implementation
+    public class UserParseFactory : IConcreteParseFactory
+    {
+        #region IConcreteParseFactory implementation
 
-	public IBaseData Create (ParseObject po)
-	{
-		UserData userData = new UserData ();
-		ParseUser parseUser = (ParseUser)po;
-		userData.username = parseUser.Username;
-		userData.email = parseUser.Email;
+        public IBaseData Create (ParseObject po_)
+        {
+            UserData.UserData userData = new UserData.UserData ();
+            ParseUser parseUser = (ParseUser)po_;
+            userData.username = parseUser.Username;
+            userData.email = parseUser.Email;
 
-		return userData;
-	}
+            return userData;
+        }
 
-	#endregion
+        #endregion
+    }
 }
 
 

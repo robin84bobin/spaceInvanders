@@ -1,9 +1,12 @@
-using System;
+using Assets.Scripts.Data.DataSource;
 using Parse;
 
-public interface IConcreteParseFactory
+namespace Assets.Scripts.Data.DataFactories.ParseFactories
 {
-	IBaseData Create(ParseObject po) ;
+    public interface IConcreteParseFactory
+    {
+        IBaseData Create(ParseObject po_) ;
+    }
 }
 
 

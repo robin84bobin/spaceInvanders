@@ -1,18 +1,20 @@
-using System;
+using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Extensions;
 using Parse;
-using System.Collections.Generic;
-using UnityEngine;
 
-class WeaponParseFactory : IConcreteParseFactory
+namespace Assets.Scripts.Data.DataFactories.ParseFactories
 {
-	public IBaseData Create (ParseObject po)
-	{
-		WeaponData weaponData = new WeaponData();
-		weaponData.type = po.ClassName;
-		weaponData.objectId = po.ObjectId;
-		weaponData.bulletId = po.TryGetPointerObjectId (DataTypes.BULLET);
-		return weaponData;
-	}
+    class WeaponParseFactory : IConcreteParseFactory
+    {
+        public IBaseData Create (ParseObject po_)
+        {
+            WeaponData weaponData = new WeaponData();
+            weaponData.Type = po_.ClassName;
+            weaponData.ObjectId = po_.ObjectId;
+            weaponData.BulletId = po_.TryGetPointerObjectId (DataTypes.BULLET);
+            return weaponData;
+        }
+    }
 }
 
 

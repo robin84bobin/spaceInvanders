@@ -1,10 +1,11 @@
-using System;
-
-public class UserStorage : BaseStorage<UserData>
+namespace Assets.Scripts.Data.DataStorages
 {
-	public UserStorage (string type) : base(type)
-	{
-	}
+    public class UserStorage : BaseStorage<UserData.UserData>
+    {
+        public UserStorage (string type_) : base(type_)
+        {
+        }
+    }
 }
 
 

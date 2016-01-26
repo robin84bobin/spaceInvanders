@@ -1,57 +1,60 @@
-using System;
+using Assets.Scripts.Data.DataSource;
 using UnityEngine;
 
-public class EnemyModel : BaseActorModel
+namespace Assets.Scripts.ModelComponents.ActorComponents
 {
-	private EnemyData _enemyData;
-	private double _moveEnemiesTime;
-	private double _movePeriod;
-	private Vector3 _speedVector;
+    public class EnemyModel : BaseActorModel
+    {
+        private EnemyData _enemyData;
+        private double _moveEnemiesTime;
+        private double _movePeriod;
+        private Vector3 _speedVector;
 
-	public EnemyModel (EnemyData enemyData): base(enemyData)
-	{
-		_enemyData = enemyData;
-	}
+        public EnemyModel (EnemyData enemyData_): base(enemyData_)
+        {
+            _enemyData = enemyData_;
+        }
 
-	public void Init (double speed, double movePeriod)
-	{
-		_speedVector = new Vector3(0f,-(float)speed,0f);
-		_movePeriod = movePeriod;
-		_moveEnemiesTime = Time.time + _movePeriod;
-	}
+        public void Init (double speed_, double movePeriod_)
+        {
+            _speedVector = new Vector3(0f,-(float)speed_,0f);
+            _movePeriod = movePeriod_;
+            _moveEnemiesTime = Time.time + _movePeriod;
+        }
 
-	protected override void OnUpdate ()
-	{
-		CheckMove ();
-	}
+        protected override void OnUpdate ()
+        {
+            CheckMove ();
+        }
 	
-	void CheckMove ()
-	{
-		if (Time.time > _moveEnemiesTime) {
-			_moveEnemiesTime += _movePeriod;
-			OnMoveEvent(_speedVector);
-		}
-	}
+        void CheckMove ()
+        {
+            if (Time.time > _moveEnemiesTime) {
+                _moveEnemiesTime += _movePeriod;
+                OnMoveEvent(_speedVector);
+            }
+        }
 
 
-	public void Move(Vector3 vector)
-	{
-		OnMoveEvent (vector);
-	}
+        public void Move(Vector3 vector_)
+        {
+            OnMoveEvent (vector_);
+        }
 
-	#region implemented abstract members of BaseComponent
+        #region implemented abstract members of BaseComponent
 
-	protected override void OnRelease ()
-	{
-		//
-	}
+        protected override void OnRelease ()
+        {
+            //
+        }
 
-	protected override void OnInit ()
-	{
-		//
-	}
+        protected override void OnInit ()
+        {
+            //
+        }
 
-	#endregion
+        #endregion
+    }
 }
 
 
