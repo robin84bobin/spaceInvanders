@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.ModelComponents.ActorComponents;
 using UnityEngine;
 
-namespace Assets.Scripts.GameActorControllers
+namespace Assets.Scripts.ViewControllers
 {
     public abstract class BaseActorController <TModel> : MonoBehaviour where TModel:BaseActorModel
     {

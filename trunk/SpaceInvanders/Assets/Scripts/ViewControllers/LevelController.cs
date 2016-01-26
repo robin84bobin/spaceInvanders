@@ -4,7 +4,7 @@ using Assets.Scripts.ModelComponents.ActorComponents;
 using Assets.Scripts.ModelComponents.Level;
 using UnityEngine;
 
-namespace Assets.Scripts.GameActorControllers
+namespace Assets.Scripts.ViewControllers
 {
     public class LevelController : MonoBehaviour
     {

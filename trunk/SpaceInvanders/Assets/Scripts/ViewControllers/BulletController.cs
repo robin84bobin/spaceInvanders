@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts.GameActorControllers
+﻿using Assets.Scripts.ModelComponents.ActorComponents;
+
+namespace Assets.Scripts.ViewControllers
 {
     public class BulletController : BaseActorController<BulletModel> 
     {
@@ -16,9 +18,7 @@
         }
 
         #endregion
-
-
-
+        
         // Use this for initialization
         void Start () {
 	

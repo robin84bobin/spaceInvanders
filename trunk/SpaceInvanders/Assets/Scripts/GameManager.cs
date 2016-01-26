@@ -1,8 +1,8 @@
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Events;
 using Assets.Scripts.Events.CustomEvents;
-using Assets.Scripts.GameActorControllers;
 using Assets.Scripts.ModelComponents.Level;
+using Assets.Scripts.ViewControllers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

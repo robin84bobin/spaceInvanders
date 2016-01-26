@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.GameActorControllers
+namespace Assets.Scripts.ViewControllers
 {
     public class Spinner : MonoBehaviour 
     {

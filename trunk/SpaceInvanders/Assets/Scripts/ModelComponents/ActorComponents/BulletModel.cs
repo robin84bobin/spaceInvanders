@@ -1,7 +1,6 @@
 using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.ModelComponents.ActorComponents;
 
-namespace Assets.Scripts.GameActorControllers
+namespace Assets.Scripts.ModelComponents.ActorComponents
 {
     public class BulletModel : BaseActorModel
     {
