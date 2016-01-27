@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
 using UnityEngine;
 
-namespace Assets.Scripts.ModelComponents.ActorComponents
+namespace Assets.Scripts.ModelComponents.Actors
 {
     public abstract class BaseActorModel : BaseComponent
     {

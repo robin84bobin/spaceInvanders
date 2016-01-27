@@ -2,7 +2,7 @@ using System;
 using Assets.Scripts.CommonComponents.StateSwitcher;
 using Assets.Scripts.Data;
 using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.ModelComponents.ActorComponents;
+using Assets.Scripts.ModelComponents.Actors;
 using JetBrains.Annotations;
 using UnityEngine;
 

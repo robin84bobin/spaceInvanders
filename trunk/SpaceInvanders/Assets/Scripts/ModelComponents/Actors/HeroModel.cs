@@ -1,12 +1,18 @@
 using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.ModelComponents.BehaviourComponents;
+using Assets.Scripts.ModelComponents.Behaviours;
+using Assets.Scripts.ModelComponents.Equipments;
 using UnityEngine;
 
-namespace Assets.Scripts.ModelComponents.ActorComponents
+namespace Assets.Scripts.ModelComponents.Actors
 {
     public class HeroModel: BaseActorModel
     {
-        private WeaponModel _weapon;
+        private WeaponModel _weaponModel;
+
+        public WeaponModel Weapon
+        {
+            get { return _weaponModel; }
+        }
 
         public HeroModel (HeroData data_):base(data_)
         {
@@ -15,7 +21,7 @@ namespace Assets.Scripts.ModelComponents.ActorComponents
             data.MaxHealth = 4;
 
             if (data.Weapon != null) {
-                _weapon = new WeaponModel (data.Weapon);
+                _weaponModel = new WeaponModel (data.Weapon);
             }
         }
 
@@ -32,7 +38,6 @@ namespace Assets.Scripts.ModelComponents.ActorComponents
         {
             //;
         }
-
 
         protected override void OnInit ()
         {

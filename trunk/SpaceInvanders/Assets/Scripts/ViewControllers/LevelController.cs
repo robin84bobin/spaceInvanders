@@ -1,6 +1,6 @@
 using Assets.Scripts.Events;
 using Assets.Scripts.Events.CustomEvents;
-using Assets.Scripts.ModelComponents.ActorComponents;
+using Assets.Scripts.ModelComponents.Actors;
 using Assets.Scripts.ModelComponents.Level;
 using UnityEngine;
 

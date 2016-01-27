@@ -1,9 +1,9 @@
 using Assets.Scripts.Events;
 using Assets.Scripts.Events.CustomEvents;
-using Assets.Scripts.ModelComponents.CommonComponents;
+using Assets.Scripts.ModelComponents.Common;
 using UnityEngine;
 
-namespace Assets.Scripts.ModelComponents.BehaviourComponents
+namespace Assets.Scripts.ModelComponents.Behaviours
 {
     public class GuidedBehaviuorComponent: BaseComponent
     {

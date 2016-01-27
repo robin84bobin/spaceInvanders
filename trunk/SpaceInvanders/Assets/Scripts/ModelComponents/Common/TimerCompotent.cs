@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.ModelComponents.CommonComponents
+namespace Assets.Scripts.ModelComponents.Common
 {
     public class TimerComponent : BaseComponent
     {

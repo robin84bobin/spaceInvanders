@@ -1,7 +1,7 @@
 using Assets.Scripts.Data.DataSource;
 using UnityEngine;
 
-namespace Assets.Scripts.ModelComponents.ActorComponents
+namespace Assets.Scripts.ModelComponents.Actors
 {
     public class EnemyModel : BaseActorModel
     {

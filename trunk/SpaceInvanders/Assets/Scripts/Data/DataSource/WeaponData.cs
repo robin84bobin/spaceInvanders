@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts.Data.Attributes;
 
 namespace Assets.Scripts.Data.DataSource
@@ -19,6 +20,11 @@ namespace Assets.Scripts.Data.DataSource
                 }
                 return _bullet;
             }
+        }
+
+        public string PrefabName
+        {
+            get { return "Weapon"; }
         }
     }
 }

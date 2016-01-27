@@ -1,4 +1,4 @@
-using Assets.Scripts.ModelComponents.ActorComponents;
+using Assets.Scripts.ModelComponents.Actors;
 using UnityEngine;
 
 namespace Assets.Scripts.ViewControllers

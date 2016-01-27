@@ -1,4 +1,4 @@
-using Assets.Scripts.ModelComponents.ActorComponents;
+using Assets.Scripts.ModelComponents.Actors;
 using UnityEngine;
 
 namespace Assets.Scripts.ViewControllers
@@ -17,6 +17,8 @@ namespace Assets.Scripts.ViewControllers
         protected override void OnInit()
         {
             model.MoveEvent += OnMove;
+            //
+            EquipItem(model.Weapon);
         }
 
         protected override void Release ()

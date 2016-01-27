@@ -1,6 +1,6 @@
 using Assets.Scripts.Data.DataSource;
 
-namespace Assets.Scripts.ModelComponents.ActorComponents
+namespace Assets.Scripts.ModelComponents.Actors
 {
     public class BulletModel : BaseActorModel
     {
