@@ -6,7 +6,7 @@ namespace Assets.Scripts.ModelComponents.Equipments
 {
     public class WeaponModel : BaseComponent, IEquipmentModel
     {
-        public event Action<Vector3, BulletData> OnShot = delegate {};
+        public event Action<Vector3, BulletData> AttackEvent = delegate {};
 
         private readonly WeaponData _data;
         private Vector3 _direction;
@@ -31,10 +31,7 @@ namespace Assets.Scripts.ModelComponents.Equipments
             _direction = direction_;
         }
 
-        public void Shot()
-        {
-            OnShot (_data.BulletSpeed * _direction, _data.Bullet);
-        }
+
 
         public void OnEquip()
         {
@@ -45,6 +42,12 @@ namespace Assets.Scripts.ModelComponents.Equipments
         {
             Debug.Log("Unequipped:" + _data.ObjectId);
         }
+
+        public void Attack()
+        {
+            AttackEvent(_data.BulletSpeed * _direction, _data.Bullet);
+        }
+
     }
 }
 

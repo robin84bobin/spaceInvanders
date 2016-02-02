@@ -21,7 +21,7 @@ namespace Assets.Scripts.Input
     {
         public string horizontalAxis = "Horizontal";
         public string verticalAxis = "Vertical";
-        public KeyCode fireButton = KeyCode.Space;
+        public static KeyCode fireButton = KeyCode.Space;
 
         private Dictionary<InputMode,IInputState> _states;
         private IInputState _currentState;
@@ -37,7 +37,7 @@ namespace Assets.Scripts.Input
 
         public bool FirePressed{
             get{
-                return UnityEngine.Input.GetKey (Main.Inst.input.fireButton);
+                return UnityEngine.Input.GetKey (InputManager.fireButton);
             }
         }
 
@@ -68,6 +68,16 @@ namespace Assets.Scripts.Input
             _moveVector = GetMoveVector();
             if (_moveVector != Vector3.zero) {
                 EventManager.Get<MoveControlsEvent>().Publish(_moveVector);
+            }
+
+            CheckButton(fireButton);
+        }
+
+        void CheckButton(KeyCode key_)
+        {
+            if (UnityEngine.Input.GetKey(key_))
+            {
+                EventManager.Get<ButtonEvent>().Publish(key_);
             }
         }
     }

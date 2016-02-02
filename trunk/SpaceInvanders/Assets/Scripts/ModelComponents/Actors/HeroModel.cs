@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Behaviours;
 using Assets.Scripts.ModelComponents.Equipments;
@@ -7,8 +8,9 @@ namespace Assets.Scripts.ModelComponents.Actors
 {
     public class HeroModel: BaseActorModel
     {
-        private WeaponModel _weaponModel;
 
+
+        private WeaponModel _weaponModel;
         public WeaponModel Weapon
         {
             get { return _weaponModel; }
@@ -25,6 +27,10 @@ namespace Assets.Scripts.ModelComponents.Actors
             }
         }
 
+        public void Attack()
+        {
+            Weapon.Attack();
+        }
 
         public void Move(Vector3 vector_)
         {

@@ -6,7 +6,7 @@ namespace Assets.Scripts.Events
 {
     public class SiEvent
     {
-        private List<Action> _callbacks;
+        private readonly List<Action> _callbacks;
 
         public SiEvent()
         {
