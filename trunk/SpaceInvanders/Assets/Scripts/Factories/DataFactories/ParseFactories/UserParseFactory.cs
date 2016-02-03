@@ -1,16 +1,17 @@
 using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Data.UserData;
 using Parse;
 
-namespace Assets.Scripts.Data.DataFactories.ParseFactories
+namespace Assets.Scripts.Factories.DataFactories.ParseFactories
 {
     public class UserParseFactory : IConcreteParseFactory
     {
         #region IConcreteParseFactory implementation
 
-        public IBaseData Create (ParseObject po_)
+        public IBaseData Create(ParseObject po_)
         {
-            UserData.UserData userData = new UserData.UserData ();
-            ParseUser parseUser = (ParseUser)po_;
+            var userData = new UserData();
+            var parseUser = (ParseUser) po_;
             userData.username = parseUser.Username;
             userData.email = parseUser.Email;
 
@@ -20,6 +21,3 @@ namespace Assets.Scripts.Data.DataFactories.ParseFactories
         #endregion
     }
 }
-
-
-

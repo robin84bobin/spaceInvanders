@@ -37,6 +37,7 @@ namespace Assets.Scripts.ModelComponents.Actors
 
         protected BaseActorModel (IBaseData data_)
         {
+            base.Init();
             DataType = data_.Type;
         }
 

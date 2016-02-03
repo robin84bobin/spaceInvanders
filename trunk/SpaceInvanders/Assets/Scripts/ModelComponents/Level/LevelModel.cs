@@ -70,7 +70,7 @@ namespace Assets.Scripts.ModelComponents.Level
         {
             _hero = new HeroModel(_levelData.Hero);
             OnHeroCreate (_hero);
-            AddComponent (_hero);
+            //AddComponent (_hero);
         }
 
         void CreateEnemies ()
@@ -79,7 +79,7 @@ namespace Assets.Scripts.ModelComponents.Level
             for (int i = 0; i < _levelData.EnemyWaveSize; i++) {
                 EnemyModel enemy = new EnemyModel(_levelData.Enemy);
                 enemy.Init(_enemySpeed, _levelData.EnemyMovePeriod);
-                AddComponent(enemy);
+                //AddComponent(enemy);
                 OnEnemyCreate (enemy);
             }
             Debug.Log ("");

@@ -5,18 +5,30 @@ using UnityEngine;
 
 namespace Assets.Scripts.ViewControllers
 {
-    public abstract class BaseActorController<TModel> : MonoBehaviour where TModel : BaseActorModel
+    public abstract class BaseActorController<TModel> : MonoBehaviour, IBaseActorController 
+                                                        where TModel : BaseActorModel
     {
         protected AbstractEquipmentHolder[] equipmentHolders;
 
         protected TModel model;
+        public TModel Model
+        {
+            get { return model; }
+        }
 
-        public void Init(TModel model_)
+        public void Init(BaseActorModel model_)
         {
             equipmentHolders = GetComponentsInChildren<AbstractEquipmentHolder>();
 
-            model = model_;
+            model = (TModel) model_;
             OnInit();
+        }
+
+        void Update()
+        {
+            if (model != null) {
+                model.Update();
+            }
         }
 
         private void OnDestroy()
@@ -40,5 +52,10 @@ namespace Assets.Scripts.ViewControllers
 
         protected abstract void OnInit();
         protected abstract void Release();
+    }
+
+    public interface IBaseActorController
+    {
+        void Init(BaseActorModel model_);
     }
 }

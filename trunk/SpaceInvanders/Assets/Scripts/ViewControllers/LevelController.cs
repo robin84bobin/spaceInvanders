@@ -1,5 +1,7 @@
+using System;
 using Assets.Scripts.Events;
 using Assets.Scripts.Events.CustomEvents;
+using Assets.Scripts.Factories.GameEntitiesFactories;
 using Assets.Scripts.ModelComponents.Actors;
 using Assets.Scripts.ModelComponents.Level;
 using UnityEngine;
@@ -19,6 +21,7 @@ namespace Assets.Scripts.ViewControllers
         void Start()
         {
             EventManager.Get<LevelStartEvent> ().Publish ();
+            GameActorBuilder.Enable(this);          
         }
 
         private LevelModel _model;
@@ -36,6 +39,8 @@ namespace Assets.Scripts.ViewControllers
             _model.OnHeroCreate -= SpawnHero;
             _model.OnStartEnemyWave -= OnEnemyWaveStart;
             _model = null;
+
+            GameActorBuilder.Disable();
         }
 
         void OnEnemyWaveStart()
@@ -46,18 +51,25 @@ namespace Assets.Scripts.ViewControllers
 
         void SpawnHero (HeroModel model_)
         {
-            HeroController hero =  CreateActor<HeroController, HeroModel> (model_);
-            hero.transform.localPosition = heroSpawnPoint.transform.localPosition;
+            CreateObjectParams param = new CreateObjectParams {
+                model = model_,
+                position = heroSpawnPoint.transform.position
+            };
+
+            GameActorBuilder.CreateActor(param);
         }
 
 
         void SpawnEnemy(EnemyModel model_)
         {
-            EnemyController enemy = CreateActor<EnemyController, EnemyModel> ( model_);
-
-            Vector3 position = enemySpawnPoints[_enemySpawnPointIndex].transform.localPosition;
-            position.y += _enemySpawnRow * (spawnRowDistance + enemy.GetYSize());
-            enemy.transform.localPosition = position;
+            Vector3 spawnPosition = enemySpawnPoints[_enemySpawnPointIndex].transform.position;
+            CreateObjectParams param = new CreateObjectParams
+            {
+                model = model_,
+                position = spawnPosition
+            };
+            //EventManager.Get<CreateObjectEvent>().Publish(param);
+            GameActorBuilder.CreateActor(param);
 
             _enemySpawnPointIndex ++;
             if (_enemySpawnPointIndex >= enemySpawnPoints.Length) {
@@ -65,26 +77,6 @@ namespace Assets.Scripts.ViewControllers
                 _enemySpawnRow ++;
             }
         }
-
-        /// <summary>
-        /// Creates the actor.
-        /// Where T:BaseActorController<M>
-        /// Where M:BaseActorModel 
-        /// </summary>
-        T CreateActor<T,TM>(TM model_)  where TM:BaseActorModel where T:BaseActorController<TM>
-        {
-            GameObject prefab = (GameObject)Resources.Load ("Prefabs/GameEntities/" + model_.DataType);
-            GameObject go = GameObject.Instantiate (prefab) as GameObject;
-            Transform t = go.transform;
-            t.parent = this.transform;
-            t.localRotation = Quaternion.identity;
-            go.SetActive (true);
-
-            T actor = go.GetComponent<T> ();
-            actor.Init (model_);
-            return actor;
-        }
-
 
 
     }

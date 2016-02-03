@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.Data;
-using Assets.Scripts.Data.DataFactories.ParseFactories;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.UserData;
+using Assets.Scripts.Factories.DataFactories.ParseFactories;
 using Parse;
 using UnityEngine;
 

@@ -2,6 +2,8 @@
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Events;
 using Assets.Scripts.Events.CustomEvents;
+using Assets.Scripts.Factories.GameEntitiesFactories;
+using Assets.Scripts.ModelComponents.Actors;
 using Assets.Scripts.ModelComponents.Equipments;
 using UnityEngine;
 
@@ -24,15 +26,18 @@ namespace Assets.Scripts.ViewControllers.Equipment.Weapon
             }
         }
 
-        private BulletParams _bulletParams = new BulletParams();
+        private readonly CreateObjectParams _createObjectParams = new CreateObjectParams();
         private void OnAttack(Vector3 direction_, BulletData bulletData_)
         {
             Animate(attackAnimation);
 
-            _bulletParams.position = bulletSpawnPos.position;
-            _bulletParams.direction = direction_;
-            _bulletParams.data = bulletData_;
-            EventManager.Get<BulletEvent>().Publish(_bulletParams);
+            _createObjectParams.rotation = bulletSpawnPos.transform.rotation.eulerAngles 
+                + new Vector3( 0f,Random.Range(-180f,180f), Random.Range(-10f, 10f));
+            _createObjectParams.position = bulletSpawnPos.position;
+            _createObjectParams.scale = Vector3.one;
+            _createObjectParams.model = new BulletModel(bulletData_);
+
+            GameActorBuilder.CreateActor(_createObjectParams);
         }
 
         private void Animate(Animation animation_)
