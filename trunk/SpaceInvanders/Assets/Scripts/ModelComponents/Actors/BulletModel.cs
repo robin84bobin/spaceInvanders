@@ -1,4 +1,5 @@
 using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.ModelComponents.Collisions;
 
 namespace Assets.Scripts.ModelComponents.Actors
 {
@@ -9,6 +10,12 @@ namespace Assets.Scripts.ModelComponents.Actors
         public BulletModel(BulletData data_):base(data_)
         {
            
+        }
+
+        protected override void InitCollisionInfo()
+        {
+            ImpactInfo hitImpactInfo = new ImpactInfo(50);
+            collisionInfo = new CollisionInfo(hitImpactInfo);
         }
     }
 }

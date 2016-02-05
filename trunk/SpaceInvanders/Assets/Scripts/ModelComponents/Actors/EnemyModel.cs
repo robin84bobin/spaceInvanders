@@ -1,4 +1,5 @@
 using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.ModelComponents.Collisions;
 using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Actors
@@ -54,6 +55,12 @@ namespace Assets.Scripts.ModelComponents.Actors
         }
 
         #endregion
+
+        protected override void InitCollisionInfo()
+        {
+            ImpactInfo hitImpactInfo = new ImpactInfo(50);
+            collisionInfo = new CollisionInfo(hitImpactInfo);
+        }
     }
 }
 

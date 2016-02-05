@@ -38,10 +38,9 @@ namespace Assets.Scripts.ViewControllers
             Release();
         }
 
-        
+        EquipmentType _newType = EquipmentType.CLOTH;
         public void EquipItem(IEquipmentModel equipment_)
         {
-            EquipmentType _newType = EquipmentType.CLOTH;
             foreach (AbstractEquipmentHolder holder in equipmentHolders) {
                 _newType = EquipmentHelper.GetEquipType(equipment_.Type);
                 if (holder.EquipType != _newType) continue;

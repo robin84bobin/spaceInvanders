@@ -52,6 +52,10 @@ namespace Assets.Scripts.ModelComponents.Actors
 
         #endregion
 
+        protected override void InitCollisionInfo()
+        {
+            //TODO
+        }
     }
 }
 
