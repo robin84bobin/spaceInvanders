@@ -15,7 +15,7 @@ namespace Assets.Scripts.Factories.GameEntitiesFactories
         private static bool _enable = false;
         private static LevelController _parentLevel;
 
-        public static GameObject CreateActor( CreateObjectParams params_ = null)
+        public static GameObject CreateActor( CreateObjectParams params_)
         {
             if (!_enable) {
                 return null;

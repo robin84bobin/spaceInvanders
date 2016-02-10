@@ -3,26 +3,28 @@ using Assets.Scripts.Data.Attributes;
 
 namespace Assets.Scripts.Data.DataSource
 {
+    [Serializable]
     public class LevelData : BaseData
     {
         [DbField]
-        public int Id { get; set;}
+        public int Id;// { get; set;}
+
         [DbField]
-        public string LevelSceneName { get; set;}
+        public string LevelSceneName;//{ get; set;}
         [DbField]
-        public int EnemyWaveRate { get; set;}
+        public int EnemyWaveRate;// { get; set;}
         [DbField]
-        public int EnemyWaveSize { get; set;}
+        public int EnemyWaveSize;// { get; set;}
         [DbField]
-        public int EnemyStartSpeed { get; set;}
+        public int EnemyStartSpeed;// { get; set;}
         [DbField]
-        public double EnemySpeedFactor { get; set;}
+        public double EnemySpeedFactor;// { get; set;}
         [DbField]
-        public double EnemyMovePeriod { get; set;}
+        public double EnemyMovePeriod;// { get; set;}
         [DbField]
-        public string EnemyId { get; set;}
+        public string EnemyId;// { get; set;}
         [DbField]
-        public string HeroId { get; set;}
+        public string HeroId;// { get; set;}
 
         private EnemyData _enemy;
 	

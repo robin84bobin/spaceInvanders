@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Collisions;
+using Assets.Scripts.ModelComponents.Skills;
+using Assets.Scripts.ModelComponents.Skills.Modifiers;
 using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Actors
@@ -16,7 +19,8 @@ namespace Assets.Scripts.ModelComponents.Actors
             _enemyData = enemyData_;
         }
 
-        public void Init (double speed_, double movePeriod_)
+
+        public void InitMoveParams (double speed_, double movePeriod_)
         {
             _speedVector = new Vector3(0f,-(float)speed_,0f);
             _movePeriod = movePeriod_;
@@ -49,17 +53,20 @@ namespace Assets.Scripts.ModelComponents.Actors
             //
         }
 
-        protected override void OnInit ()
-        {
-            //
-        }
-
         #endregion
+
+        protected override void InitSkills()
+        {
+            //TODO read skills from data
+            Skills = new Dictionary<string, Skill> {
+                {SKILLS.HEALTH, new Skill(SKILLS.HEALTH, 100f, 100f, 0f).MinValueCallback(Death)},
+                {SKILLS.SPEED,  new Skill(SKILLS.SPEED, 10f, 100f, -10f)},
+            };
+        }
 
         protected override void InitCollisionInfo()
         {
-            ImpactInfo hitImpactInfo = new ImpactInfo(50);
-            collisionInfo = new CollisionInfo(hitImpactInfo);
+            CollisionInfoData = new CollisionInfo( new HitSkillModifier(100f));
         }
     }
 }

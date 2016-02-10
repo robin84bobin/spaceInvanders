@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Collisions;
 using Assets.Scripts.ModelComponents.Skills;
+using Assets.Scripts.ModelComponents.Skills.Modifiers;
 using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Actors
@@ -14,14 +15,19 @@ namespace Assets.Scripts.ModelComponents.Actors
         protected BaseActorModel(IBaseData data_)
         {
             base.Init();
-            DataType = data_.Type;
+            DataType = data_.type;
+        }
+
+        protected override void OnInit()
+        {
+            base.OnInit();
             InitSkills();
             InitCollisionInfo();
         }
 
-        private void Death()
+        protected void Death()
         {
-            OnDeathEvent(this);
+            OnDeathEvent();
         }
 
         #region EVENTS
@@ -42,44 +48,37 @@ namespace Assets.Scripts.ModelComponents.Actors
                 handler (obj_);
         }
 
-        public event Action<BaseActorModel> DeathEvent = delegate{};
-        protected virtual void OnDeathEvent (BaseActorModel obj_)
+        public event Action DeathEvent = delegate{};
+        protected virtual void OnDeathEvent ()
         {
             var handler = DeathEvent;
             if (handler != null)
-                handler (obj_);
+                handler ();
         }
 
         #endregion
 
         #region SKILLS
 
-        protected Dictionary<string, Skill> skills;
-
-        private void InitSkills()
-        {
-            //TODO read skills from data
-            skills = new Dictionary<string, Skill> {
-                {SKILLS.HEALTH, new Skill(SKILLS.HEALTH, 100f, 100f, 0f).MinValueCallback(Death)},
-                {SKILLS.SPEED,  new Skill(SKILLS.SPEED, 10f, 100f, -10f)},
-            };
-        }
+        public Dictionary<string, Skill> Skills { get; protected set; }
+        
+        protected abstract void InitSkills();
+        
 
         public void ChangeSkill(string skill_, double amount_)
         {
-            if (!skills.ContainsKey(skill_))
-            {
+            if (!Skills.ContainsKey(skill_)){
                 Debug.LogWarning(string.Format("Try to modify unexisted skill {0}::{1}", this.GetType().Name, skill_));
             }
-            skills[skill_].ChangeValue(amount_);
+            Skills[skill_].ChangeValue(amount_);
         }
 
         public void SetSkill(string skill_, double value_)
         {
-            if (!skills.ContainsKey (skill_)) {
+            if (!Skills.ContainsKey (skill_)) {
                 Debug.LogWarning(string.Format ("Try to modify unexisted skill {0}::{1}", this.GetType().Name, skill_));
             }
-            skills [skill_].SetValue(value_);
+            Skills [skill_].SetValue(value_);
             //TODO dispatch skill update event
         }
 
@@ -87,16 +86,12 @@ namespace Assets.Scripts.ModelComponents.Actors
 
         #region COLLISIONS
 
-        protected CollisionInfo collisionInfo;
+
+        public CollisionInfo CollisionInfoData { get; internal set; }
+
 
         protected abstract void InitCollisionInfo();
 
-        public void ProcessCollisionInfo(CollisionInfo info_)
-        {
-            foreach (ImpactInfo damageInfo in info_.Impact) {
-                damageInfo.Apply(skills);
-            }
-        }
 
         #endregion
 

@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Behaviours;
 using Assets.Scripts.ModelComponents.Equipments;
+using Assets.Scripts.ModelComponents.Skills;
 using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Actors
@@ -51,6 +53,15 @@ namespace Assets.Scripts.ModelComponents.Actors
         }
 
         #endregion
+
+        protected override void InitSkills()
+        {
+            //TODO read skills from data
+            Skills = new Dictionary<string, Skill> {
+                {SKILLS.HEALTH, new Skill(SKILLS.HEALTH, 100f, 100f, 0f).MinValueCallback(Death)},
+                {SKILLS.SPEED,  new Skill(SKILLS.SPEED, 10f, 100f, -10f)},
+            };
+        }
 
         protected override void InitCollisionInfo()
         {

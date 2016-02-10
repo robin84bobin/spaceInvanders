@@ -1,0 +1,14 @@
+{ "collection": [
+	{
+        "EnemyId": "qrG0UhfNu9",
+        "EnemyMovePeriod": 1.0,
+        "EnemySpeedFactor": 0.1,
+        "EnemyStartSpeed": 20,
+        "EnemyWaveRate": 30,
+        "EnemyWaveSize": 5,
+        "HeroId":"n5TelACYrB",
+        "Id": 1,
+        "LevelSceneName": "Level",
+        "ObjectId": "dYA1GhQBlJ",
+    }
+] }

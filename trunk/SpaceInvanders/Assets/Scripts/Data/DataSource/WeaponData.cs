@@ -5,12 +5,11 @@ namespace Assets.Scripts.Data.DataSource
 {
     public class WeaponData : BaseData
     {
-        [DbField]
-        public int Frequency { get; set;}
-        [DbField]
-        public int BulletSpeed { get; set;}
-        [DbField]
-        public string BulletId { get; set;}
+        [DbField] public int Frequency;// { get; set;}
+
+        [DbField] public int BulletSpeed;// { get; set;}
+
+        [DbField] public string BulletId;// { get; set;}
 
         private BulletData _bullet;
         public BulletData Bullet {

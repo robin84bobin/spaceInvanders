@@ -37,7 +37,7 @@ namespace Assets.Scripts.Network
         public void Init()
         {
             _webProxy = new ParseProxy ();
-            _dbProxy = new SqLiteProxy ();
+            _dbProxy = new JsonProxy ();
             _dbProxy.Init ();
         }
 

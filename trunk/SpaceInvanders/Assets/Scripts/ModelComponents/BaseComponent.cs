@@ -23,7 +23,7 @@ namespace Assets.Scripts.ModelComponents
         void SendMessage(string name_, params object[] paramList_);
     }
 
-    public abstract class BaseComponent : IBaseComponent 
+    public class BaseComponent : IBaseComponent 
     {
         private List<IBaseComponent> _children = new List<IBaseComponent> ();
         IBaseComponent _parent;
@@ -33,9 +33,9 @@ namespace Assets.Scripts.ModelComponents
             }
             set {
                 _parent = value;
+                OnSetParent();
             }
         }
-
 
         protected bool locked = true;
 
@@ -140,6 +140,7 @@ namespace Assets.Scripts.ModelComponents
             method.Invoke (this, paramList_);
         }
 
+        protected virtual void OnSetParent() {}
         protected virtual void OnUpdate (){}
         protected virtual void OnInit (){}
         protected virtual void OnRelease (){}

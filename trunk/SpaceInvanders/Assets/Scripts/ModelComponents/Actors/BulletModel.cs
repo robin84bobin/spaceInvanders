@@ -1,5 +1,6 @@
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Collisions;
+using Assets.Scripts.ModelComponents.Skills.Modifiers;
 
 namespace Assets.Scripts.ModelComponents.Actors
 {
@@ -7,16 +8,16 @@ namespace Assets.Scripts.ModelComponents.Actors
     {
         public float speed = 50f;
 
-        public BulletModel(BulletData data_):base(data_)
+        public BulletModel(BulletData data_) : base(data_) {}
+
+        protected override void InitSkills()
         {
-           
+            //
         }
 
         protected override void InitCollisionInfo()
         {
-            ImpactInfo hitImpactInfo = new ImpactInfo(50);
-            collisionInfo = new CollisionInfo(hitImpactInfo);
+            CollisionInfoData = new CollisionInfo(new HitSkillModifier(-10f));
         }
     }
 }
-

@@ -1,0 +1,7 @@
+{ "collection": [
+	{
+        "ID": 1,
+        "WeaponId": "C48VEwbhIr",
+        "ObjectId": "qrG0UhfNu9",
+    }
+] }

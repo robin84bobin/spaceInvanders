@@ -1,11 +1,14 @@
 ﻿using System;
+using Assets.Scripts.Data.DataSource.Impacts;
 using JetBrains.Annotations;
+using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Skills
 {
     // ReSharper disable once InconsistentNaming
     public class SKILLS
     {
+        public const string ARMOR = "armor";
         public const string HEALTH = "health";
         public const string SPEED = "speed";
     }
@@ -42,8 +45,9 @@ namespace Assets.Scripts.ModelComponents.Skills
             get { return _value; }
         }
 
-        private event Action MinValueEvent;
-        private event Action MaxValueEvent;
+        public event Action MinValueEvent;
+        public event Action MaxValueEvent;
+        public event Action<double, double> ValueChangeEvent;
 
         public Skill (string name_, double value_, double maxValue_ = double.MaxValue, double minValue_ = double.MinValue)
         {
@@ -52,6 +56,12 @@ namespace Assets.Scripts.ModelComponents.Skills
             MinValue = minValue_;
             SetValue(value_);
             DefaultValue = Value;
+
+            ValueChangeEvent += (d_, d1_) =>
+            {
+                Debug.Log(string.Format("{0}::{1} >> {2}", Name, d_.ToString(), d1_.ToString()));
+            };
+
         }
 
         /// <summary>
@@ -87,6 +97,10 @@ namespace Assets.Scripts.ModelComponents.Skills
                 return remainder;
             }
 
+            double oldValue = _value;
+            _value = newValue_;
+            OnValueChangeEvent(oldValue, _value);
+
             return remainder;
         }
 
@@ -112,5 +126,9 @@ namespace Assets.Scripts.ModelComponents.Skills
             if (MaxValueEvent != null) MaxValueEvent.Invoke();
         }
 
+        protected virtual void OnValueChangeEvent(double oldValue_, double newValue_)
+        {
+            if (ValueChangeEvent != null) ValueChangeEvent.Invoke(oldValue_, newValue_);
+        }
     }
 }

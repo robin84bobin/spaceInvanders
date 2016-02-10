@@ -5,12 +5,9 @@ namespace Assets.Scripts.Data.DataSource
 {
     public abstract class AbstractWarriorData : BaseData
     {
-        [DbField]
-        public int MaxHealth { get; set;}
-        [DbField]
-        public string WeaponId { get; set;}
-        [DbField]
-        public float Weight { get; set;}
+        [DbField] public int MaxHealth;// { get; set;}
+        [DbField] public string WeaponId;// { get; set;}
+        [DbField] public float Weight;// { get; set;}
 
         [NonSerialized]
         private WeaponData _weapon;

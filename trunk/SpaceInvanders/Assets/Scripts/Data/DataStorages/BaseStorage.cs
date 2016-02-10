@@ -67,7 +67,7 @@ namespace Assets.Scripts.Data.DataStorages
         void Log(Dictionary<string,T> dict_)
         {
             foreach (var item in dict_) {
-                Debug.Log(string.Format(" {0} > {1}", item.Value.Type, item.Value.ObjectId));
+                Debug.Log(string.Format(" {0} > {1}", item.Value.type, item.Value.objectId));
             }
         }
 

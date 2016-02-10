@@ -78,7 +78,7 @@ namespace Assets.Scripts.ModelComponents.Level
             OnStartEnemyWave ();
             for (int i = 0; i < _levelData.EnemyWaveSize; i++) {
                 EnemyModel enemy = new EnemyModel(_levelData.Enemy);
-                enemy.Init(_enemySpeed, _levelData.EnemyMovePeriod);
+                enemy.InitMoveParams(_enemySpeed, _levelData.EnemyMovePeriod);
                 //AddComponent(enemy);
                 OnEnemyCreate (enemy);
             }

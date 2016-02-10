@@ -49,6 +49,7 @@ namespace Assets.Scripts.Data
             if (_storageMap.ContainsKey(type)){
                 return ((BaseStorage<T>)_storageMap[type]);
             }
+            Debug.LogError("Storage not found for data type: "+ type.Name);
             return null;
         }
 

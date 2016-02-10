@@ -100,7 +100,7 @@ namespace Assets.Scripts.Data.DB
 
             while (_mReader.Read()) {
                 TBaseData data = ReadDataItem<TBaseData>(_mReader);
-                resultObjects.Add(data.ObjectId, data);
+                resultObjects.Add(data.objectId, data);
             }
 
             callback_ (tableName_,resultObjects);

@@ -1,0 +1,8 @@
+{ "collection": [
+	{
+        "ID": 1,
+        "Mass": 50,
+        "WeaponId": "C48VEwbhIr",
+        "ObjectId": "n5TelACYrB",
+    }
+] }

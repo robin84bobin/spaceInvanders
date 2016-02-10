@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.ModelComponents.Actors;
+﻿using System;
+using Assets.Scripts.ModelComponents.Actors;
+using Assets.Scripts.ModelComponents.Collisions;
 using Assets.Scripts.ModelComponents.Equipments;
 using Assets.Scripts.ViewControllers.Equipment;
 using UnityEngine;
@@ -11,17 +13,36 @@ namespace Assets.Scripts.ViewControllers
         protected AbstractEquipmentHolder[] equipmentHolders;
 
         protected TModel model;
-        public TModel Model
+        public BaseActorModel Model
         {
             get { return model; }
         }
+
+
 
         public void Init(BaseActorModel model_)
         {
             equipmentHolders = GetComponentsInChildren<AbstractEquipmentHolder>();
 
             model = (TModel) model_;
+            InitEvents();
+            InitCollisionController();
             OnInit();
+
+        }
+
+        private void InitEvents()
+        {
+            model.DeathEvent += () => {Destroy(gameObject);};
+
+        }
+
+        private void InitCollisionController()
+        {
+            
+            if (model.CollisionInfoData != null) {
+                gameObject.AddComponent<CollisionController>().Init(model.CollisionInfoData);
+            }
         }
 
         void Update()
@@ -29,6 +50,20 @@ namespace Assets.Scripts.ViewControllers
             if (model != null) {
                 model.Update();
             }
+        }
+
+        void OnTriggerEnter(Collider other_)
+        {
+            CollisionController cc = other_.GetComponent<CollisionController>();
+            if (cc != null && cc.CollisionInfoData != null) {
+                cc.CollisionInfoData.Apply(this.model);
+            }
+            //other_.SendMessage("ApplyCollisionInfo", model.CollisionInfoData, SendMessageOptions.DontRequireReceiver);
+        }
+
+        protected void ApplyCollisionInfo(CollisionInfo info_)
+        {
+            info_.Apply(this.model);
         }
 
         private void OnDestroy()
@@ -56,5 +91,6 @@ namespace Assets.Scripts.ViewControllers
     public interface IBaseActorController
     {
         void Init(BaseActorModel model_);
+        BaseActorModel Model { get; }
     }
 }
