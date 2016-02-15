@@ -12,9 +12,9 @@ namespace Assets.Scripts.Factories.DataFactories.ParseFactories
         public IBaseData Create(ParseObject po_)
         {
             var heroData = new HeroData {
-                Type = po_.ClassName,
-                ObjectId = po_.ObjectId,
-                WeaponId = po_.TryGetPointerObjectId(DataTypes.WEAPON)
+                type = po_.ClassName,
+                objectId = po_.ObjectId,
+                weaponId = po_.TryGetPointerObjectId(DataTypes.WEAPON)
             };
 
             return heroData;

@@ -54,13 +54,13 @@ namespace Assets.Scripts
         {
             _dataController = new DataController();
             _dataController.Init ();
-            _dataController.StartUserSession ();
         }
 
         void OnDataInited ()
         {
             EventManager.Get<DataInitCompleteEvent> ().Unsubscribe (OnDataInited);
             Debug.Log ("COMPLETE!");
+            _dataController.StartUserSession();
         }
     }
 }

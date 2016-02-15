@@ -1,20 +1,17 @@
 ﻿using System;
-using System.CodeDom;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
-using Assets.Scripts.Data.Attributes;
 using Assets.Scripts.Data.DataSource;
+using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Scripts.Data.DB
 {
-    public class JsonProxy  : IDataBaseProxy
+    public class JsonProxy : IDataBaseProxy
     {
-        public  const string PATH = "JSON/";
+        public const string FOLDER_PATH = "JSON";
 
         public void Init()
         {
@@ -27,66 +24,77 @@ namespace Assets.Scripts.Data.DB
             return 0f;
         }
 
-        public bool IsTableExist(string tableName_)
+        public bool IsTableExist(string path_)
         {
-           TextAsset textAsset = Resources.Load(PATH + tableName_ ) as TextAsset;
-            if (textAsset == null) {
-                Debug.LogError("JSON FILE NOT FOUND: " + tableName_);
-                return false;
+            bool exists = File.Exists(path_);
+            if (!exists) {
+                Debug.LogError("FILE NOT FOUND: " + path_);
             }
-            
-            return true;
+
+            return exists;
         }
 
-        public void SaveTableData<TBaseData>(string tableName_, Dictionary<string, IBaseData> dataDictionary_) where TBaseData : IBaseData
+        public void SaveTableData<TBaseData>(string tableName_, Dictionary<string, IBaseData> dataDictionary_)
+            where TBaseData : IBaseData
         {
-            throw new NotImplementedException();
+            SaveTable(tableName_, dataDictionary_);
         }
 
-
-
-        public void GetTableData<TBaseData>(string tableName_, Action<string, Dictionary<string, TBaseData>> callback_) where TBaseData : IBaseData, new()
+        public void SaveTableData<T>(string tableName_, Dictionary<string, T> dataDictionary_)
         {
-            if (!IsTableExist(tableName_)) {
-                return;
-            }
+            SaveTable(tableName_, dataDictionary_);
+        }
 
-            TextAsset textAsset = Resources.Load(PATH + tableName_) as TextAsset;
-            if (textAsset == null){
-                Debug.LogError("JSON FILE NOT FOUND: " + tableName_);
-                return;
-            }
-
-            //List<TBaseData> resultArray = new List<T>();
-            Dictionary<string, TBaseData> resultDict = new Dictionary<string, TBaseData>();
-            JSONObject jsonRoot = new JSONObject(textAsset.text);
-            foreach (JSONObject jsonObject in jsonRoot["collection"].list)
+        private void SaveTable(string tableName_, IDictionary dataDictionary_)
+        {
+            var filePath = Application.streamingAssetsPath + "/" + FOLDER_PATH + "/" + tableName_ + ".txt";
+            if (!IsTableExist(filePath))
             {
-                TBaseData dataItem = new TBaseData {type = tableName_};
-                JsonUtility.FromJsonOverwrite(jsonObject.ToString(), dataItem);
-                resultDict.Add(dataItem.objectId, dataItem);
+                return;
             }
-            //List<TBaseData> dataList = ExtractDataCollection<TBaseData>(textAsset.text);
 
-            //Dictionary<string, TBaseData> resultDict = dataList.ToDictionary(data_ => data_.objectId);
-            callback_.Invoke( tableName_, resultDict );
+            StreamWriter writer = File.CreateText(filePath);
+            var sourceString = CreateJsonFromDict(dataDictionary_);
+            writer.Write(sourceString.ToCharArray());
+            writer.Close();
         }
 
-        private List<T> ExtractDataCollection<T>(string sourceStr_) where T:IBaseData , new()
+        private string CreateJsonFromDict(IDictionary dict_)
         {
-            JSONObject jsonRoot = new JSONObject(sourceStr_);
-            
-            JSONObject collection = new JSONObject(JSONObject.Type.ARRAY);
-            collection = jsonRoot["collection"];
-
-            List<T> resultArray = new List<T>();
-            foreach (JSONObject jsonObject in collection.list) {
-                T dataItem = new T();
-                JsonUtility.FromJsonOverwrite(jsonObject.ToString(), dataItem);
-                resultArray.Add(dataItem);
+            StringBuilder sb = new StringBuilder("{ \"collection\": [ \n");
+            string dataStr = string.Empty;
+            foreach (var dataItem in dict_.Values) {
+                dataStr = JsonUtility.ToJson(dataItem);
+                sb.Append(dataStr);
+                sb.Append(",\n");
             }
-           
-            return resultArray;
+            sb.Append("\n]}");
+
+            return sb.ToString();
+        }
+
+        public void GetTableData<TBaseData>(string tableName_, Action<string, Dictionary<string, TBaseData>> callback_)
+            where TBaseData : IBaseData, new()
+        {
+            var sourceString = string.Empty;
+            var filePath = Application.streamingAssetsPath + "/" + FOLDER_PATH + "/" + tableName_ + ".txt";
+            if (!IsTableExist(filePath)){
+                callback_.Invoke(tableName_, null);
+                return;
+            }
+
+           // var www = new WWW(filePath);
+            sourceString = File.ReadAllText(filePath);
+
+            var resultDict = new Dictionary<string, TBaseData>();
+            var jsonRoot = new JSONObject(sourceString);
+            foreach (var jsonObject in jsonRoot["collection"].list) {
+                var dataItem = new TBaseData {Type = tableName_};
+                JsonUtility.FromJsonOverwrite(jsonObject.ToString(), dataItem);
+                resultDict.Add(dataItem.ObjectId, dataItem);
+            }
+
+            callback_.Invoke(tableName_, resultDict);
         }
 
         /*
@@ -117,5 +125,24 @@ namespace Assets.Scripts.Data.DB
         }
         */
 
+        /*
+        private List<T> ExtractDataCollection<T>(string sourceStr_) where T:IBaseData , new()
+        {
+            JSONObject jsonRoot = new JSONObject(sourceStr_);
+            
+            JSONObject collection = new JSONObject(JSONObject.Type.ARRAY);
+            collection = jsonRoot["collection"];
+
+            List<T> resultArray = new List<T>();
+            foreach (JSONObject jsonObject in collection.list) {
+                T dataItem = new T();
+                JsonUtility.FromJsonOverwrite(jsonObject.ToString(), dataItem);
+                resultArray.Add(dataItem);
+            }
+           
+            return resultArray;
+        }
+
+        */
     }
 }

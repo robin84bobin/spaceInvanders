@@ -22,7 +22,7 @@ namespace Assets.Scripts.ModelComponents.Actors
         {
             var data = data_;
             //
-            data.MaxHealth = 4;
+            data.maxHealth = 4;
 
             if (data.Weapon != null) {
                 _weaponModel = new WeaponModel (data.Weapon);

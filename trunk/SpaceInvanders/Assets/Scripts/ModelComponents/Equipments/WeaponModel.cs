@@ -18,7 +18,7 @@ namespace Assets.Scripts.ModelComponents.Equipments
 
         public string Type
         {
-            get { return _data.Type; }
+            get { return _data.type; }
         }
 
         public WeaponModel (WeaponData data_)
@@ -35,17 +35,17 @@ namespace Assets.Scripts.ModelComponents.Equipments
 
         public void OnEquip()
         {
-           Debug.Log("Equipped:"+_data.ObjectId);
+           Debug.Log("Equipped:"+_data.objectId);
         }
 
         public void OnUnequip()
         {
-            Debug.Log("Unequipped:" + _data.ObjectId);
+            Debug.Log("Unequipped:" + _data.objectId);
         }
 
         public void Attack()
         {
-            AttackEvent(_data.BulletSpeed * _direction, _data.Bullet);
+            AttackEvent(_data.bulletSpeed * _direction, _data.Bullet);
         }
 
     }

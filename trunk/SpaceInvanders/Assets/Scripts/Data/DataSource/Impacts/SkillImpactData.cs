@@ -1,10 +1,5 @@
-﻿using System;
-using System.Runtime.Serialization;
-using Assets.Scripts.Data.Attributes;
+﻿using Assets.Scripts.Data.Attributes;
 using Assets.Scripts.ModelComponents.Skills;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.Networking;
 
 namespace Assets.Scripts.Data.DataSource.Impacts
 {

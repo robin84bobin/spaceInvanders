@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataStorages;
+using Assets.Scripts.Data.User;
 using Assets.Scripts.Events;
 using Assets.Scripts.Events.CustomEvents;
 using Assets.Scripts.Network;
@@ -15,8 +16,13 @@ namespace Assets.Scripts.Data
         private Dictionary<Type, IBaseStorage> _storageMap;
         //------------------
         private UserStorage _userStorage;
+        public UserStorage UserStorage
+        {
+            get { return _userStorage; }
+        }
 
-        public UserData.UserData userSessionData;
+        public UserData userSessionData;
+
 
         public void Init ()
         {
@@ -29,7 +35,9 @@ namespace Assets.Scripts.Data
 
         public void StartUserSession()
         {
-            userSessionData = new UserData.UserData ();
+            UserData user = _userStorage.Get("robin84bobin@gmail.com");
+            user.level ++;
+            _userStorage.SaveData();
         }
 
         private void InitStorages()
@@ -41,6 +49,9 @@ namespace Assets.Scripts.Data
             RegisterBaseStorage<BulletData>(DataTypes.BULLET);
             RegisterBaseStorage<HeroData>(DataTypes.HERO);
             RegisterBaseStorage<WeaponData>(DataTypes.WEAPON);
+
+            _userStorage = new UserStorage();
+            _storageMap.Add(UserStorage.GetType(), _userStorage);
         }
 
         public BaseStorage<T> Storage<T>() where T:BaseData, new()

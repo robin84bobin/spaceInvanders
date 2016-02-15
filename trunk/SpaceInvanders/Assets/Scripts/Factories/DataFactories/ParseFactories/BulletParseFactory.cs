@@ -8,8 +8,8 @@ namespace Assets.Scripts.Factories.DataFactories.ParseFactories
         public IBaseData Create(ParseObject po_)
         {
             var bulletData = new BulletData {
-                Type = po_.ClassName,
-                ObjectId = po_.ObjectId
+                type = po_.ClassName,
+                objectId = po_.ObjectId
             };
             return bulletData;
         }

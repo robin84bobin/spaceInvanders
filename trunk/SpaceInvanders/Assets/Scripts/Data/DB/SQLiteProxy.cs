@@ -91,6 +91,11 @@ namespace Assets.Scripts.Data.DB
             return true;
         }
 
+        public void SaveTableData<T>(string tableName_, Dictionary<string, T> dataDictionary_)
+        {
+            throw new NotImplementedException();
+        }
+
         public void GetTableData<TBaseData> (string tableName_, Action<string, Dictionary<string, TBaseData>> callback_) where TBaseData:IBaseData, new()
         {
             Dictionary<string,TBaseData> resultObjects = new Dictionary<string, TBaseData> ();
@@ -100,7 +105,7 @@ namespace Assets.Scripts.Data.DB
 
             while (_mReader.Read()) {
                 TBaseData data = ReadDataItem<TBaseData>(_mReader);
-                resultObjects.Add(data.objectId, data);
+                resultObjects.Add(data.ObjectId, data);
             }
 
             callback_ (tableName_,resultObjects);

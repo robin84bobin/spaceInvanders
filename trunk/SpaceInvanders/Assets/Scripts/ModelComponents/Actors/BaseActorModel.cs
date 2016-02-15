@@ -15,7 +15,7 @@ namespace Assets.Scripts.ModelComponents.Actors
         protected BaseActorModel(IBaseData data_)
         {
             base.Init();
-            DataType = data_.type;
+            DataType = data_.Type;
         }
 
         protected override void OnInit()

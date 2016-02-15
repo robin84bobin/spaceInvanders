@@ -7,7 +7,7 @@ namespace Assets.Scripts.Input.InputStates
         #region IInputState implementation
         public CursorLockMode CursorLockMode {
             get {
-                return CursorLockMode.Locked;
+                return CursorLockMode.None;
             }
         }
         #endregion

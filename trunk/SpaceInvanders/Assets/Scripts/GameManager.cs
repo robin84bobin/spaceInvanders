@@ -19,8 +19,8 @@ namespace Assets.Scripts
         public void LoadCurrentLevel()
         {
             EventManager.Get<LevelStartEvent> ().Subscribe (OnLevelStart);
-            _currentLevelData =	Main.Inst.Data.Get<LevelData>(level_ => level_.Id == _currentLevelId);
-            SceneManager.LoadScene(_currentLevelData.LevelSceneName);
+            _currentLevelData =	Main.Inst.Data.Get<LevelData>(level_ => level_.id == _currentLevelId);
+            SceneManager.LoadScene(_currentLevelData.levelSceneName);
         }
 
         private void OnLevelStart()

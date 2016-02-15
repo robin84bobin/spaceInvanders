@@ -12,17 +12,17 @@ namespace Assets.Scripts.Factories.DataFactories.ParseFactories
         public IBaseData Create(ParseObject po_)
         {
             var levelData = new LevelData {
-                Type = po_.ClassName,
-                ObjectId = po_.ObjectId,
-                Id = po_.TryGet<int>("ID"),
-                LevelSceneName = po_.TryGet<string>("LevelSceneName"),
-                HeroId = po_.TryGetPointerObjectId(DataTypes.HERO),
-                EnemyId = po_.TryGetPointerObjectId(DataTypes.ENEMY),
-                EnemyWaveRate = po_.TryGet<int>("EnemyWaveRate"),
-                EnemyWaveSize = po_.TryGet<int>("EnemyWaveSize"),
-                EnemyStartSpeed = po_.TryGet<int>("EnemyStartSpeed"),
-                EnemySpeedFactor = po_.TryGet<double>("EnemySpeedFactor"),
-                EnemyMovePeriod = po_.TryGet<double>("EnemyMovePeriod")
+                type = po_.ClassName,
+                objectId = po_.ObjectId,
+                id = po_.TryGet<int>("ID"),
+                levelSceneName = po_.TryGet<string>("LevelSceneName"),
+                heroId = po_.TryGetPointerObjectId(DataTypes.HERO),
+                enemyId = po_.TryGetPointerObjectId(DataTypes.ENEMY),
+                enemyWaveRate = po_.TryGet<int>("EnemyWaveRate"),
+                enemyWaveSize = po_.TryGet<int>("EnemyWaveSize"),
+                enemyStartSpeed = po_.TryGet<int>("EnemyStartSpeed"),
+                enemySpeedFactor = po_.TryGet<double>("EnemySpeedFactor"),
+                enemyMovePeriod = po_.TryGet<double>("EnemyMovePeriod")
             };
             return levelData;
         }

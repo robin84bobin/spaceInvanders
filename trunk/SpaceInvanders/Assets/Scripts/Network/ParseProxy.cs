@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.Data;
 using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.Data.UserData;
+using Assets.Scripts.Data.User;
 using Assets.Scripts.Factories.DataFactories.ParseFactories;
 using Parse;
 using UnityEngine;
@@ -50,6 +50,11 @@ namespace Assets.Scripts.Network
         public void SaveScores (string name_, int score_)
         {
             throw new NotImplementedException ();
+        }
+
+        public void GetTableData<TData>(string tableName_, Action<string, Dictionary<string, TData>> p) where TData : IBaseData, new()
+        {
+            throw new NotImplementedException();
         }
 
         public void SignUp (AuthData authData_, Action onSuccess_, Action onFail_)

@@ -21,7 +21,8 @@ namespace Assets.Scripts.ViewControllers
         void Start()
         {
             EventManager.Get<LevelStartEvent> ().Publish ();
-            GameActorBuilder.Enable(this);          
+            GameActorBuilder.Enable(this);    
+                 
         }
 
         private LevelModel _model;

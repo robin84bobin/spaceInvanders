@@ -13,7 +13,7 @@ namespace Assets.Scripts.Data.DataStorages
 
             foreach (var item in objects) {
                 levelData = (LevelData)item.Value;
-                if(levelData.Id == id_){
+                if(levelData.id == id_){
                     return levelData;
                 }
             }

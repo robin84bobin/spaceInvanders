@@ -7,31 +7,31 @@ namespace Assets.Scripts.Data.DataSource
     public class LevelData : BaseData
     {
         [DbField]
-        public int Id;// { get; set;}
+        public int id;// { get; set;}
 
         [DbField]
-        public string LevelSceneName;//{ get; set;}
+        public string levelSceneName;//{ get; set;}
         [DbField]
-        public int EnemyWaveRate;// { get; set;}
+        public int enemyWaveRate;// { get; set;}
         [DbField]
-        public int EnemyWaveSize;// { get; set;}
+        public int enemyWaveSize;// { get; set;}
         [DbField]
-        public int EnemyStartSpeed;// { get; set;}
+        public int enemyStartSpeed;// { get; set;}
         [DbField]
-        public double EnemySpeedFactor;// { get; set;}
+        public double enemySpeedFactor;// { get; set;}
         [DbField]
-        public double EnemyMovePeriod;// { get; set;}
+        public double enemyMovePeriod;// { get; set;}
         [DbField]
-        public string EnemyId;// { get; set;}
+        public string enemyId;// { get; set;}
         [DbField]
-        public string HeroId;// { get; set;}
+        public string heroId;// { get; set;}
 
         private EnemyData _enemy;
 	
         public EnemyData Enemy {
             get {
                 if (_enemy == null) {
-                    _enemy = Main.Inst.Data.Get<EnemyData>(EnemyId);
+                    _enemy = Main.Inst.Data.Get<EnemyData>(enemyId);
                 }
                 return _enemy;
             }
@@ -42,7 +42,7 @@ namespace Assets.Scripts.Data.DataSource
         public HeroData Hero {
             get {
                 if (_hero == null)	{
-                    _hero = Main.Inst.Data.Get<HeroData>(HeroId);
+                    _hero = Main.Inst.Data.Get<HeroData>(heroId);
                 }
                 return _hero;
             }

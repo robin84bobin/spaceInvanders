@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DB;
@@ -69,8 +70,13 @@ namespace Assets.Scripts.Network
 
         void OnUpdateComplete<TData> (string tableName_, Dictionary<string, IBaseData> dataDict_)  where TData:IBaseData
         {
-            _dbProxy.SaveTableData<TData> (tableName_, dataDict_);
-            EventManager.Get<StorageUpdateCompleteEvent> ().Publish (typeof(TData));
+            LocalDb.SaveTableData<TData>(tableName_, dataDict_);
+            EventManager.Get<StorageUpdateCompleteEvent>().Publish(typeof(TData));
+        }
+
+        public void SaveData<T>(string tableName_, int id_)
+        {
+            throw new NotImplementedException();
         }
 
         public void SaveResults(string playerName_, int score_)
@@ -80,6 +86,9 @@ namespace Assets.Scripts.Network
 
         public bool CheckConnection()
         {
+            //TODO
+            return false;
+            //
             ConnectionTesterStatus connectionStatus = UnityEngine.Network.TestConnection ();
             if (connectionStatus == ConnectionTesterStatus.Error){
                 return false;

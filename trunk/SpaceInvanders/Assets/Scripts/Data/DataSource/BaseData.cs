@@ -5,26 +5,26 @@ namespace Assets.Scripts.Data.DataSource
 {
     public interface IBaseData
     {
-        string type { get; set; }
-        string objectId { get;}
+        string Type { get; set; }
+        string ObjectId { get;}
     }
 
     public class BaseData : IBaseData
     {
         [DbField]
-        public string Type;// { get; set;}
+        public string type;// { get; set;}
         [DbField]
-        public string ObjectId;// { get; set;}
+        public string objectId;// { get; set;}
 
-        public string type
+        public string Type
         {
-            get { return Type; }
-            set { Type = value; }
+            get { return type; }
+            set { type = value; }
         }
 
-        public string objectId
+        public string ObjectId
         {
-            get { return ObjectId; } 
+            get { return objectId; } 
         }
     }
 }

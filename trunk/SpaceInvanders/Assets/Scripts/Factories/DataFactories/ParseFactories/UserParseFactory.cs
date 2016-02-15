@@ -1,5 +1,5 @@
 using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.Data.UserData;
+using Assets.Scripts.Data.User;
 using Parse;
 
 namespace Assets.Scripts.Factories.DataFactories.ParseFactories

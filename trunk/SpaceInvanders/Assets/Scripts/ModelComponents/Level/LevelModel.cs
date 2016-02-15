@@ -60,8 +60,8 @@ namespace Assets.Scripts.ModelComponents.Level
         {
             if (Time.time >= _waveSpawnTime) {
                 _waveNum ++;
-                _enemySpeed = _levelData.EnemyStartSpeed + _waveNum * _levelData.EnemySpeedFactor * _levelData.EnemyStartSpeed;
-                _waveSpawnTime = Time.time + _levelData.EnemyWaveRate;
+                _enemySpeed = _levelData.enemyStartSpeed + _waveNum * _levelData.enemySpeedFactor * _levelData.enemyStartSpeed;
+                _waveSpawnTime = Time.time + _levelData.enemyWaveRate;
                 CreateEnemies ();
             }
         }
@@ -76,9 +76,9 @@ namespace Assets.Scripts.ModelComponents.Level
         void CreateEnemies ()
         {
             OnStartEnemyWave ();
-            for (int i = 0; i < _levelData.EnemyWaveSize; i++) {
+            for (int i = 0; i < _levelData.enemyWaveSize; i++) {
                 EnemyModel enemy = new EnemyModel(_levelData.Enemy);
-                enemy.InitMoveParams(_enemySpeed, _levelData.EnemyMovePeriod);
+                enemy.InitMoveParams(_enemySpeed, _levelData.enemyMovePeriod);
                 //AddComponent(enemy);
                 OnEnemyCreate (enemy);
             }

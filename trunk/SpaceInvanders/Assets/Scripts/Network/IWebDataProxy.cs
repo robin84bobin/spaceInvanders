@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.Data.UserData;
+using Assets.Scripts.Data.User;
 
 namespace Assets.Scripts.Network
 {
@@ -16,6 +16,7 @@ namespace Assets.Scripts.Network
         UserData CurrentUser ();
 
         void SaveScores(string name_, int score_);
+       // void GetTableData<TData>(string tableName_, Action<string, Dictionary<string, TData>> p) where TData : IBaseData, new();
     }
 }
 

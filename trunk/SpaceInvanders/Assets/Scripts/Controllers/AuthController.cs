@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Assets.Scripts.Data.UserData;
+using Assets.Scripts.Data.User;
 using Assets.Scripts.Network;
 using Assets.Scripts.UI.Windows.AuthWindow;
 using Assets.Scripts.UI.Windows.InfoWindows;
