@@ -10,6 +10,16 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers.ModifyStartegies
 
     public class ModifyStrategy
     {
+        private static Dictionary<string, IModifyStrategy> _map = new Dictionary<string, IModifyStrategy>() {
+            {"serial", new SerialModifyStrategy() },
+            {"parallel", new ParallelModifyStrategy() }
+        };
+
+        public static IModifyStrategy Get(string name_)
+        {
+            return _map[name_];
+        }
+
         // ReSharper disable once InconsistentNaming
         private static readonly ParallelModifyStrategy _parallel = new ParallelModifyStrategy();
         public static ParallelModifyStrategy Parallel

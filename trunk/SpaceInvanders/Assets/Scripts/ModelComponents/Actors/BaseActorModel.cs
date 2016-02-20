@@ -14,7 +14,6 @@ namespace Assets.Scripts.ModelComponents.Actors
 
         protected BaseActorModel(IBaseData data_)
         {
-            base.Init();
             DataType = data_.Type;
         }
 
@@ -68,7 +67,7 @@ namespace Assets.Scripts.ModelComponents.Actors
         public void ChangeSkill(string skill_, double amount_)
         {
             if (!Skills.ContainsKey(skill_)){
-                Debug.LogWarning(string.Format("Try to modify unexisted skill {0}::{1}", this.GetType().Name, skill_));
+                Debug.LogWarning(string.Format("Try to change unexisted skill {0}::{1}", this.GetType().Name, skill_));
             }
             Skills[skill_].ChangeValue(amount_);
         }
@@ -76,7 +75,7 @@ namespace Assets.Scripts.ModelComponents.Actors
         public void SetSkill(string skill_, double value_)
         {
             if (!Skills.ContainsKey (skill_)) {
-                Debug.LogWarning(string.Format ("Try to modify unexisted skill {0}::{1}", this.GetType().Name, skill_));
+                Debug.LogWarning(string.Format ("Try to set unexisted skill {0}::{1}", this.GetType().Name, skill_));
             }
             Skills [skill_].SetValue(value_);
             //TODO dispatch skill update event

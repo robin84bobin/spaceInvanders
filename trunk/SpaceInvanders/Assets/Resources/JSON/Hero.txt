@@ -1,5 +1,6 @@
 { "collection": [
 	{
+		"class":"Hero",
         "id": 1,
         "mass": 50,
         "weaponId": "C48VEwbhIr",

@@ -1,0 +1,28 @@
+{ "collection" :[
+	{
+		"type":"damage",
+		"name":"hit",
+		"skills":[ "armor", "health" ],
+		"value": -20,
+		"strategy" : "serial",
+		"objectId":"hitDamage_Id"
+	},
+	{
+		"type":"damage",
+		"name":"poison",
+		"skills":[ "health" ],
+		"value": 5,
+		"timerId": "timer1_Id",
+		"objectId":"poisonDamage_Id"
+	},
+	{
+		"type":"damage",
+		"name":"fire",
+		"skills":[ "armor", "health" ],
+		"value": 10,
+		"strategy" : "parrallel"
+		"timerId": "timer2_Id",
+		"objectId":"fireDamage_Id"
+	}
+
+]}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Data.DataSource.Impacts.Damage;
 using Assets.Scripts.Data.DataStorages;
 using Assets.Scripts.Data.User;
 using Assets.Scripts.Events;
@@ -49,6 +50,8 @@ namespace Assets.Scripts.Data
             RegisterBaseStorage<BulletData>(DataTypes.BULLET);
             RegisterBaseStorage<HeroData>(DataTypes.HERO);
             RegisterBaseStorage<WeaponData>(DataTypes.WEAPON);
+            RegisterBaseStorage<DamageData>(DataTypes.DAMAGE);
+            RegisterBaseStorage<TimerData>(DataTypes.TIMER);
 
             _userStorage = new UserStorage();
             _storageMap.Add(UserStorage.GetType(), _userStorage);

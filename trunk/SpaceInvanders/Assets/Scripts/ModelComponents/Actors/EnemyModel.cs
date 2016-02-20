@@ -17,6 +17,7 @@ namespace Assets.Scripts.ModelComponents.Actors
         public EnemyModel (EnemyData enemyData_): base(enemyData_)
         {
             _enemyData = enemyData_;
+            base.Init();
         }
 
 
@@ -66,7 +67,7 @@ namespace Assets.Scripts.ModelComponents.Actors
 
         protected override void InitCollisionInfo()
         {
-            CollisionInfoData = new CollisionInfo( new HitSkillModifier(100f));
+            //CollisionInfoData = new CollisionInfo( new HitSkillBuffComponent(100f));
         }
     }
 }

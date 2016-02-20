@@ -20,6 +20,7 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers.ModifyStartegies
                 _skillName = skills_[i];
                 if (targetSkills_.ContainsKey(_skillName)) {
                     _remainderValue = targetSkills_[_skillName].ChangeValue(_remainderValue);
+
                 }
             }
 

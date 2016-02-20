@@ -1,7 +1,14 @@
 { "collection": [
 	{
+		"type":"Bullet",
         "id": 1,
         "damage": 5,
         "objectId": "EpWwqhWxcw",
+		"impact": [
+			{ 
+				"impactType":"damage", 
+				"impactObjectId":"hitDamage_Id"	
+			}
+		]
     }
 ] }

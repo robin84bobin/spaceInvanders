@@ -27,6 +27,8 @@ namespace Assets.Scripts.ModelComponents.Actors
             if (data.Weapon != null) {
                 _weaponModel = new WeaponModel (data.Weapon);
             }
+
+            base.Init();
         }
 
         public void Attack()

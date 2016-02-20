@@ -1,5 +1,6 @@
 { "collection": [
 	{
+		"class":"Level",
         "enemyId": "qrG0UhfNu9",
         "enemyMovePeriod": 1.0,
         "enemySpeedFactor": 0.1,

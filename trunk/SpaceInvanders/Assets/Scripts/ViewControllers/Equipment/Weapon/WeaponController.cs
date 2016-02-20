@@ -35,7 +35,8 @@ namespace Assets.Scripts.ViewControllers.Equipment.Weapon
                 + new Vector3( 0f,Random.Range(-180f,180f), Random.Range(-10f, 10f));
             _createObjectParams.position = bulletSpawnPos.position;
             _createObjectParams.scale = Vector3.one;
-            _createObjectParams.model = new BulletModel(bulletData_);
+            var bullet = new BulletModel(bulletData_);
+            _createObjectParams.model = bullet;
 
             GameActorBuilder.CreateActor(_createObjectParams);
         }

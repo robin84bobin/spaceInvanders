@@ -1,5 +1,6 @@
 { "collection": [
 	{
+		"type":"Enemy",
         "id": 1,
         "weaponId": "C48VEwbhIr",
         "objectId": "qrG0UhfNu9",

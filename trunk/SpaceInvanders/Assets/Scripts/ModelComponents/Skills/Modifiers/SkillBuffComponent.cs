@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Skills.Modifiers
 {
-    public class SkillModifier : BaseComponent
+    public class SkillBuffComponent : BaseComponent
     {
         public string[] skills;
         public double value;
@@ -34,7 +34,7 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers
 
         private double _stopTime;
 
-        public SkillModifier()
+        public SkillBuffComponent()
         {
         }
 

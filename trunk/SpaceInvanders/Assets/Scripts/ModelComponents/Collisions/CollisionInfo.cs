@@ -1,21 +1,21 @@
 ﻿using Assets.Scripts.ModelComponents.Actors;
-using Assets.Scripts.ModelComponents.Skills.Modifiers;
+using Assets.Scripts.ModelComponents.Impacts;
 
 namespace Assets.Scripts.ModelComponents.Collisions
 {
     public class CollisionInfo
     {
-        private readonly SkillModifier[] _skillModifiers;
+        private readonly IImpact[] _impacts;
 
-        public CollisionInfo(params SkillModifier[] skillModifiers_)
+        public CollisionInfo( IImpact[] impacts_)
         {
-            _skillModifiers = skillModifiers_;
+            _impacts = impacts_;
         }
 
         public void Apply(BaseActorModel actor_)
         {
-            foreach (var modifier in _skillModifiers) {
-                modifier.Apply(actor_);
+            foreach (var impact in _impacts) {
+                impact.Apply(actor_);
             }
         }
     }

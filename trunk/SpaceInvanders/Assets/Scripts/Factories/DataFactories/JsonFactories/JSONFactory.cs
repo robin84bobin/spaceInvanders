@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Data.DataSource.Impacts.Damage;
+using UnityEngine;
+
+namespace Assets.Scripts.Factories.DataFactories.JsonFactories
+{
+    public class JsonFactory
+    {
+        private static JsonFactory _instance;
+        public static JsonFactory Instance
+        {
+            get { return _instance ?? (_instance = new JsonFactory()); }
+        }
+
+        private Dictionary<Type, AbstractJsonFactory> _factories;
+
+        private JsonFactory()
+        {
+            _factories = new Dictionary<Type, AbstractJsonFactory> {
+                {typeof (BulletData), new BulletJsonFactory()},
+                {typeof (DamageData), new DamageJsonFactory()}
+            };
+
+        }
+
+        public T Create<T>( string jsonString_) where T : IBaseData, new()
+        {
+            if (_factories.ContainsKey(typeof(T))) {
+                return (T)_factories[typeof(T)].Create(jsonString_) ;
+            }
+            else {
+                return DefaultJsonFactory.Create<T>( jsonString_);
+            }
+        }
+    }
+
+    internal static class DefaultJsonFactory
+    {
+        public static T Create<T>( string jsonString_) where T : IBaseData, new () 
+        {
+           T data = new T();
+           JsonUtility.FromJsonOverwrite(jsonString_, data);
+           return data;
+        }
+    }
+}

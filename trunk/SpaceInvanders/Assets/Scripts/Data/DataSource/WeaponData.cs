@@ -6,9 +6,7 @@ namespace Assets.Scripts.Data.DataSource
     public class WeaponData : BaseData
     {
         [DbField] public int frequency;// { get; set;}
-
         [DbField] public int bulletSpeed;// { get; set;}
-
         [DbField] public string bulletId;// { get; set;}
 
         private BulletData _bullet;

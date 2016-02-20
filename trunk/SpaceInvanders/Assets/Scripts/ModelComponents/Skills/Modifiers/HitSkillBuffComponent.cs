@@ -2,9 +2,9 @@
 
 namespace Assets.Scripts.ModelComponents.Skills.Modifiers
 {
-    public class HitSkillModifier : SkillModifier
+    public class HitSkillBuffComponent : SkillBuffComponent
     {
-        public HitSkillModifier(double value_)
+        public HitSkillBuffComponent(double value_)
         {
             value = value_;
             modifyStrategy = ModifyStrategy.Serial;
