@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -33,7 +34,10 @@ namespace Assets.Scripts.ModelComponents
             }
             set {
                 _parent = value;
-                OnSetParent();
+                if (_parent != null) {
+                    OnSetParent();
+                    Debug.Log(_parent.GetType().Name + " -> addChild :: " + this.GetType().Name);
+                }
             }
         }
 
@@ -49,6 +53,7 @@ namespace Assets.Scripts.ModelComponents
         public void RemoveComponent (IBaseComponent child_)
         {
             if (_children.Contains (child_)) {
+                Debug.Log(this.GetType().Name + " -> removeChild :: " + child_.GetType().Name);
                 _children.Remove(child_);
                 child_.Release();
                 child_ = null;
@@ -57,10 +62,10 @@ namespace Assets.Scripts.ModelComponents
 
         public void Remove ()
         {
+            Lock();
             if (Parent != null) {
                 Parent.RemoveComponent (this);
             }
-
         }
 
         public List<IBaseComponent> Children {
@@ -96,7 +101,12 @@ namespace Assets.Scripts.ModelComponents
 
         public void Release()
         {
+            Debug.Log(this.GetType().Name + " => Release");
+
             Lock ();
+            foreach (var child in _children) {
+                child.Release();
+            }
             _children.Clear();
             Parent = null;
             OnRelease ();

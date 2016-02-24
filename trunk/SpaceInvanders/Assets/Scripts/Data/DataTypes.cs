@@ -10,8 +10,10 @@ namespace Assets.Scripts.Data
         public const string ENEMY = "Enemy";
         public const string WEAPON = "Weapon";
         public const string BULLET = "Bullet";
-        public const string DAMAGE = "Damage";
+        public const string SKILL_IMPACT = "SkillImpact";
         public const string TIMER = "Timer";
+        public const string BUFF_IMPACT = "BuffImpact";
+        public const string BEHAVIOUR_IMPACT = "BehaviourImpact";
     }
 }
 

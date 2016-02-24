@@ -8,7 +8,7 @@ namespace Assets.Scripts.ModelComponents.Actors
 {
     public class BulletModel : BaseActorModel
     {
-        public float speed = 50f;
+        public float speed = 10f;
         private BulletData _bulletData;
 
         public BulletModel(BulletData data_) : base(data_)

@@ -5,14 +5,14 @@
 		"delay": 2.0,
 		"period": 2.0,
 		"totalTime": 10,
-		"objectId":"timer1_Id",
+		"objectId":"timer1_Id"
 	},
 	{
 		"type":"timer",
 		"name":"timer_2",
 		"delay": 1.0,
-		"period": 1.0,
+		"period": 0.5,
 		"totalTime": 10,
-		"objectId":"timer2_Id",
+		"objectId":"timer2_Id"
 	}
 ]}

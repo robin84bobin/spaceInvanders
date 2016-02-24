@@ -1,3 +1,5 @@
+using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Data.DataSource.Impacts;
 using Assets.Scripts.ModelComponents.Actors;
 using Assets.Scripts.ModelComponents.Skills.Modifiers.ModifyStartegies;
 
@@ -8,7 +10,8 @@ namespace Assets.Scripts.ModelComponents.Impacts
         private readonly string[] _affectedSkills;
         private readonly double _impactValue;
 
-        public IModifyStrategy modifyStrategy;
+        public ISkillModifyStrategy Strategy { private get; set; }
+        public TimerData Timer { private get; set; }
 
         public SkillImpact(double impactValue_, params string[] affectedSkills_ )
         {
@@ -18,7 +21,7 @@ namespace Assets.Scripts.ModelComponents.Impacts
 
         public void Apply(BaseActorModel actor_)
         {
-           modifyStrategy.Apply(_impactValue, _affectedSkills, actor_.Skills);
+            Strategy.Apply(_impactValue, _affectedSkills, actor_.Skills);
         }
     }
 }

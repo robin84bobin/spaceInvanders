@@ -1,0 +1,8 @@
+{ "collection": [
+	{
+		"type":"Weapon",
+        "bulletId": "bullet_1",
+        "id": 1,
+        "objectId": "C48VEwbhIr"
+    }
+] }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts.ModelComponents.Skills.Modifiers.ModifyStartegies
 {
-    public class ParallelModifyStrategy : IModifyStrategy
+    public class ParallelModifyStrategy : ISkillModifyStrategy
     {
         private string _skillName;
 

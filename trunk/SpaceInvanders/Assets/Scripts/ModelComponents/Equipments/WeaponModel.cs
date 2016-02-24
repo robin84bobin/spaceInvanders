@@ -11,6 +11,8 @@ namespace Assets.Scripts.ModelComponents.Equipments
         private readonly WeaponData _data;
         private Vector3 _direction;
 
+        private float _reloadTime = 1f;
+
         public string PrefabName
         {
             get { return _data.PrefabName; }  
@@ -43,8 +45,13 @@ namespace Assets.Scripts.ModelComponents.Equipments
             Debug.Log("Unequipped:" + _data.objectId);
         }
 
+        float _nextAttackTime = 0f;
         public void Attack()
         {
+            if (Time.time < _nextAttackTime) {
+                return;
+            }
+            _nextAttackTime = Time.time + _reloadTime;
             AttackEvent(_data.bulletSpeed * _direction, _data.Bullet);
         }
 

@@ -1,0 +1,37 @@
+{
+  "collection": [
+    {
+      "type": "SkillImpact",
+      "name": "hitDamage",
+      "skills": [
+        "armor",
+        "health"
+      ],
+      "value": -20,
+      "strategy": "serial",
+      "objectId": "hitDamage_Id"
+    },
+    {
+      "type": "SkillImpact",
+      "name": "poisonDamage",
+      "skills": [
+        "health"
+      ],
+      "value": -5,
+      "timerId": "timer1_Id",
+      "objectId": "poisonDamage_Id"
+    },
+    {
+      "type": "SkillImpact",
+      "name": "fireDamage",
+      "skills": [
+        "armor",
+        "health"
+      ],
+      "value": -10,
+      "strategy": "parallel",
+      "timerId": "timer2_Id",
+      "objectId": "fireDamage_Id"
+    }
+  ]
+}

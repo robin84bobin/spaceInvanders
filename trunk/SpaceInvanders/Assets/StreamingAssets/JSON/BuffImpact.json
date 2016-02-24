@@ -1,0 +1,15 @@
+{
+  "collection": [
+    {
+      "type": "BuffImpact",
+      "impact": [
+        {
+          "impactType": "SkillImpact",
+          "impactObjectId": "fireDamage_Id"
+        }
+      ],
+      "timerId": "timer2_Id",
+      "objectId": "buff1_Id"
+    }
+  ]
+}

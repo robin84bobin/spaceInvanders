@@ -2,12 +2,12 @@
 
 namespace Assets.Scripts.Data.DataSource.Impacts.Damage
 {
-    public class DamageData : BaseData
+    public class SkillImpactData : BaseData
     {
         public string name;
         public string[] skills;
         public float value;
-        public IModifyStrategy strategy;
+        public ISkillModifyStrategy strategy;
         public string timerId;
     }
 }

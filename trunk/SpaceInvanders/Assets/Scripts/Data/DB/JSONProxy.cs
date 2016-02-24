@@ -47,7 +47,7 @@ namespace Assets.Scripts.Data.DB
 
         private void SaveTable(string tableName_, IDictionary dataDictionary_)
         {
-            var filePath = Application.streamingAssetsPath + "/" + FOLDER_PATH + "/" + tableName_ + ".txt";
+            var filePath = Application.streamingAssetsPath + "/" + FOLDER_PATH + "/" + tableName_ + ".json";
             if (!IsTableExist(filePath))
             {
                 return;
@@ -77,7 +77,7 @@ namespace Assets.Scripts.Data.DB
             where T : IBaseData, new()
         {
             var sourceString = string.Empty;
-            var filePath = Application.streamingAssetsPath + "/" + FOLDER_PATH + "/" + tableName_ + ".txt";
+            var filePath = Application.streamingAssetsPath + "/" + FOLDER_PATH + "/" + tableName_ + ".json";
             if (!IsTableExist(filePath)){
                 callback_.Invoke(tableName_, null);
                 return;

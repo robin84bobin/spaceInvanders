@@ -1,0 +1,9 @@
+{
+  "collection": [
+    {
+      "type": "BehaviourImpact",
+	  "behaviourType":"guided",
+      "objectId": "behaviour_1"
+    }
+  ]
+}

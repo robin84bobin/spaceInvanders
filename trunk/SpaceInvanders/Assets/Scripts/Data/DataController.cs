@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Data.DataSource.Impacts;
 using Assets.Scripts.Data.DataSource.Impacts.Damage;
 using Assets.Scripts.Data.DataStorages;
 using Assets.Scripts.Data.User;
@@ -8,6 +9,7 @@ using Assets.Scripts.Events;
 using Assets.Scripts.Events.CustomEvents;
 using Assets.Scripts.Network;
 using UnityEngine;
+using SkillImpactData = Assets.Scripts.Data.DataSource.Impacts.Damage.SkillImpactData;
 
 namespace Assets.Scripts.Data
 {
@@ -50,8 +52,10 @@ namespace Assets.Scripts.Data
             RegisterBaseStorage<BulletData>(DataTypes.BULLET);
             RegisterBaseStorage<HeroData>(DataTypes.HERO);
             RegisterBaseStorage<WeaponData>(DataTypes.WEAPON);
-            RegisterBaseStorage<DamageData>(DataTypes.DAMAGE);
+            RegisterBaseStorage<SkillImpactData>(DataTypes.SKILL_IMPACT);
             RegisterBaseStorage<TimerData>(DataTypes.TIMER);
+            RegisterBaseStorage<BehaviourData>(DataTypes.BEHAVIOUR_IMPACT);
+            RegisterBaseStorage<BuffImpactData>(DataTypes.BUFF_IMPACT);
 
             _userStorage = new UserStorage();
             _storageMap.Add(UserStorage.GetType(), _userStorage);

@@ -6,7 +6,7 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers.ModifyStartegies
     /// Apply impact in order of affectedSkills array
     /// Apply residual value to next skill
     /// </summary>
-    public class SerialModifyStrategy : IModifyStrategy
+    public class SerialModifyStrategy : ISkillModifyStrategy
     {
         private string _skillName = string.Empty;
         private double _remainderValue = 0;

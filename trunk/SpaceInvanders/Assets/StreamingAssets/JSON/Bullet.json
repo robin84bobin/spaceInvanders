@@ -1,0 +1,20 @@
+{
+  "collection": [
+    {
+      "type": "Bullet",
+      "id": 1,
+      "damage": 5,
+      "objectId": "bullet_1",
+      "impact": [
+        {
+          "impactType": "SkillImpact",
+          "impactObjectId": "hitDamage_Id"
+        },
+        {
+          "impactType": "BuffImpact",
+          "impactObjectId": "buff1_Id"
+        }
+      ]
+    }
+  ]
+}

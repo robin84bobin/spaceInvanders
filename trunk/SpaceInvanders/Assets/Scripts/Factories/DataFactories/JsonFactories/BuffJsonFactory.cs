@@ -1,24 +1,26 @@
-﻿using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts;
 
 namespace Assets.Scripts.Factories.DataFactories.JsonFactories
 {
-    class BulletJsonFactory : AbstractJsonFactory
+    class BuffImpactJsonFactory : AbstractJsonFactory
     {
         public override IBaseData Create(string jsonString_)
         {
             //first override all simple type fields...
-            BulletData data = DefaultJsonFactory.Create<BulletData>(jsonString_);
+            BuffImpactData data = DefaultJsonFactory.Create<BuffImpactData>(jsonString_);
 
             //...and then more complex fields
             JSONObject jo = new JSONObject(jsonString_);
 
             //IMPACTS
             JSONObject arrayJo = jo["impact"];
-            if (arrayJo != null){
+            if (arrayJo != null)
+            {
                 int cnt = arrayJo.list.Count;
                 data.impactInfos = new ImpactInfo[cnt];
-                for (int i = 0; i < cnt; i++) {
+                for (int i = 0; i < cnt; i++)
+                {
                     ImpactInfo info = JsonFactory.Instance.Create<ImpactInfo>(arrayJo.list[i].ToString());
                     data.impactInfos[i] = info;
                 }

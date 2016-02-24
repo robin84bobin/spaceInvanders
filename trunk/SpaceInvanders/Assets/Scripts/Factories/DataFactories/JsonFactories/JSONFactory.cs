@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts.Damage;
 using UnityEngine;
+using Assets.Scripts.Data.DataSource.Impacts;
 
 namespace Assets.Scripts.Factories.DataFactories.JsonFactories
 {
@@ -21,7 +22,8 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
         {
             _factories = new Dictionary<Type, AbstractJsonFactory> {
                 {typeof (BulletData), new BulletJsonFactory()},
-                {typeof (DamageData), new DamageJsonFactory()}
+                {typeof (SkillImpactData), new SkillImpactJsonFactory()},
+                {typeof (BuffImpactData), new BuffImpactJsonFactory()}
             };
 
         }

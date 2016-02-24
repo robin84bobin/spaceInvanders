@@ -32,7 +32,7 @@ namespace Assets.Scripts.ViewControllers.Equipment.Weapon
             Animate(attackAnimation);
 
             _createObjectParams.rotation = bulletSpawnPos.transform.rotation.eulerAngles 
-                + new Vector3( 0f,Random.Range(-180f,180f), Random.Range(-10f, 10f));
+                + new Vector3( 0f,Random.Range(-10f,10f), Random.Range(-5f, 5f));
             _createObjectParams.position = bulletSpawnPos.position;
             _createObjectParams.scale = Vector3.one;
             var bullet = new BulletModel(bulletData_);

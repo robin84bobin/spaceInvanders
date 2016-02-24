@@ -18,8 +18,6 @@ namespace Assets.Scripts.ViewControllers
             get { return model; }
         }
 
-
-
         public void Init(BaseActorModel model_)
         {
             equipmentHolders = GetComponentsInChildren<AbstractEquipmentHolder>();
@@ -28,18 +26,19 @@ namespace Assets.Scripts.ViewControllers
             InitEvents();
             InitCollisionController();
             OnInit();
-
         }
 
         private void InitEvents()
         {
-            model.DeathEvent += () => {Destroy(gameObject);};
-
+            model.DeathEvent += () =>
+            {
+                model.Release();
+                Destroy(gameObject);
+            };
         }
 
         private void InitCollisionController()
         {
-            
             if (model.CollisionInfoData != null) {
                 gameObject.AddComponent<CollisionController>().Init(model.CollisionInfoData);
             }
@@ -58,7 +57,6 @@ namespace Assets.Scripts.ViewControllers
             if (cc != null && cc.CollisionInfoData != null) {
                 cc.CollisionInfoData.Apply(this.model);
             }
-            //other_.SendMessage("ApplyCollisionInfo", model.CollisionInfoData, SendMessageOptions.DontRequireReceiver);
         }
 
         protected void ApplyCollisionInfo(CollisionInfo info_)
