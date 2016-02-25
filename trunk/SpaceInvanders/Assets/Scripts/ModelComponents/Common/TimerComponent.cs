@@ -57,37 +57,46 @@ namespace Assets.Scripts.ModelComponents.Common
         {
             Unlock();
 
-            if (_firstStart) {
-               OnFirstStart();
-               return;
-            }
+            _firstStart = false;
 
-            if (_period > 0) {
-                _targetTime = _period + Time.time ;
-                _finishTime = _totalTime + Time.time ;
-            }
-            else {
-                _targetTime = _totalTime + Time.time ;
-                _finishTime = _targetTime;
-            }
-        }
+            _finishTime = _totalTime + Time.time;
 
-        private void OnFirstStart()
-        {
             if (_delay > 0){
                 _targetTime = Time.time + _delay;
                 return;
             }
+
+            if (_period > 0) {
+                _targetTime = _period + Time.time;
+            }
+            else {
+                _targetTime = _totalTime + Time.time;
+            }
+
             Execute();
         }
 
+        /*  private void OnFirstStart()
+          {
+              _firstStart = false;
+              _finishTime = _totalTime + Time.time;
+              if (_delay > 0){
+                  _targetTime = Time.time + _delay;
+                  return;
+              }
+              _targetTime = _totalTime + Time.time;
+
+              Execute();
+          }
+          */
+
         protected override void OnUpdate()
         {
-            if (Time.time >= _targetTime) {
+            if (_targetTime > 0 && Time.time >= _targetTime) {
                 Execute();
             }
             else
-            if (Time.time >= _finishTime) {
+            if (_finishTime > 0 && Time.time >= _finishTime) {
                 Complete();
             }
         }
@@ -111,7 +120,7 @@ namespace Assets.Scripts.ModelComponents.Common
             }
 
             if (_period > 0) {
-                Start();
+                _targetTime = _period + Time.time;
             }
         }
 

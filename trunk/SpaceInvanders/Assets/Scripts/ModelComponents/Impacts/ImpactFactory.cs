@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Assets.Scripts.Data;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts;
-using Assets.Scripts.Data.DataSource.Impacts.Damage;
-using UnityEditor;
 using UnityEngine;
 using SkillImpactData = Assets.Scripts.Data.DataSource.Impacts.Damage.SkillImpactData;
 
@@ -29,7 +25,7 @@ namespace Assets.Scripts.ModelComponents.Impacts
         {
             _factoryFuncs = new Dictionary<string, Func<ImpactInfo, IImpact>>() {
                 {DataTypes.SKILL_IMPACT, CreateSkillImpact },
-                {DataTypes.BUFF_IMPACT, CreateBuffImpact },
+                {DataTypes.BUFF_IMPACT, CreateTimerImpact },
                // {DataTypes.BEHAVIOUR_IMPACT, CreateBehaviourImpact }
             };
         }
@@ -54,14 +50,14 @@ namespace Assets.Scripts.ModelComponents.Impacts
             return impact;
         }
 
-        private IImpact CreateBuffImpact(ImpactInfo info_)
+        private IImpact CreateTimerImpact(ImpactInfo info_)
         {
             BuffImpactData buffImpactData = Main.Inst.Data.Get<BuffImpactData>(info_.impactObjectId);
             if (buffImpactData.impactInfos == null || buffImpactData.impactInfos.Length <= 0) {
                 Debug.LogError(string.Format("{0} (id:{1}) has no impacts to apply ", buffImpactData.GetType().Name, buffImpactData.ObjectId));
                 return null;
             }
-            //create impacts children
+            //create impacts
             int cnt = buffImpactData.impactInfos.Length;
             IImpact[] impacts = new IImpact[cnt];
             for (int i = 0; i < cnt; i++) {
@@ -71,9 +67,8 @@ namespace Assets.Scripts.ModelComponents.Impacts
             }
             //create timer
             TimerData timerData = Main.Inst.Data.Get<TimerData>(buffImpactData.timerId);
-
-            BuffImpact buffImpact = new BuffImpact(timerData, impacts);
-            return buffImpact;
+            TimerImpact timerImpact = new TimerImpact(timerData, impacts);
+            return timerImpact;
         }
 
       /*  private IImpact CreateBehaviourImpact(ImpactInfo info_)

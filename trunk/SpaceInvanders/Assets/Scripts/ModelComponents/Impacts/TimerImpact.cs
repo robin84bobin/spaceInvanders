@@ -4,12 +4,12 @@ using Assets.Scripts.ModelComponents.Skills.Modifiers;
 
 namespace Assets.Scripts.ModelComponents.Impacts
 {
-    public class BuffImpact : IImpact
+    public class TimerImpact : IImpact
     {
         private readonly IImpact[] _impacts;
-        private TimerData _timerData;
+        private readonly TimerData _timerData;
 
-        public BuffImpact( TimerData timerData_, params IImpact[] impacts_)
+        public TimerImpact( TimerData timerData_, params IImpact[] impacts_)
         {
             _impacts = impacts_;
             _timerData = timerData_;
@@ -17,9 +17,8 @@ namespace Assets.Scripts.ModelComponents.Impacts
 
         public void Apply(BaseActorModel actor_)
         {
-            var buff = new BuffComponent(_impacts, _timerData);
-           // buff.Target = actor_;
-            actor_.AddComponent(buff);
+            var timerImpactComponent = new TimerImpactComponent(_impacts, _timerData);
+            actor_.AddComponent(timerImpactComponent);
         }
     }
 }

@@ -12,7 +12,7 @@
 		"name":"timer_2",
 		"delay": 1.0,
 		"period": 0.5,
-		"totalTime": 10,
+		"totalTime": 5,
 		"objectId":"timer2_Id"
 	}
 ]}

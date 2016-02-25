@@ -8,19 +8,20 @@ using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Skills.Modifiers
 {
-    public class BuffComponent : BaseComponent
+    public class TimerImpactComponent : BaseComponent
     {
         private BaseActorModel _target;
         private readonly IImpact[] _impacts;
         private readonly TimerComponent _timer;
 
-        public BuffComponent(IImpact[] impacts_, TimerData timerData_ = null)
+        public TimerImpactComponent(IImpact[] impacts_, TimerData timerData_ = null)
         {
             _impacts = impacts_;
 
             if (timerData_ != null) {
                _timer = new TimerComponent(timerData_);
                _timer.OnTargetTime(Apply);
+               _timer.OnComplete(Remove);
                AddComponent(_timer);
             }
         }

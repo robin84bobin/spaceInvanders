@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -11,7 +10,8 @@ namespace Assets.Scripts.ModelComponents
         void AddComponent(IBaseComponent child_);
         void RemoveComponent(IBaseComponent child_);
         void Remove();
-        List<IBaseComponent> Children { get; }
+        Dictionary<Type, List<IBaseComponent>> Children { get; }
+        List<IBaseComponent> GetChildren<T>() where T : IBaseComponent;
         IBaseComponent Parent { get; set; }
 
         void Init();
@@ -19,15 +19,26 @@ namespace Assets.Scripts.ModelComponents
         void Unlock ();
         void Release();
         void Update();
-        bool IsSingle { get; }
-
+        bool IsOneChildOfAKind { get; }
+        bool NeedToRemove { get; }
         void SendMessage(string name_, params object[] paramList_);
     }
 
     public class BaseComponent : IBaseComponent 
     {
-        private List<IBaseComponent> _children = new List<IBaseComponent> ();
-        IBaseComponent _parent;
+        private readonly Dictionary<Type,List<IBaseComponent>> _children = new Dictionary<Type, List<IBaseComponent>>();
+        public List<IBaseComponent> GetChildren<T>() where T : IBaseComponent
+        {
+            Type type = typeof (T);
+            if (_children.ContainsKey(type)) {
+                return _children[type];
+            }
+            return null;
+        }
+
+        private readonly List<IBaseComponent> _unusedChildren = new List<IBaseComponent>();
+
+        private IBaseComponent _parent;
         public IBaseComponent Parent {
             get {
                 return _parent;
@@ -36,7 +47,7 @@ namespace Assets.Scripts.ModelComponents
                 _parent = value;
                 if (_parent != null) {
                     OnSetParent();
-                    Debug.Log(_parent.GetType().Name + " -> addChild :: " + this.GetType().Name);
+                    Debug.Log(_parent.GetType().Name + " -> addChild :: " + GetType().Name);
                 }
             }
         }
@@ -45,16 +56,27 @@ namespace Assets.Scripts.ModelComponents
 
         public void AddComponent (IBaseComponent child_)
         {
-            _children.Add (child_);
+            Type type = child_.GetType();
+
+            if (!_children.ContainsKey(type)) {
+                _children.Add(type, new List<IBaseComponent>());
+            }
+            else 
+            if (child_.IsOneChildOfAKind && _children[type].Count > 0) {
+                Debug.Log(GetType().Name + " couldn't attach more than one child of type: "+ type.Name);
+                return;
+            }
+           _children[type].Add(child_);
             child_.Parent = this;
             child_.Init ();
         }
 
         public void RemoveComponent (IBaseComponent child_)
         {
-            if (_children.Contains (child_)) {
-                Debug.Log(this.GetType().Name + " -> removeChild :: " + child_.GetType().Name);
-                _children.Remove(child_);
+            Type type = child_.GetType();
+            if (_children.ContainsKey(type) && _children[type].Contains (child_)) {
+                Debug.Log(GetType().Name + " -> removeChild :: " + child_.GetType().Name);
+                _children[type].Remove(child_);
                 child_.Release();
                 child_ = null;
             }
@@ -62,26 +84,27 @@ namespace Assets.Scripts.ModelComponents
 
         public void Remove ()
         {
-            Lock();
+            NeedToRemove = true;
+            /* Lock();
             if (Parent != null) {
                 Parent.RemoveComponent (this);
-            }
+            }*/
         }
 
-        public List<IBaseComponent> Children {
+        public Dictionary<Type, List<IBaseComponent>> Children {
             get {
                 return _children;
             }
         }
 
-
-        protected bool isSingle = true;	
-        public bool IsSingle{
+        protected bool isOneChildOfAKind = true;	
+        public bool IsOneChildOfAKind{
             get {
-                return isSingle;
+                return isOneChildOfAKind;
             }
         }
 
+        public bool NeedToRemove {get; protected set;}
 
         public virtual void Init()
         {
@@ -101,38 +124,62 @@ namespace Assets.Scripts.ModelComponents
 
         public void Release()
         {
-            Debug.Log(this.GetType().Name + " => Release");
+            Debug.Log(GetType().Name + " => Release");
 
             Lock ();
-            foreach (var child in _children) {
-                child.Release();
-            }
+            foreach (KeyValuePair<Type, List<IBaseComponent>> list in _children)
+                foreach (IBaseComponent child in list.Value) {
+                    child.Release();
+                }
             _children.Clear();
             Parent = null;
             OnRelease ();
         }
 
-        protected bool needToRemove = false;
-
         public void Update()
         {
-            if (needToRemove) {
-                Remove();
-                return;
-            }
-
-            if (locked) {
+            if (NeedToRemove || locked) {
                 return;
             }
 
             OnUpdate ();
 
-            for (int i = 0; i < _children.Count; i++) {
-                _children[i].Update();
+            foreach (KeyValuePair<Type, List<IBaseComponent>> list in _children)
+            {
+                foreach (IBaseComponent child in list.Value)
+                {
+                    if (child.NeedToRemove)
+                    {
+                        _unusedChildren.Add(child);
+                        continue;
+                    }
+                    child.Update();
+                    //stop updating if this component had been locked or removed on its child's update
+                    if (NeedToRemove || locked){
+                        return;
+                    }
+                }
             }
+
+            RemoveUnusedItems();
         }
 
-        Dictionary<string,MethodInfo> _methodsCache = new Dictionary<string, MethodInfo>();
+        private void RemoveUnusedItems()
+        {
+            if (_unusedChildren.Count <= 0) {
+                return;
+            }
+
+            foreach (IBaseComponent component in _unusedChildren) {
+                RemoveComponent(component);
+            }
+            _unusedChildren.Clear();
+        }
+
+        readonly Dictionary<string,MethodInfo> _methodsCache = new Dictionary<string, MethodInfo>();
+        
+
+
         public void SendMessage (string name_, params object[] paramList_)
         {
             if (_methodsCache.ContainsKey (name_)) {
@@ -140,10 +187,10 @@ namespace Assets.Scripts.ModelComponents
                 return;
             }
 
-            Type type = this.GetType ();
+            Type type = GetType ();
             MethodInfo method = type.GetMethod (name_);
             if (method == null) {
-                Debug.LogWarning(String.Format ("Try to Invoke unexisted method {0}::{1}", this.GetType().Name, name_));
+                Debug.LogWarning(String.Format ("Try to Invoke unexisted method {0}::{1}", GetType().Name, name_));
                 return;
             }
             _methodsCache.Add (name_, method);

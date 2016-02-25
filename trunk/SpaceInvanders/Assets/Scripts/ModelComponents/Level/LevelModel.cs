@@ -118,8 +118,6 @@ namespace Assets.Scripts.ModelComponents.Level
             _pause = pause_;
         }
 
-
-
         #region implemented abstract members of BaseComponent
         protected override void OnRelease ()
         {

@@ -28,7 +28,7 @@
         "armor",
         "health"
       ],
-      "value": -10,
+      "value": -5,
       "strategy": "parallel",
       "timerId": "timer2_Id",
       "objectId": "fireDamage_Id"
