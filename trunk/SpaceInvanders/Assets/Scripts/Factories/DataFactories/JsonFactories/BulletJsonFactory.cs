@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts;
+using UnityEngine;
 
 namespace Assets.Scripts.Factories.DataFactories.JsonFactories
 {
@@ -19,8 +20,9 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
                 int cnt = arrayJo.list.Count;
                 data.impactInfos = new ImpactInfo[cnt];
                 for (int i = 0; i < cnt; i++) {
-                    ImpactInfo info = JsonFactory.Instance.Create<ImpactInfo>(arrayJo.list[i].ToString());
-                    data.impactInfos[i] = info;
+                    ImpactInfo impactInfo = new ImpactInfo();
+                    JsonUtility.FromJsonOverwrite( arrayJo.list[i].ToString(), impactInfo );
+                    data.impactInfos[i] = impactInfo;
                 }
             }
 

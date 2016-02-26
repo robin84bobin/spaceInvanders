@@ -2,8 +2,6 @@
   "collection": [
     {
       "type": "Bullet",
-      "id": 1,
-      "damage": 5,
       "objectId": "bullet_1",
       "impact": [
         {
@@ -11,9 +9,13 @@
           "impactObjectId": "hitDamage_Id"
         },
         {
-          "impactType": "BuffImpact",
-          "impactObjectId": "buff1_Id"
-        }
+          "impactType": "TimerImpact",
+          "impactObjectId": "fireImpact1_Id"
+        },
+		{
+		  "impactType": "BehaviourImpact",
+		  "impactObjectId": "behaviuor1_Id"
+		}
       ]
     }
   ]

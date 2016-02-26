@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.Scripts.Data.DataSource;
+﻿using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Actors;
 using Assets.Scripts.ModelComponents.Common;
 using Assets.Scripts.ModelComponents.Impacts;
@@ -8,6 +6,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Skills.Modifiers
 {
+    /// <summary>
+    /// Applies impacts on timer execute
+    /// </summary>
+    
     public class TimerImpactComponent : BaseComponent
     {
         private BaseActorModel _target;

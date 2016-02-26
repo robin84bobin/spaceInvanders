@@ -54,8 +54,8 @@ namespace Assets.Scripts.Data
             RegisterBaseStorage<WeaponData>(DataTypes.WEAPON);
             RegisterBaseStorage<SkillImpactData>(DataTypes.SKILL_IMPACT);
             RegisterBaseStorage<TimerData>(DataTypes.TIMER);
-            RegisterBaseStorage<BehaviourData>(DataTypes.BEHAVIOUR_IMPACT);
-            RegisterBaseStorage<BuffImpactData>(DataTypes.BUFF_IMPACT);
+            RegisterBaseStorage<BehaviourImpactData>(DataTypes.BEHAVIOUR_IMPACT);
+            RegisterBaseStorage<TimerImpactData>(DataTypes.TIMER_IMPACT);
 
             _userStorage = new UserStorage();
             _storageMap.Add(UserStorage.GetType(), _userStorage);

@@ -1,5 +1,6 @@
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts;
+using UnityEngine;
 
 namespace Assets.Scripts.Factories.DataFactories.JsonFactories
 {
@@ -8,7 +9,7 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
         public override IBaseData Create(string jsonString_)
         {
             //first override all simple type fields...
-            BuffImpactData data = DefaultJsonFactory.Create<BuffImpactData>(jsonString_);
+            TimerImpactData data = DefaultJsonFactory.Create<TimerImpactData>(jsonString_);
 
             //...and then more complex fields
             JSONObject jo = new JSONObject(jsonString_);
@@ -19,9 +20,9 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
             {
                 int cnt = arrayJo.list.Count;
                 data.impactInfos = new ImpactInfo[cnt];
-                for (int i = 0; i < cnt; i++)
-                {
-                    ImpactInfo info = JsonFactory.Instance.Create<ImpactInfo>(arrayJo.list[i].ToString());
+                for (int i = 0; i < cnt; i++) {
+                    ImpactInfo info = //JsonFactory.Instance.Create<ImpactInfo>(arrayJo.list[i].ToString());
+                        JsonUtility.FromJson<ImpactInfo>(arrayJo.list[i].ToString());
                     data.impactInfos[i] = info;
                 }
             }

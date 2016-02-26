@@ -3,7 +3,8 @@
     {
       "type": "BehaviourImpact",
 	  "behaviourType":"guided",
-      "objectId": "behaviour_1"
+	  "timerId": "timer3_Id",
+      "objectId": "behaviuor1_Id"
     }
   ]
 }

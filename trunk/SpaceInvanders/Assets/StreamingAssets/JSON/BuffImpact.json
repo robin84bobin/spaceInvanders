@@ -1,15 +1,14 @@
 {
   "collection": [
     {
-      "type": "BuffImpact",
+      "type": "CompositeImpact",
       "impact": [
         {
           "impactType": "SkillImpact",
           "impactObjectId": "fireDamage_Id"
         }
       ],
-      "timerId": "timer2_Id",
-      "objectId": "buff1_Id"
+      "objectId": "fireImpact1_Id"
     }
   ]
 }

@@ -18,7 +18,6 @@
         "health"
       ],
       "value": -5,
-      "timerId": "timer1_Id",
       "objectId": "poisonDamage_Id"
     },
     {
@@ -28,9 +27,8 @@
         "armor",
         "health"
       ],
-      "value": -5,
+      "value": -20,
       "strategy": "parallel",
-      "timerId": "timer2_Id",
       "objectId": "fireDamage_Id"
     }
   ]

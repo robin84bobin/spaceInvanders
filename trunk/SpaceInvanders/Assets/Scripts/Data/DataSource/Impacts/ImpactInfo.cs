@@ -2,10 +2,9 @@ using Assets.Scripts.Data.Attributes;
 
 namespace Assets.Scripts.Data.DataSource.Impacts
 {
-    public class ImpactInfo  : BaseData
+    public class ImpactInfo 
     {
-        [DbField] public string impactType;
-        // objectId of current impact type 
-        [DbField] public string impactObjectId; 
+        public string impactType;
+        public string impactObjectId; 
    }
 }
