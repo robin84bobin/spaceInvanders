@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.Events;
+﻿using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Events.CustomEvents;
 using Assets.Scripts.Factories.GameEntitiesFactories;
 using Assets.Scripts.ModelComponents.Actors;
@@ -48,12 +46,12 @@ namespace Assets.Scripts.ViewControllers.Equipment.Weapon
             }
         }
 
-        protected override void OnEnable()
+        protected override void OnEquip()
         {
             //
         }
 
-        protected override void OnDisable()
+        protected override void OnUnequip()
         {
            //
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Factories.DataFactories.JsonFactories
 {
-    class BuffImpactJsonFactory : AbstractJsonFactory
+    class PeriodImpactJsonFactory : AbstractJsonFactory
     {
         public override IBaseData Create(string jsonString_)
         {

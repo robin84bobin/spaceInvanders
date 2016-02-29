@@ -79,6 +79,7 @@ namespace Assets.Scripts.ViewControllers
                 if (holder.EquipType != _newType) continue;
                 holder.UnequipItem();
                 holder.EquipItem(equipment_);
+                break;
             }
         }
 

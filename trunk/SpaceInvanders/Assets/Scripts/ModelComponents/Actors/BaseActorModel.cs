@@ -20,9 +20,10 @@ namespace Assets.Scripts.ModelComponents.Actors
         protected override void OnInit()
         {
             base.OnInit();
-            InitSkills();
             InitCollisionInfo();
         }
+
+        
 
         protected void Death()
         {
@@ -60,9 +61,21 @@ namespace Assets.Scripts.ModelComponents.Actors
         #region SKILLS
 
         public Dictionary<string, Skill> Skills { get; protected set; }
-        
-        protected abstract void InitSkills();
-        
+
+        protected void InitSkills(SkillInfo[] skillInfos_)
+        {
+            Skills = new Dictionary<string, Skill>();
+            for (int i = 0; i < skillInfos_.Length; i++)
+            {
+                SkillInfo skillInfo = skillInfos_[i];
+                Skill skill = new Skill(skillInfo.name, skillInfo.value, skillInfo.maxValue, skillInfo.minValue);
+                Skills.Add(skill.Name, skill);
+            }
+
+            OnInitSkills();
+        }
+
+        protected abstract void OnInitSkills();
 
         public void ChangeSkill(string skill_, double amount_)
         {
@@ -85,22 +98,25 @@ namespace Assets.Scripts.ModelComponents.Actors
 
         #region COLLISIONS
 
-
         public CollisionInfo CollisionInfoData { get; internal set; }
-
-
-        protected abstract void InitCollisionInfo();
-
+        protected virtual void InitCollisionInfo() {}
 
         #endregion
 
         public void Destroy()
         {
             Release ();
-        } 
+        }
 
-
-    }
+        protected override void OnRelease()
+        {
+            foreach (var skill in Skills)
+            {
+                skill.Value.Release();
+            }
+        }
+       
+}
 }
 
 

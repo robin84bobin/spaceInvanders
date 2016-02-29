@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -45,9 +46,9 @@ namespace Assets.Scripts.ModelComponents.Skills
             get { return _value; }
         }
 
-        public event Action MinValueEvent;
-        public event Action MaxValueEvent;
-        public event Action<double, double> ValueChangeEvent;
+        public event Action MinValueEvent = delegate { };
+        public event Action MaxValueEvent = delegate { };
+        public event Action<double, double> ValueChangeEvent = delegate { };
 
         public Skill (string name_, double value_, double maxValue_ = double.MaxValue, double minValue_ = double.MinValue)
         {
@@ -129,6 +130,13 @@ namespace Assets.Scripts.ModelComponents.Skills
         protected virtual void OnValueChangeEvent(double oldValue_, double newValue_)
         {
             if (ValueChangeEvent != null) ValueChangeEvent.Invoke(oldValue_, newValue_);
+        }
+
+        public void Release()
+        {
+            MinValueEvent = delegate { };
+            MaxValueEvent = delegate { };
+            ValueChangeEvent = delegate { };
         }
     }
 }

@@ -10,10 +10,8 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
         {
             //first override all simple type fields...
             BulletData data = DefaultJsonFactory.Create<BulletData>(jsonString_);
-
             //...and then more complex fields
             JSONObject jo = new JSONObject(jsonString_);
-
             //IMPACTS
             JSONObject arrayJo = jo["impact"];
             if (arrayJo != null){

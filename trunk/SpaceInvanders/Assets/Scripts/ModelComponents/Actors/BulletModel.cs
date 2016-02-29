@@ -17,7 +17,7 @@ namespace Assets.Scripts.ModelComponents.Actors
             base.Init();
         }
 
-        protected override void InitSkills()
+        protected override void OnInitSkills()
         {
             //
         }

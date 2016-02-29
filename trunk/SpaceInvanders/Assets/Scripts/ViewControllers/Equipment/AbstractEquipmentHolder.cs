@@ -27,6 +27,7 @@ namespace Assets.Scripts.ViewControllers.Equipment
         public virtual void EquipItem(IEquipmentModel model_)
         {
             InstantiateEquipment(model_);
+            model_.OnEquip();
         }
 
 

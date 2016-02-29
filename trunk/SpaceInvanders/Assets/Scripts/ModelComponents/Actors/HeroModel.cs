@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Behaviours;
 using Assets.Scripts.ModelComponents.Equipments;
@@ -10,8 +10,6 @@ namespace Assets.Scripts.ModelComponents.Actors
 {
     public class HeroModel: BaseActorModel
     {
-
-
         private WeaponModel _weaponModel;
         public WeaponModel Weapon
         {
@@ -21,13 +19,10 @@ namespace Assets.Scripts.ModelComponents.Actors
         public HeroModel (HeroData data_):base(data_)
         {
             var data = data_;
-            //
-            data.maxHealth = 4;
-
             if (data.Weapon != null) {
                 _weaponModel = new WeaponModel (data.Weapon);
             }
-
+            InitSkills(data.skillInfos);
             base.Init();
         }
 
@@ -46,7 +41,7 @@ namespace Assets.Scripts.ModelComponents.Actors
 
         protected override void OnRelease ()
         {
-            //;
+            base.OnRelease();
         }
 
         protected override void OnInit ()
@@ -56,13 +51,9 @@ namespace Assets.Scripts.ModelComponents.Actors
 
         #endregion
 
-        protected override void InitSkills()
+        protected override void OnInitSkills()
         {
-            //TODO read skills from data
-            Skills = new Dictionary<string, Skill> {
-                {SKILLS.HEALTH, new Skill(SKILLS.HEALTH, 100f, 100f, 0f).MinValueCallback(Death)},
-                {SKILLS.SPEED,  new Skill(SKILLS.SPEED, 10f, 100f, -10f)},
-            };
+            Skills[SKILLS.HEALTH].MinValueCallback(Death);
         }
 
         protected override void InitCollisionInfo()

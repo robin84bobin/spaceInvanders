@@ -8,6 +8,7 @@ namespace Assets.Scripts.Data.DataSource
         [DbField] public int maxHealth;// { get; set;}
         [DbField] public string weaponId;// { get; set;}
         [DbField] public float weight;// { get; set;}
+        public SkillInfo[] skillInfos;
 
         [NonSerialized]
         private WeaponData _weapon;
@@ -19,6 +20,14 @@ namespace Assets.Scripts.Data.DataSource
                 return _weapon;
             }
         }
+    }
+
+    public class SkillInfo
+    {
+        public string name;
+        public double value;
+        public double maxValue = double.MaxValue;
+        public double minValue = double.MinValue;
     }
 }
 
