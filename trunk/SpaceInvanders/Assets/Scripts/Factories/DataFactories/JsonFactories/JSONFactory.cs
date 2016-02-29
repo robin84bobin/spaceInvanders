@@ -23,7 +23,7 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
             _factories = new Dictionary<Type, AbstractJsonFactory> {
                 {typeof (BulletData), new BulletJsonFactory()},
                 {typeof (SkillImpactData), new SkillImpactJsonFactory()},
-                {typeof (TimerImpactData), new BuffImpactJsonFactory()}
+                {typeof (PeriodImpactData), new BuffImpactJsonFactory()}
             };
 
         }

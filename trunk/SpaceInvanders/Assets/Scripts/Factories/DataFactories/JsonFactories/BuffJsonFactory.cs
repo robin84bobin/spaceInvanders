@@ -9,7 +9,7 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
         public override IBaseData Create(string jsonString_)
         {
             //first override all simple type fields...
-            TimerImpactData data = DefaultJsonFactory.Create<TimerImpactData>(jsonString_);
+            PeriodImpactData data = DefaultJsonFactory.Create<PeriodImpactData>(jsonString_);
 
             //...and then more complex fields
             JSONObject jo = new JSONObject(jsonString_);

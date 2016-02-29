@@ -9,7 +9,7 @@
           "impactObjectId": "hitDamage_Id"
         },
         {
-          "impactType": "TimerImpact",
+          "impactType": "PeriodImpact",
           "impactObjectId": "fireImpact1_Id"
         },
 		{

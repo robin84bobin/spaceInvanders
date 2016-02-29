@@ -1,13 +1,14 @@
 {
   "collection": [
     {
-      "type": "CompositeImpact",
+      "type": "PeriodImpact",
       "impact": [
         {
           "impactType": "SkillImpact",
           "impactObjectId": "fireDamage_Id"
         }
       ],
+	  "timerId": "timer2_Id",
       "objectId": "fireImpact1_Id"
     }
   ]

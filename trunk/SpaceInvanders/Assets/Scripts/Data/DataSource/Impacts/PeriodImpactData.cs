@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Data.DataSource.Impacts
 {
-    public class BuffImpactData : BaseData
+    public class PeriodImpactData : BaseData
     {
         public ImpactInfo[] impactInfos;
         public string timerId ;

@@ -4,12 +4,12 @@ using Assets.Scripts.ModelComponents.Skills.Modifiers;
 
 namespace Assets.Scripts.ModelComponents.Impacts
 {
-    public class TimerImpact : IImpact
+    public class PeriodImpact : IImpact
     {
         private readonly IImpact[] _impacts;
         private readonly TimerData _timerData;
 
-        public TimerImpact( TimerData timerData_, params IImpact[] impacts_)
+        public PeriodImpact( TimerData timerData_, params IImpact[] impacts_)
         {
             _impacts = impacts_;
             _timerData = timerData_;
@@ -17,7 +17,7 @@ namespace Assets.Scripts.ModelComponents.Impacts
 
         public void Apply(BaseActorModel actor_)
         {
-            var timerImpactComponent = new TimerImpactComponent(_impacts, _timerData);
+            var timerImpactComponent = new PeriodImpactComponent(_impacts, _timerData);
             actor_.AddComponent(timerImpactComponent);
         }
     }

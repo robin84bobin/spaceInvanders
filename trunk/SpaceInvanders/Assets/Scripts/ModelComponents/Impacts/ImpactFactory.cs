@@ -25,7 +25,7 @@ namespace Assets.Scripts.ModelComponents.Impacts
         {
             _factoryFuncs = new Dictionary<string, Func<ImpactInfo, IImpact>>() {
                 {DataTypes.SKILL_IMPACT, CreateSkillImpact },
-                {DataTypes.TIMER_IMPACT, CreateTimerImpact },
+                {DataTypes.PERIOD_IMPACT, CreateTimerImpact },
                 {DataTypes.BEHAVIOUR_IMPACT, CreateBehaviourImpact }
             };
         }
@@ -52,23 +52,23 @@ namespace Assets.Scripts.ModelComponents.Impacts
 
         private IImpact CreateTimerImpact(ImpactInfo info_)
         {
-            TimerImpactData timerImpactData = Main.Inst.Data.Get<TimerImpactData>(info_.impactObjectId);
-            if (timerImpactData.impactInfos == null || timerImpactData.impactInfos.Length <= 0) {
-                Debug.LogError(string.Format("{0} (id:{1}) has no impacts to apply ", timerImpactData.GetType().Name, timerImpactData.ObjectId));
+            PeriodImpactData periodImpactData = Main.Inst.Data.Get<PeriodImpactData>(info_.impactObjectId);
+            if (periodImpactData.impactInfos == null || periodImpactData.impactInfos.Length <= 0) {
+                Debug.LogError(string.Format("{0} (id:{1}) has no impacts to apply ", periodImpactData.GetType().Name, periodImpactData.ObjectId));
                 return null;
             }
             //create impacts
-            int cnt = timerImpactData.impactInfos.Length;
+            int cnt = periodImpactData.impactInfos.Length;
             IImpact[] impacts = new IImpact[cnt];
             for (int i = 0; i < cnt; i++) {
-                ImpactInfo info = timerImpactData.impactInfos[i];
+                ImpactInfo info = periodImpactData.impactInfos[i];
                 IImpact impact = Create(info);
                 impacts[i] = impact;
             }
             //create timer
-            TimerData timerData = Main.Inst.Data.Get<TimerData>(timerImpactData.timerId);
-            TimerImpact timerImpact = new TimerImpact(timerData, impacts);
-            return timerImpact;
+            TimerData timerData = Main.Inst.Data.Get<TimerData>(periodImpactData.timerId);
+            PeriodImpact periodImpact = new PeriodImpact(timerData, impacts);
+            return periodImpact;
         }
 
         private IImpact CreateBehaviourImpact(ImpactInfo info_)

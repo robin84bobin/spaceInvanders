@@ -12,7 +12,7 @@ namespace Assets.Scripts.Data
         public const string BULLET = "Bullet";
         public const string SKILL_IMPACT = "SkillImpact";
         public const string TIMER = "Timer";
-        public const string TIMER_IMPACT = "TimerImpact";
+        public const string PERIOD_IMPACT = "PeriodImpact";
         public const string BEHAVIOUR_IMPACT = "BehaviourImpact";
     }
 }

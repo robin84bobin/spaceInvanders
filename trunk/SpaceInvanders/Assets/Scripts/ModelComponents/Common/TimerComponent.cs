@@ -10,10 +10,11 @@ namespace Assets.Scripts.ModelComponents.Common
         private readonly float _period;
         private readonly float _totalTime;
 
-        private float _targetTime;
+        private float _startTime;
+        private float _periodTime;
         private float _finishTime;
 
-        private Action _callback;
+        private Action _periodCallback;
         private Action _startCallback;
         private Action _finishCallback;
 
@@ -30,6 +31,7 @@ namespace Assets.Scripts.ModelComponents.Common
             _delay = timerData_.delay;
             _period = timerData_.period;
             _totalTime = timerData_.totalTime;
+            _timerId = timerData_.objectId;
         }
 
         public TimerComponent OnStart(Action startCallback_)
@@ -38,9 +40,9 @@ namespace Assets.Scripts.ModelComponents.Common
             return this;
         }
 
-        public TimerComponent OnTargetTime(Action callback_)
+        public TimerComponent OnPeriod(Action periodCallback_)
         {
-            _callback = callback_;
+            _periodCallback = periodCallback_;
             return this;
         }
 
@@ -52,81 +54,63 @@ namespace Assets.Scripts.ModelComponents.Common
 
         private bool _firstStart = true;
         private bool _removeOnComplete = false;
+        private string _timerId;
 
         public void Start()
         {
             Unlock();
-
             _firstStart = false;
-
+           
+            _startTime = Time.time + _delay;
             _finishTime = _totalTime + Time.time;
-
-            if (_delay > 0){
-                _targetTime = Time.time + _delay;
-                return;
-            }
-
             if (_period > 0) {
-                _targetTime = _period + Time.time;
-            }
-            else {
-                _targetTime = _totalTime + Time.time;
+                _periodTime = _period + Time.time;
             }
 
-            Execute();
+           // Execute();
         }
 
-        /*  private void OnFirstStart()
-          {
-              _firstStart = false;
-              _finishTime = _totalTime + Time.time;
-              if (_delay > 0){
-                  _targetTime = Time.time + _delay;
-                  return;
-              }
-              _targetTime = _totalTime + Time.time;
-
-              Execute();
-          }
-          */
 
         protected override void OnUpdate()
         {
-            if (_targetTime > 0 && Time.time >= _targetTime) {
-                Execute();
+            if (_startTime > 0 && Time.time >= _startTime) {
+                OnStart();
             }
-            else
+
+            if (_periodTime > 0 && Time.time >= _periodTime) {
+                OnPeriod();
+            }
+            
             if (_finishTime > 0 && Time.time >= _finishTime) {
                 Complete();
             }
         }
 
-        private void Execute()
+        private void OnStart()
         {
-            if (_firstStart) {
-                if (_startCallback != null){
-                    _startCallback.Invoke();
-                }
-                else
-                    if (_callback != null)
-                    {
-                        _callback.Invoke();
-                    }
-                _firstStart = false;
+            if (_startCallback != null)
+            {
+                _startCallback.Invoke();
             }
-            else
-            if (_callback != null){
-                _callback.Invoke();
+
+            _startTime = 0f;
+        }
+
+        private void OnPeriod()
+        {
+            if (_periodCallback != null){
+                _periodCallback.Invoke();
             }
 
             if (_period > 0) {
-                _targetTime = _period + Time.time;
+                _periodTime = _period + Time.time;
             }
         }
 
         private void Complete()
         {
-            _targetTime = 0f;
+            _periodTime = 0f;
+            _finishTime = 0f;
 
             if (_finishCallback != null) {
                 _finishCallback.Invoke();
@@ -144,7 +128,7 @@ namespace Assets.Scripts.ModelComponents.Common
 
         protected override void OnRelease ()
         {
-            _callback = null;
+            _periodCallback = null;
             _startCallback = null;
             _finishCallback = null;
         }
