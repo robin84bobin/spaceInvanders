@@ -11,19 +11,17 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers.ModifyStartegies
         private string _skillName = string.Empty;
         private double _remainderValue = 0;
 
-        public void Apply(double value_, string[] skills_, Dictionary<string, Skill> targetSkills_)
+        public void Apply(double value_, string[] targetSkills_, Dictionary<string, Skill> skills_)
         {
             _remainderValue = value_;
 
             // ReSharper disable once ForCanBeConvertedToForeach
-            for (int i = 0; i < skills_.Length; i++) {
-                _skillName = skills_[i];
-                if (targetSkills_.ContainsKey(_skillName)) {
-                    _remainderValue = targetSkills_[_skillName].ChangeValue(_remainderValue);
-
+            for (int i = 0; i < targetSkills_.Length; i++) {
+                _skillName = targetSkills_[i];
+                if (skills_.ContainsKey(_skillName)) {
+                    _remainderValue = skills_[_skillName].ChangeValue(_remainderValue);
                 }
             }
-
         }
     }
 }

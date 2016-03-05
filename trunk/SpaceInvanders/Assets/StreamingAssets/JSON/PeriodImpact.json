@@ -8,6 +8,7 @@
           "impactObjectId": "fireDamage_Id"
         }
       ],
+	  "targetTypes":["Enemy","Hero"],
 	  "timerId": "timer2_Id",
       "objectId": "fireImpact1_Id"
     }

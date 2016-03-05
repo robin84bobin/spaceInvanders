@@ -4,5 +4,6 @@
     {
         public ImpactInfo[] impactInfos;
         public string timerId ;
+        public string[] targetTypes;
     }
 }

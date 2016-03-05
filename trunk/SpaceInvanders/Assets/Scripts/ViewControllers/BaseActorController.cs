@@ -8,17 +8,17 @@ using UnityEngine;
 namespace Assets.Scripts.ViewControllers
 {
     public abstract class BaseActorController<TModel> : MonoBehaviour, IBaseActorController 
-                                                        where TModel : BaseActorModel
+                                                        where TModel : BaseEntityModel
     {
         protected AbstractEquipmentHolder[] equipmentHolders;
 
         protected TModel model;
-        public BaseActorModel Model
+        public BaseEntityModel Model
         {
             get { return model; }
         }
 
-        public void Init(BaseActorModel model_)
+        public void Init(BaseEntityModel model_)
         {
             equipmentHolders = GetComponentsInChildren<AbstractEquipmentHolder>();
 
@@ -89,7 +89,7 @@ namespace Assets.Scripts.ViewControllers
 
     public interface IBaseActorController
     {
-        void Init(BaseActorModel model_);
-        BaseActorModel Model { get; }
+        void Init(BaseEntityModel model_);
+        BaseEntityModel Model { get; }
     }
 }

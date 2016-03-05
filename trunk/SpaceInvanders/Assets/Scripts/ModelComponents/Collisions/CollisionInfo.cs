@@ -5,17 +5,17 @@ namespace Assets.Scripts.ModelComponents.Collisions
 {
     public class CollisionInfo
     {
-        private readonly IImpact[] _impacts;
+        private readonly Impact[] _impacts;
 
-        public CollisionInfo( IImpact[] impacts_)
+        public CollisionInfo( Impact[] impacts_)
         {
             _impacts = impacts_;
         }
 
-        public void Apply(BaseActorModel actor_)
+        public void Apply(BaseEntityModel entity_)
         {
             foreach (var impact in _impacts) {
-                impact.Apply(actor_);
+                 impact.Apply(entity_);
             }
         }
     }

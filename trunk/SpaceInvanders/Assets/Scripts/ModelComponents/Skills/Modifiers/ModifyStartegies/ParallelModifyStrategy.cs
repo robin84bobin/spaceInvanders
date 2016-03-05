@@ -6,14 +6,14 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers.ModifyStartegies
     {
         private string _skillName;
 
-        public void Apply(double value_, string[] skills_, Dictionary<string, Skill> targetSkills_)
+        public void Apply(double value_, string[] targetSkills_, Dictionary<string, Skill> skills_)
         {
-            for (int i = 0; i < skills_.Length; i++)
+            for (int i = 0; i < targetSkills_.Length; i++)
             {
-                _skillName = skills_[i];
-                if (targetSkills_.ContainsKey(_skillName))
+                _skillName = targetSkills_[i];
+                if (skills_.ContainsKey(_skillName))
                 {
-                   targetSkills_[_skillName].ChangeValue(value_);
+                    skills_[_skillName].ChangeValue(value_);
                 }
             }
         }

@@ -87,17 +87,17 @@ namespace Assets.Scripts.ModelComponents.Level
 
 
 
-        void OnActorDeath (BaseActorModel actor_)
+        void OnActorDeath (BaseEntityModel entity_)
         {
-            if (actor_.DataType == DataTypes.HERO){
+            if (entity_.DataType == DataTypes.HERO){
                 GameOver();
             }
-            RemoveActor (actor_);
+            RemoveActor (entity_);
         }
 
-        void RemoveActor(BaseActorModel actor_)
+        void RemoveActor(BaseEntityModel entity_)
         {
-            actor_.Destroy();
+            entity_.Destroy();
         }
 
         void GameOver ()

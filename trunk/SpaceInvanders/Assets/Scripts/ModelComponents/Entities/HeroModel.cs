@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Actors
 {
-    public class HeroModel: BaseActorModel
+    public class HeroModel: BaseEntityModel
     {
         private WeaponModel _weaponModel;
         public WeaponModel Weapon

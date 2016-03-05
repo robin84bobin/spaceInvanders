@@ -24,6 +24,7 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
                 {typeof (BulletData), new BulletJsonFactory()},
                 {typeof (SkillImpactData), new SkillImpactJsonFactory()},
                 {typeof (PeriodImpactData), new PeriodImpactJsonFactory()},
+                {typeof (BehaviourImpactData), new BehaviourImpactJsonFactory()},
                 {typeof (HeroData), new HeroJsonFactory()},
                 {typeof (EnemyData), new EnemyJsonFactory()},
             };

@@ -8,5 +8,6 @@ namespace Assets.Scripts.Data.DataSource.Impacts.Damage
         public float value;
         public string[] skills;
         public ISkillModifyStrategy strategy;
+        public string[] targetTypes;
     }
 }

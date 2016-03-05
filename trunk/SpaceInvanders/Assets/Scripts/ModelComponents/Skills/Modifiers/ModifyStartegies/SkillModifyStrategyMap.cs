@@ -37,6 +37,6 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers.ModifyStartegies
 
     public interface ISkillModifyStrategy
     {
-        void Apply(double value_, string[] skills_, Dictionary<string, Skill> targetSkills_);
+        void Apply(double value_, string[] targetSkills_, Dictionary<string, Skill> skills_);
     }
 }

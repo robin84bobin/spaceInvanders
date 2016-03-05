@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Actors
 {
-    public class BulletModel : BaseActorModel
+    public class BulletModel : BaseEntityModel
     {
         public float speed = 10f;
         private BulletData _bulletData;
@@ -26,7 +26,7 @@ namespace Assets.Scripts.ModelComponents.Actors
         {
             if (_bulletData.impactInfos != null && _bulletData.impactInfos.Length > 0)
             {
-                IImpact[] impacts = new IImpact[_bulletData.impactInfos.Length];
+                Impact[] impacts = new Impact[_bulletData.impactInfos.Length];
                 for (int index = 0; index < _bulletData.impactInfos.Length; index++) {
                     var impactInfo = _bulletData.impactInfos[index];
                     impacts[index] = ImpactFactory.Instance.Create(impactInfo);

@@ -26,6 +26,8 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
                     data.impactInfos[i] = info;
                 }
             }
+            //targetTypes
+            data.targetTypes = GetStringArray(jo, "targetTypes");
 
             return data;
         }

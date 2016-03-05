@@ -20,17 +20,17 @@ namespace Assets.Scripts.ModelComponents.Impacts
             }
         }
 
-        private readonly Dictionary<string, Func<ImpactInfo, IImpact>> _factoryFuncs;
+        private readonly Dictionary<string, Func<ImpactInfo, Impact>> _factoryFuncs;
         private ImpactFactory()
         {
-            _factoryFuncs = new Dictionary<string, Func<ImpactInfo, IImpact>>() {
+            _factoryFuncs = new Dictionary<string, Func<ImpactInfo, Impact>>() {
                 {DataTypes.SKILL_IMPACT, CreateSkillImpact },
                 {DataTypes.PERIOD_IMPACT, CreateTimerImpact },
                 {DataTypes.BEHAVIOUR_IMPACT, CreateBehaviourImpact }
             };
         }
 
-        public IImpact Create(ImpactInfo info_)
+        public Impact Create(ImpactInfo info_)
         {
             if (_factoryFuncs.ContainsKey(info_.impactType)) {
                 return _factoryFuncs[info_.impactType].Invoke(info_);
@@ -41,16 +41,16 @@ namespace Assets.Scripts.ModelComponents.Impacts
             }
         }
 
-        private IImpact CreateSkillImpact(ImpactInfo info_)
+        private Impact CreateSkillImpact(ImpactInfo info_)
         {
             SkillImpactData data = Main.Inst.Data.Get<SkillImpactData>(info_.impactObjectId);
-            SkillImpact impact = new SkillImpact(data.value, data.skills) {
+            SkillImpact impact = new SkillImpact(data.targetTypes, data.value, data.skills ) {
                 Strategy = data.strategy,
             };
             return impact;
         }
 
-        private IImpact CreateTimerImpact(ImpactInfo info_)
+        private Impact CreateTimerImpact(ImpactInfo info_)
         {
             PeriodImpactData periodImpactData = Main.Inst.Data.Get<PeriodImpactData>(info_.impactObjectId);
             if (periodImpactData.impactInfos == null || periodImpactData.impactInfos.Length <= 0) {
@@ -59,10 +59,10 @@ namespace Assets.Scripts.ModelComponents.Impacts
             }
             //create impacts
             int cnt = periodImpactData.impactInfos.Length;
-            IImpact[] impacts = new IImpact[cnt];
+            Impact[] impacts = new Impact[cnt];
             for (int i = 0; i < cnt; i++) {
                 ImpactInfo info = periodImpactData.impactInfos[i];
-                IImpact impact = Create(info);
+                Impact impact = Create(info);
                 impacts[i] = impact;
             }
             //create timer
@@ -71,7 +71,7 @@ namespace Assets.Scripts.ModelComponents.Impacts
             return periodImpact;
         }
 
-        private IImpact CreateBehaviourImpact(ImpactInfo info_)
+        private Impact CreateBehaviourImpact(ImpactInfo info_)
         {
             BehaviourImpactData data = Main.Inst.Data.Get<BehaviourImpactData>(info_.impactObjectId);
             BehaviourImpact behaviourImpact = new BehaviourImpact(data);

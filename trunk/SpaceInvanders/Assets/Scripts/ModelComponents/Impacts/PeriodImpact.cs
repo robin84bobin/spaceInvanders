@@ -1,24 +1,27 @@
+using Assets.Scripts.Data;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Actors;
 using Assets.Scripts.ModelComponents.Skills.Modifiers;
 
 namespace Assets.Scripts.ModelComponents.Impacts
 {
-    public class PeriodImpact : IImpact
+    public class PeriodImpact : Impact
     {
-        private readonly IImpact[] _impacts;
+        private readonly Impact[] _impacts;
         private readonly TimerData _timerData;
 
-        public PeriodImpact( TimerData timerData_, params IImpact[] impacts_)
+        public PeriodImpact( TimerData timerData_, params Impact[] impacts_)
         {
+            targetTypes = new string[2] { DataTypes.ENEMY, DataTypes.HERO };
             _impacts = impacts_;
             _timerData = timerData_;
         }
 
-        public void Apply(BaseActorModel actor_)
+        protected override void Execute(BaseEntityModel entity_)
         {
             var timerImpactComponent = new PeriodImpactComponent(_impacts, _timerData);
-            actor_.AddComponent(timerImpactComponent);
+            entity_.AddComponent(timerImpactComponent);
         }
+
     }
 }

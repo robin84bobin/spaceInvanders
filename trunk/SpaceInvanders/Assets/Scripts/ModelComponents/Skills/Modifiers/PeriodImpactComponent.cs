@@ -12,11 +12,11 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers
     
     public class PeriodImpactComponent : BaseComponent
     {
-        private BaseActorModel _target;
-        private readonly IImpact[] _impacts;
+        private BaseEntityModel _target;
+        private readonly Impact[] _impacts;
         private readonly TimerComponent _timer;
 
-        public PeriodImpactComponent(IImpact[] impacts_, TimerData timerData_ = null)
+        public PeriodImpactComponent(Impact[] impacts_, TimerData timerData_ = null)
         {
             _impacts = impacts_;
 
@@ -53,7 +53,7 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers
         protected override void OnSetParent()
         {
             base.OnSetParent();
-            _target = (BaseActorModel) Parent;
+            _target = (BaseEntityModel) Parent;
         }
 
         protected override void OnRelease()

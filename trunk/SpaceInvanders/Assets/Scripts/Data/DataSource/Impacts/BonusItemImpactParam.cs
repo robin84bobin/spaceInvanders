@@ -4,7 +4,8 @@ namespace Assets.Scripts.Data.DataSource.Impacts
 {
     public class BonusItemImpactData : BaseData
     {
-        [DbField] public string[] itemsIds;
-        [DbField] public bool toInventory;
+        public string[] itemsIds;
+        public bool toInventory;
+        public string[] targetTypes;
     }
 }

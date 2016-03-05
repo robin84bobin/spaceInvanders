@@ -1,3 +1,5 @@
+using System;
+using Assets.Scripts.Data;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts;
 using Assets.Scripts.ModelComponents.Actors;
@@ -6,7 +8,7 @@ using Assets.Scripts.ModelComponents.Common;
 
 namespace Assets.Scripts.ModelComponents.Impacts
 {
-    public class BehaviourImpact  : IImpact
+    public class BehaviourImpact  : Impact
     {
         private readonly TimerData _timerData;
         private readonly BehaviourImpactData _behaviourImpactData;
@@ -14,10 +16,11 @@ namespace Assets.Scripts.ModelComponents.Impacts
         public BehaviourImpact(BehaviourImpactData behaviourImpactData_)
         {
             _behaviourImpactData = behaviourImpactData_;
+            targetTypes = _behaviourImpactData.targetTypes;
             _timerData = Main.Inst.Data.Get<TimerData>(_behaviourImpactData.timerId);
         }
 
-        public void Apply(BaseActorModel actor_)
+        protected override void Execute(BaseEntityModel entity_)
         {
             var behaviourComponent = BehaviourFactory.Instance.Create(_behaviourImpactData);
             if (_timerData != null) {
@@ -26,7 +29,8 @@ namespace Assets.Scripts.ModelComponents.Impacts
                 behaviourComponent.AddComponent(timer);
                 timer.Start();
             }
-            actor_.AddComponent(behaviourComponent);
+            entity_.AddComponent(behaviourComponent);
         }
+
     }
 }

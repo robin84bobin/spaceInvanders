@@ -2,6 +2,7 @@
   "collection": [
     {
       "type": "BehaviourImpact",
+	  "targetTypes":["Hero"],
 	  "behaviourType":"guided",
 	  "timerId": "timer3_Id",
       "objectId": "behaviuor1_Id"

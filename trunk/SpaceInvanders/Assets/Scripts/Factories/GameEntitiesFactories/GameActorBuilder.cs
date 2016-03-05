@@ -33,7 +33,7 @@ namespace Assets.Scripts.Factories.GameEntitiesFactories
             }           
         }
 
-        private static T CreateActor<T>(BaseActorModel model_, CreateObjectParams params_ = null)
+        private static T CreateActor<T>(BaseEntityModel model_, CreateObjectParams params_ = null)
             where T : IBaseActorController
         {
 

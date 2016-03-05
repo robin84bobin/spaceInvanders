@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Actors
 {
-    public class EnemyModel : BaseActorModel
+    public class EnemyModel : BaseEntityModel
     {
         private double _moveEnemiesTime;
         private double _movePeriod;

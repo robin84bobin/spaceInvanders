@@ -4,5 +4,6 @@
     {
         public string behaviourType;
         public string timerId;
+        public string[] targetTypes;
     }
 }

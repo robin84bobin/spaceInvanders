@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Collisions;
 using Assets.Scripts.ModelComponents.Skills;
-using Assets.Scripts.ModelComponents.Skills.Modifiers;
 using UnityEngine;
 
 namespace Assets.Scripts.ModelComponents.Actors
 {
-    public abstract class BaseActorModel : BaseComponent
+    public abstract class BaseEntityModel : BaseComponent
     {
         public string DataType { get; private set; }
 
-        protected BaseActorModel(IBaseData data_)
+        protected BaseEntityModel(IBaseData data_)
         {
             DataType = data_.Type;
         }
