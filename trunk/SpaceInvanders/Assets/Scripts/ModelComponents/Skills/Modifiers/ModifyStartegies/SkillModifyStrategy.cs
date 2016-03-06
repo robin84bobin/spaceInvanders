@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Assets.Scripts.ModelComponents.Skills.Modifiers.ModifyStartegies
 {
 
-    public class SkillModifyStrategyMap
+    public class SkillModifyStrategy
     {
         public static ISkillModifyStrategy Get(string name_)
         {

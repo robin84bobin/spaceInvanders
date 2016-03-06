@@ -1,15 +1,13 @@
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Collisions;
 using Assets.Scripts.ModelComponents.Impacts;
-using UnityEngine;
 
-
-namespace Assets.Scripts.ModelComponents.Actors
+namespace Assets.Scripts.ModelComponents.Entities
 {
     public class BulletModel : BaseEntityModel
     {
         public float speed = 10f;
-        private BulletData _bulletData;
+        private readonly BulletData _bulletData;
 
         public BulletModel(BulletData data_) : base(data_)
         {

@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.ModelComponents.Actors
+﻿namespace Assets.Scripts.ModelComponents.Entities
 {
     internal interface ISkillHolder
     {

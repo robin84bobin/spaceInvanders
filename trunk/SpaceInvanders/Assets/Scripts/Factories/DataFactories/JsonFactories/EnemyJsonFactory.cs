@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Data.DataSource;
+﻿using Assets.JSON;
+using Assets.Scripts.Data.DataSource;
 using UnityEngine;
 
 namespace Assets.Scripts.Factories.DataFactories.JsonFactories
@@ -24,6 +25,9 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
                     data.skillInfos[i] = skillInfo;
                 }
             }
+            //BONUSES
+            data.bonusIds = GetStringArray(jo, "bonusIds");
+            //
             return data;
         }
     }

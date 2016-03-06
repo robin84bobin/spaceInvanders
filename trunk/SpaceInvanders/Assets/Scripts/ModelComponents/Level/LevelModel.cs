@@ -2,7 +2,7 @@ using System;
 using Assets.Scripts.CommonComponents.StateSwitcher;
 using Assets.Scripts.Data;
 using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.ModelComponents.Actors;
+using Assets.Scripts.ModelComponents.Entities;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -10,8 +10,8 @@ namespace Assets.Scripts.ModelComponents.Level
 {
     public sealed class LevelModel : BaseComponent
     {
-        public event Action<HeroModel> OnHeroCreate = delegate{};
-        public event Action<EnemyModel> OnEnemyCreate = delegate{};
+        public event Action<HeroData> OnHeroCreate = delegate{};
+        public event Action<EnemyData> OnEnemyCreate = delegate{};
         public event Action OnStartEnemyWave = delegate{};
         public event Action OnGameOver = delegate{};
 
@@ -68,21 +68,15 @@ namespace Assets.Scripts.ModelComponents.Level
 
         void CreateHero ()
         {
-            _hero = new HeroModel(_levelData.Hero);
-            OnHeroCreate (_hero);
-            //AddComponent (_hero);
+            OnHeroCreate (_levelData.Hero);
         }
 
         void CreateEnemies ()
         {
             OnStartEnemyWave ();
             for (int i = 0; i < _levelData.enemyWaveSize; i++) {
-                EnemyModel enemy = new EnemyModel(_levelData.Enemy);
-                enemy.InitMoveParams(_enemySpeed, _levelData.enemyMovePeriod);
-                //AddComponent(enemy);
-                OnEnemyCreate (enemy);
+                OnEnemyCreate (_levelData.Enemy);
             }
-            Debug.Log ("");
         }
 
 

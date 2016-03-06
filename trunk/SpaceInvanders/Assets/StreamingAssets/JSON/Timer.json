@@ -11,7 +11,7 @@
 		"type":"timer",
 		"name":"timer_2",
 		"delay": 1.0,
-		"period": 3,
+		"period": 1,
 		"totalTime": 15,
 		"objectId":"timer2_Id"
 	},

@@ -1,18 +1,25 @@
+using System;
 using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Events.CustomEvents;
+using Assets.Scripts.Factories.GameEntitiesFactories;
 using Assets.Scripts.ModelComponents.Skills;
 using UnityEngine;
 
-namespace Assets.Scripts.ModelComponents.Actors
+namespace Assets.Scripts.ModelComponents.Entities
 {
     public class EnemyModel : BaseEntityModel
     {
+        public event Action<BonusData[]> DropBonusEvent = delegate { };
+
         private double _moveEnemiesTime;
         private double _movePeriod;
         private Vector3 _speedVector;
+        private readonly EnemyData _enemyData;
 
         public EnemyModel (EnemyData enemyData_): base(enemyData_)
         {
-            InitSkills(enemyData_.skillInfos);
+            _enemyData = enemyData_;
+            InitSkills(_enemyData.skillInfos);
             base.Init();
         }
 
@@ -47,10 +54,15 @@ namespace Assets.Scripts.ModelComponents.Actors
 
         protected override void OnRelease ()
         {
+            DropBonusEvent.Invoke(_enemyData.Bonuses);
             base.OnRelease();
         }
 
         #endregion
+
+
+
+
 
         protected override void OnInitSkills()
         {
@@ -59,7 +71,7 @@ namespace Assets.Scripts.ModelComponents.Actors
 
         protected override void InitCollisionInfo()
         {
-            //CollisionInfoData = new CollisionInfo( new HitSkillBuffComponent(100f));
+           //
         }
     }
 }

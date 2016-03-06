@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.ModelComponents.Actors;
 using Assets.Scripts.ModelComponents.Common;
+using Assets.Scripts.ModelComponents.Entities;
 using Assets.Scripts.ModelComponents.Impacts;
 using UnityEngine;
 

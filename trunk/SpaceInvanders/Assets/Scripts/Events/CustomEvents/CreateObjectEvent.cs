@@ -1,18 +1,18 @@
 ﻿using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.ModelComponents.Actors;
 using UnityEngine;
 
 namespace Assets.Scripts.Events.CustomEvents
 {
-    public sealed class CreateObjectEvent : SiParamEvent<CreateObjectParams>
+    public sealed class CreateObjectEvent : SiParamEvent<CreateParams>
     {
     }
 
-    public class CreateObjectParams
+    public class CreateParams
     {
-        public Vector3 rotation;
-        public Vector3 position;
-        public Vector3 scale;
-        public BaseEntityModel model;
+        public Vector3 rotation = Vector3.zero;
+        public Vector3 position = Vector3.zero;
+        public Vector3 scale = Vector3.one;
+        //public BaseEntityModel model;
+        public IBaseData data;
     }
 }

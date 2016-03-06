@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Data.DataSource;
+﻿using Assets.JSON;
+using Assets.Scripts.Data.DataSource;
 
 namespace Assets.Scripts.Factories.DataFactories.JsonFactories
 {

@@ -1,10 +1,10 @@
 using System;
-using Assets.Scripts.ModelComponents.Actors;
+using Assets.Scripts.ModelComponents.Entities;
 using UnityEngine;
 
 namespace Assets.Scripts.ViewControllers
 {
-    public class HeroController: BaseActorController<HeroModel>
+    public class HeroController: BaseEntityController<HeroModel>
     {
         Vector3 _moveVector = Vector3.zero;
         void OnMove (Vector3 moveVector_)
@@ -13,7 +13,7 @@ namespace Assets.Scripts.ViewControllers
             transform.Translate (_moveVector * 5f);
         }
 
-        #region implemented abstract members of BaseActorController
+        #region implemented abstract members of BaseEntityController
 
         protected override void OnInit()
         {

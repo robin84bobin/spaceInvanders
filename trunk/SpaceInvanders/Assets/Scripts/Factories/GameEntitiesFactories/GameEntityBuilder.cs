@@ -1,40 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.Scripts.Data;
+﻿using Assets.Scripts.Data;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Events.CustomEvents;
-using Assets.Scripts.ModelComponents.Actors;
 using Assets.Scripts.ViewControllers;
 using UnityEngine;
-using Assets.Scripts.Events;
+using Assets.Scripts.ModelComponents.Entities;
 
 namespace Assets.Scripts.Factories.GameEntitiesFactories
 {
-    public class GameActorBuilder
+    public class GameEntityBuilder
     {
         private static bool _enable = false;
         private static LevelController _parentLevel;
 
-        public static GameObject CreateActor( CreateObjectParams params_)
+        public static GameObject Create( CreateParams params_)
         {
             if (!_enable) {
                 return null;
             }
 
-            switch (params_.model.DataType) {
+            //switch (params_.model.DataType) {
+            switch (params_.data.Type) {
                 case DataTypes.BULLET:
-                    return CreateActor<BulletController>( params_.model, params_).gameObject;
+                    return Create<BulletController>( new BulletModel(params_.data as BulletData), params_).gameObject;
                 case DataTypes.ENEMY:
-                    return CreateActor<EnemyController>(params_.model, params_).gameObject;
+                    EnemyData data = params_.data as EnemyData;
+                    EnemyModel enemy = new EnemyModel(data);
+                    enemy.InitMoveParams(10f, 1.0f);
+                    return Create<EnemyController>( enemy, params_).gameObject;
                 case DataTypes.HERO:
-                    return CreateActor<HeroController>(params_.model, params_).gameObject;
+                    return Create<HeroController>( new HeroModel((params_.data as HeroData)), params_).gameObject;
+                
                 default:
                     return null;
             }           
         }
 
-        private static T CreateActor<T>(BaseEntityModel model_, CreateObjectParams params_ = null)
-            where T : IBaseActorController
+        private static T Create<T>(BaseEntityModel model_, CreateParams params_ = null)
+            where T : IBaseEntityController
         {
 
             GameObject prefab = (GameObject) Resources.Load("Prefabs/GameEntities/" + model_.DataType);

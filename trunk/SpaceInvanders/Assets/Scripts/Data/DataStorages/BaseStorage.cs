@@ -13,6 +13,7 @@ namespace Assets.Scripts.Data.DataStorages
     public interface IBaseStorage
     {
         string DataTypeName {get;}
+        IBaseData Get(string objectId_ );
         void LoadData();
     }
 
@@ -91,5 +92,15 @@ namespace Assets.Scripts.Data.DataStorages
             return string.Format("Updating: \"{0}\" ...", dataType);
         }
 
+        IBaseData IBaseStorage.Get(string objectId_)
+        {
+            if (!objects.ContainsKey(objectId_))
+            {
+                Debug.LogError(string.Format("Can't get data from '{0}' storage - objectId:{1}", dataType, objectId_));
+                return default(T);
+            }
+
+            return objects[objectId_];
+        }
     }
 }

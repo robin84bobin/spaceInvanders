@@ -1,7 +1,7 @@
 { "collection": [
 	{
 		"type":"Weapon",
-        "bulletId": "bullet_1",
+        "bulletId": "bullet1_Id",
         "id": 1,
         "objectId": "C48VEwbhIr"
     }

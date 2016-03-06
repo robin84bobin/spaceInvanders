@@ -1,16 +1,21 @@
-using Assets.Scripts.ModelComponents.Actors;
+using Assets.Scripts.Data.DataSource;
+using Assets.Scripts.Events.CustomEvents;
+using Assets.Scripts.Factories.GameEntitiesFactories;
+using Assets.Scripts.ModelComponents.Entities;
 using UnityEngine;
 
 namespace Assets.Scripts.ViewControllers
 {
-    public class EnemyController : BaseActorController<EnemyModel>
+    public class EnemyController : BaseEntityController<EnemyModel>
     {
-        #region implemented abstract members of BaseActorController
+        #region implemented abstract members of BaseEntityController
 
         protected override void OnInit ()
         {
             model.MoveEvent += OnMove;
+            model.DropBonusEvent += OnDropBonusEvent;
         }
+
 
         protected override void Release ()
         {
@@ -18,6 +23,22 @@ namespace Assets.Scripts.ViewControllers
         }
 
         #endregion
+
+
+        void OnDropBonusEvent(BonusData[] bonuses_)
+        {
+            foreach (BonusData bonusData in bonuses_) {
+                for (int i = 0; i < bonusData.amount; i++) {
+                    CreateParams createParams = new CreateParams
+                    {
+                        position = transform.position,
+                        data = Main.Inst.Data.Get(bonusData.bonusEntityType, bonusData.bonusEntityId)
+                    };
+                    GameEntityBuilder.Create(createParams);
+                }
+               
+            }
+        }
 
         void OnMove (Vector3 moveVector_)
         {

@@ -5,7 +5,7 @@ using Assets.Scripts.ModelComponents.Collisions;
 using Assets.Scripts.ModelComponents.Skills;
 using UnityEngine;
 
-namespace Assets.Scripts.ModelComponents.Actors
+namespace Assets.Scripts.ModelComponents.Entities
 {
     public abstract class BaseEntityModel : BaseComponent
     {
@@ -21,8 +21,6 @@ namespace Assets.Scripts.ModelComponents.Actors
             base.OnInit();
             InitCollisionInfo();
         }
-
-        
 
         protected void Death()
         {

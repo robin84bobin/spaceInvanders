@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts.Damage;
 using UnityEngine;
@@ -16,7 +15,7 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
             get { return _instance ?? (_instance = new JsonFactory()); }
         }
 
-        private Dictionary<Type, AbstractJsonFactory> _factories;
+        private readonly Dictionary<Type, AbstractJsonFactory> _factories;
 
         private JsonFactory()
         {

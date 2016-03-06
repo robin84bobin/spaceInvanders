@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Data.DataSource;
+﻿using Assets.JSON;
+using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts.Damage;
 using Assets.Scripts.ModelComponents.Skills.Modifiers.ModifyStartegies;
 
@@ -18,7 +19,7 @@ namespace Assets.Scripts.Factories.DataFactories.JsonFactories
             //strategy
             JSONObject strategy = jo["strategy"];
             if (strategy != null) {
-                data.strategy = SkillModifyStrategyMap.Get(strategy.str);
+                data.strategy = SkillModifyStrategy.Get(strategy.str);
             }
             //targetTypes
             data.targetTypes = GetStringArray(jo, "targetTypes");

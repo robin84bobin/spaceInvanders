@@ -1,21 +1,21 @@
-﻿using Assets.Scripts.ModelComponents.Actors;
+﻿using Assets.Scripts.ModelComponents.Entities;
 using UnityEngine;
 
 namespace Assets.Scripts.ViewControllers
 {
-    public class BulletController : BaseActorController<BulletModel> 
+    public class BulletController : BaseEntityController<BulletModel> 
     {
-        #region implemented abstract members of BaseActorController
+        #region implemented abstract members of BaseEntityController
 
         protected override void Release ()
         {
            // throw new System.NotImplementedException ();
         }
 
-        private Vector3 speed;
+        private Vector3 _speed;
         protected override void OnInit ()
         {
-           speed = new Vector3(0f, model.speed, 0f);
+           _speed = new Vector3(0f, model.speed, 0f);
         }
 
         #endregion
@@ -26,8 +26,9 @@ namespace Assets.Scripts.ViewControllers
         }
 	
         // Update is called once per frame
-        void Update () {
-	          transform.Translate(speed); 
+        void Update ()
+        {
+	          transform.Translate(_speed); 
         }
     }
 }

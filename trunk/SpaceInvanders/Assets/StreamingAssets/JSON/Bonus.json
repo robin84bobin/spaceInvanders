@@ -1,0 +1,11 @@
+{
+  "collection": [
+    {
+      "type": "Bonus",
+      "objectId": "bonus1_Id",
+      "bonusEntityType": "Hero",
+      "bonusEntityId": "n5TelACYrB",
+      "amount":1
+    }
+  ]
+}

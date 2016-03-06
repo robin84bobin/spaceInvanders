@@ -1,13 +1,13 @@
 ﻿using System;
-using Assets.Scripts.ModelComponents.Actors;
 using Assets.Scripts.ModelComponents.Collisions;
+using Assets.Scripts.ModelComponents.Entities;
 using Assets.Scripts.ModelComponents.Equipments;
 using Assets.Scripts.ViewControllers.Equipment;
 using UnityEngine;
 
 namespace Assets.Scripts.ViewControllers
 {
-    public abstract class BaseActorController<TModel> : MonoBehaviour, IBaseActorController 
+    public abstract class BaseEntityController<TModel> : MonoBehaviour, IBaseEntityController 
                                                         where TModel : BaseEntityModel
     {
         protected AbstractEquipmentHolder[] equipmentHolders;
@@ -87,7 +87,7 @@ namespace Assets.Scripts.ViewControllers
         protected abstract void Release();
     }
 
-    public interface IBaseActorController
+    public interface IBaseEntityController
     {
         void Init(BaseEntityModel model_);
         BaseEntityModel Model { get; }

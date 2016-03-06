@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Behaviours;
 using Assets.Scripts.ModelComponents.Equipments;
 using Assets.Scripts.ModelComponents.Skills;
 using UnityEngine;
 
-namespace Assets.Scripts.ModelComponents.Actors
+namespace Assets.Scripts.ModelComponents.Entities
 {
     public class HeroModel: BaseEntityModel
     {

@@ -1,5 +1,5 @@
 using System.Linq;
-using Assets.Scripts.ModelComponents.Actors;
+using Assets.Scripts.ModelComponents.Entities;
 
 namespace Assets.Scripts.ModelComponents.Impacts
 {

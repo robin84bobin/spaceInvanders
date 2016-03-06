@@ -1,8 +1,9 @@
 using System;
+using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Events;
 using Assets.Scripts.Events.CustomEvents;
 using Assets.Scripts.Factories.GameEntitiesFactories;
-using Assets.Scripts.ModelComponents.Actors;
+using Assets.Scripts.ModelComponents.Entities;
 using Assets.Scripts.ModelComponents.Level;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ namespace Assets.Scripts.ViewControllers
         void Start()
         {
             EventManager.Get<LevelStartEvent> ().Publish ();
-            GameActorBuilder.Enable(this);    
+            GameEntityBuilder.Enable(this);    
                  
         }
 
@@ -41,7 +42,7 @@ namespace Assets.Scripts.ViewControllers
             _model.OnStartEnemyWave -= OnEnemyWaveStart;
             _model = null;
 
-            GameActorBuilder.Disable();
+            GameEntityBuilder.Disable();
         }
 
         void OnEnemyWaveStart()
@@ -50,27 +51,27 @@ namespace Assets.Scripts.ViewControllers
             _enemySpawnRow = 0;
         }
 
-        void SpawnHero (HeroModel model_)
+        void SpawnHero (HeroData data_)
         {
-            CreateObjectParams param = new CreateObjectParams {
-                model = model_,
+            CreateParams param = new CreateParams {
+                data = data_,
                 position = heroSpawnPoint.transform.position
             };
 
-            GameActorBuilder.CreateActor(param);
+            GameEntityBuilder.Create(param);
         }
 
 
-        void SpawnEnemy(EnemyModel model_)
+        void SpawnEnemy(EnemyData data_)
         {
             Vector3 spawnPosition = enemySpawnPoints[_enemySpawnPointIndex].transform.position;
-            CreateObjectParams param = new CreateObjectParams
+            CreateParams param = new CreateParams
             {
-                model = model_,
+                data = data_,
                 position = spawnPosition
             };
             //EventManager.Get<CreateObjectEvent>().Publish(param);
-            GameActorBuilder.CreateActor(param);
+            GameEntityBuilder.Create(param);
 
             _enemySpawnPointIndex ++;
             if (_enemySpawnPointIndex >= enemySpawnPoints.Length) {

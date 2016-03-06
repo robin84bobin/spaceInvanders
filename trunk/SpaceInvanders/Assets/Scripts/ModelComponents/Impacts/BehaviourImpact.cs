@@ -2,9 +2,9 @@ using System;
 using Assets.Scripts.Data;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts;
-using Assets.Scripts.ModelComponents.Actors;
 using Assets.Scripts.ModelComponents.Behaviours;
 using Assets.Scripts.ModelComponents.Common;
+using Assets.Scripts.ModelComponents.Entities;
 
 namespace Assets.Scripts.ModelComponents.Impacts
 {

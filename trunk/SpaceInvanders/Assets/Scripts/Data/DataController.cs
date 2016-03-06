@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts;
-using Assets.Scripts.Data.DataSource.Impacts.Damage;
 using Assets.Scripts.Data.DataStorages;
 using Assets.Scripts.Data.User;
 using Assets.Scripts.Events;
@@ -16,7 +15,8 @@ namespace Assets.Scripts.Data
     public sealed class DataController
     {
         //------------------
-        private Dictionary<Type, IBaseStorage> _storageMap;
+        private Dictionary<Type, IBaseStorage> _storageTypeMap;
+        private Dictionary<string, IBaseStorage> _storageTypeNameMap;
         //------------------
         private UserStorage _userStorage;
         public UserStorage UserStorage
@@ -45,30 +45,47 @@ namespace Assets.Scripts.Data
 
         private void InitStorages()
         {
-            _storageMap = new Dictionary<Type, IBaseStorage>();
+            _storageTypeMap = new Dictionary<Type, IBaseStorage>();
+            _storageTypeNameMap = new Dictionary<string, IBaseStorage>();
 
             RegisterBaseStorage<LevelData>(DataTypes.LEVEL);
             RegisterBaseStorage<EnemyData>(DataTypes.ENEMY);
             RegisterBaseStorage<BulletData>(DataTypes.BULLET);
             RegisterBaseStorage<HeroData>(DataTypes.HERO);
             RegisterBaseStorage<WeaponData>(DataTypes.WEAPON);
+            RegisterBaseStorage<BonusData>(DataTypes.BONUS);
             RegisterBaseStorage<SkillImpactData>(DataTypes.SKILL_IMPACT);
             RegisterBaseStorage<TimerData>(DataTypes.TIMER);
             RegisterBaseStorage<BehaviourImpactData>(DataTypes.BEHAVIOUR_IMPACT);
             RegisterBaseStorage<PeriodImpactData>(DataTypes.PERIOD_IMPACT);
 
             _userStorage = new UserStorage();
-            _storageMap.Add(UserStorage.GetType(), _userStorage);
+            _storageTypeMap.Add(UserStorage.GetType(), _userStorage);
+        }
+
+        public IBaseStorage StorageByName(string typeName_)
+        {
+            if (_storageTypeNameMap.ContainsKey(typeName_))
+            {
+                return ((IBaseStorage)_storageTypeNameMap[typeName_]);
+            }
+            Debug.LogError("Storage not found for data type: " + typeName_);
+            return null;
         }
 
         public BaseStorage<T> Storage<T>() where T:BaseData, new()
         {
             Type type = typeof(T);
-            if (_storageMap.ContainsKey(type)){
-                return ((BaseStorage<T>)_storageMap[type]);
+            if (_storageTypeMap.ContainsKey(type)){
+                return ((BaseStorage<T>)_storageTypeMap[type]);
             }
             Debug.LogError("Storage not found for data type: "+ type.Name);
             return null;
+        }
+
+        public IBaseData Get(string dataType_, string objectId_)
+        {
+            return StorageByName(dataType_).Get(objectId_);
         }
 
         public T Get<T>(string objectId_) where T:BaseData, new() 
@@ -81,10 +98,11 @@ namespace Assets.Scripts.Data
             return Storage<T>().Get(predicate_);
         }
 
-        private BaseStorage<T> RegisterBaseStorage<T>(string table_) where T:BaseData, new()
+        private BaseStorage<T> RegisterBaseStorage<T>(string name_) where T:BaseData, new()
         {
-            BaseStorage<T> storage = new BaseStorage<T>(table_);
-            _storageMap.Add(typeof(T),storage);
+            BaseStorage<T> storage = new BaseStorage<T>(name_);
+            _storageTypeMap.Add(typeof(T),storage);
+            _storageTypeNameMap.Add(name_, storage);
             return storage;
         }
 
@@ -93,7 +111,7 @@ namespace Assets.Scripts.Data
         void StartLoadStorages ()
         {
             _nextStorageIndex = 0;
-            _storageLoadQueue = new Queue<IBaseStorage>( _storageMap.Values);
+            _storageLoadQueue = new Queue<IBaseStorage>( _storageTypeMap.Values);
             LoadNextStorage();
         }
 
@@ -122,11 +140,11 @@ namespace Assets.Scripts.Data
 
         void LoadStorage (Type dataType_)
         {
-            if (!_storageMap.ContainsKey(dataType_)){
+            if (!_storageTypeMap.ContainsKey(dataType_)){
                 Debug.Log("Data storage does not exist:" + dataType_.Name);
                 return;
             }
-            _storageMap[dataType_].LoadData();
+            _storageTypeMap[dataType_].LoadData();
         }
     }
 }
