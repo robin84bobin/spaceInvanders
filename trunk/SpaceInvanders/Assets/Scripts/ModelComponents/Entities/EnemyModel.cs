@@ -1,7 +1,5 @@
 using System;
 using Assets.Scripts.Data.DataSource;
-using Assets.Scripts.Events.CustomEvents;
-using Assets.Scripts.Factories.GameEntitiesFactories;
 using Assets.Scripts.ModelComponents.Skills;
 using UnityEngine;
 

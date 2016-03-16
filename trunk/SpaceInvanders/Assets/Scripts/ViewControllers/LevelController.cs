@@ -1,9 +1,6 @@
-using System;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Events;
 using Assets.Scripts.Events.CustomEvents;
-using Assets.Scripts.Factories.GameEntitiesFactories;
-using Assets.Scripts.ModelComponents.Entities;
 using Assets.Scripts.ModelComponents.Level;
 using UnityEngine;
 
@@ -22,8 +19,7 @@ namespace Assets.Scripts.ViewControllers
         void Start()
         {
             EventManager.Get<LevelStartEvent> ().Publish ();
-            GameEntityBuilder.Enable(this);    
-                 
+            GameObjectsBuilder.GameObjectsBuilder.Enable(this);    
         }
 
         private LevelModel _model;
@@ -42,7 +38,7 @@ namespace Assets.Scripts.ViewControllers
             _model.OnStartEnemyWave -= OnEnemyWaveStart;
             _model = null;
 
-            GameEntityBuilder.Disable();
+            GameObjectsBuilder.GameObjectsBuilder.Disable();
         }
 
         void OnEnemyWaveStart()
@@ -58,7 +54,7 @@ namespace Assets.Scripts.ViewControllers
                 position = heroSpawnPoint.transform.position
             };
 
-            GameEntityBuilder.Create(param);
+            GameObjectsBuilder.GameObjectsBuilder.Create(param);
         }
 
 
@@ -70,8 +66,7 @@ namespace Assets.Scripts.ViewControllers
                 data = data_,
                 position = spawnPosition
             };
-            //EventManager.Get<CreateObjectEvent>().Publish(param);
-            GameEntityBuilder.Create(param);
+            GameObjectsBuilder.GameObjectsBuilder.Create(param);
 
             _enemySpawnPointIndex ++;
             if (_enemySpawnPointIndex >= enemySpawnPoints.Length) {

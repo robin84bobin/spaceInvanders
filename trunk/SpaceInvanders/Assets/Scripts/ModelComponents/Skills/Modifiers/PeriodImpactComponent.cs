@@ -12,7 +12,6 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers
     
     public class PeriodImpactComponent : BaseComponent
     {
-        private BaseEntityModel _target;
         private readonly Impact[] _impacts;
         private readonly TimerComponent _timer;
 
@@ -40,27 +39,9 @@ namespace Assets.Scripts.ModelComponents.Skills.Modifiers
 
         private void Apply()
         {
-            if (_target == null) {
-                Debug.LogError(this.GetType().Name + " has no target!");
-                return;
-            }
-
             for (int i = 0; i < _impacts.Length; i++) {
-                _impacts[i].Apply(_target);
+                Parent.SendMessage("ApplyImpact", _impacts[i]);
             }
-        }
-
-        protected override void OnSetParent()
-        {
-            base.OnSetParent();
-            _target = (BaseEntityModel) Parent;
-        }
-
-        protected override void OnRelease()
-        {
-            base.OnRelease();
-         
-            _target = null;
         }
     }
 }

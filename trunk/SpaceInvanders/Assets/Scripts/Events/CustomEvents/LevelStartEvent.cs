@@ -1,4 +1,4 @@
 namespace Assets.Scripts.Events.CustomEvents
 {
-    public sealed class LevelStartEvent : SiEvent {}
+    public sealed class LevelStartEvent : xEvent {}
 }

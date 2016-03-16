@@ -1,5 +1,3 @@
-using System;
-using Assets.Scripts.Data;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Data.DataSource.Impacts;
 using Assets.Scripts.ModelComponents.Behaviours;

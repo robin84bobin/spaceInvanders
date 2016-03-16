@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Events.CustomEvents
 {
-    public sealed class CreateEntityEvent : SiParamEvent<CreationParams>
+    public sealed class CreateEntityEvent : xParamEvent<CreationParams>
     {
     }
 

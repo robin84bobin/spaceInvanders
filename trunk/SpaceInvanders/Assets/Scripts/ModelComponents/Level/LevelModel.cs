@@ -86,10 +86,10 @@ namespace Assets.Scripts.ModelComponents.Level
             if (entity_.DataType == DataTypes.HERO){
                 GameOver();
             }
-            RemoveActor (entity_);
+            RemoveEntity (entity_);
         }
 
-        void RemoveActor(BaseEntityModel entity_)
+        void RemoveEntity(BaseEntityModel entity_)
         {
             entity_.Destroy();
         }

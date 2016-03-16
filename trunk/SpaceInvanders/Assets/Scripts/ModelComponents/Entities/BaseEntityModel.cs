@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.ModelComponents.Collisions;
+using Assets.Scripts.ModelComponents.Impacts;
 using Assets.Scripts.ModelComponents.Skills;
 using UnityEngine;
 
@@ -97,6 +98,15 @@ namespace Assets.Scripts.ModelComponents.Entities
 
         public CollisionInfo CollisionInfoData { get; internal set; }
         protected virtual void InitCollisionInfo() {}
+
+        #endregion
+
+        #region IMPACTS
+
+        public void ApplyImpact(Impact impact_)
+        {
+            impact_.Apply(this);
+        }
 
         #endregion
 

@@ -1,7 +1,5 @@
 ﻿using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Events.CustomEvents;
-using Assets.Scripts.Factories.GameEntitiesFactories;
-using Assets.Scripts.ModelComponents.Entities;
 using Assets.Scripts.ModelComponents.Equipments;
 using UnityEngine;
 
@@ -33,7 +31,7 @@ namespace Assets.Scripts.ViewControllers.Equipment.Weapon
                 + new Vector3( 0f,Random.Range(-10f,10f), Random.Range(-5f, 5f));
             _createParams.position = bulletSpawnPos.position;
             _createParams.data = bulletData_;
-            GameEntityBuilder.Create(_createParams);
+            GameObjectsBuilder.GameObjectsBuilder.Create(_createParams);
         }
 
         private void Animate(Animation animation_)

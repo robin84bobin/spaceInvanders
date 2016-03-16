@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Events.CustomEvents
 {
-    public sealed class ButtonEvent : SiParamEvent<KeyCode>
+    public sealed class ButtonEvent : xParamEvent<KeyCode>
     {
     }
 

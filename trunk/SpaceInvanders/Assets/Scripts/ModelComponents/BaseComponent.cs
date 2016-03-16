@@ -85,10 +85,12 @@ namespace Assets.Scripts.ModelComponents
         public void Remove ()
         {
             NeedToRemove = true;
-            /* Lock();
+            /* 
+            Lock();
             if (Parent != null) {
                 Parent.RemoveComponent (this);
-            }*/
+            }
+            */
         }
 
         public Dictionary<Type, List<IBaseComponent>> Children {

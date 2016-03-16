@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Assets.Scripts.Events
 {
-    public class SiEvent
+    public class xEvent
     {
         private readonly List<Action> _callbacks;
 
-        public SiEvent()
+        public xEvent()
         {
             _callbacks = new List<Action> ();
         }
@@ -41,11 +41,11 @@ namespace Assets.Scripts.Events
         }
     }
 
-    public class SiParamEvent <TParam>
+    public class xParamEvent <TParam>
     {
         private List<Action<TParam>> _callbacks;
 
-        public SiParamEvent()
+        public xParamEvent()
         {
             _callbacks = new List<Action<TParam>> ();
         }

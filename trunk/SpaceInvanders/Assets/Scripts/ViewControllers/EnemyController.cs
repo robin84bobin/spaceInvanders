@@ -1,6 +1,5 @@
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Events.CustomEvents;
-using Assets.Scripts.Factories.GameEntitiesFactories;
 using Assets.Scripts.ModelComponents.Entities;
 using UnityEngine;
 
@@ -16,14 +15,12 @@ namespace Assets.Scripts.ViewControllers
             model.DropBonusEvent += OnDropBonusEvent;
         }
 
-
         protected override void Release ()
         {
             model = null;
         }
 
         #endregion
-
 
         void OnDropBonusEvent(BonusData[] bonuses_)
         {
@@ -34,9 +31,8 @@ namespace Assets.Scripts.ViewControllers
                         position = transform.position,
                         data = Main.Inst.Data.Get(bonusData.bonusEntityType, bonusData.bonusEntityId)
                     };
-                    GameEntityBuilder.Create(createParams);
+                    GameObjectsBuilder.GameObjectsBuilder.Create(createParams);
                 }
-               
             }
         }
 

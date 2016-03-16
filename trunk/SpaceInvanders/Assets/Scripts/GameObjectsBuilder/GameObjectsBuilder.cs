@@ -1,13 +1,15 @@
 ﻿using Assets.Scripts.Data;
 using Assets.Scripts.Data.DataSource;
 using Assets.Scripts.Events.CustomEvents;
-using Assets.Scripts.ViewControllers;
-using UnityEngine;
 using Assets.Scripts.ModelComponents.Entities;
+using Assets.Scripts.ModelComponents.Equipments;
+using Assets.Scripts.ViewControllers;
+using Assets.Scripts.ViewControllers.Equipment.Weapon;
+using UnityEngine;
 
-namespace Assets.Scripts.Factories.GameEntitiesFactories
+namespace Assets.Scripts.GameObjectsBuilder
 {
-    public class GameEntityBuilder
+    public class GameObjectsBuilder
     {
         private static bool _enable = false;
         private static LevelController _parentLevel;
@@ -18,7 +20,6 @@ namespace Assets.Scripts.Factories.GameEntitiesFactories
                 return null;
             }
 
-            //switch (params_.model.DataType) {
             switch (params_.data.Type) {
                 case DataTypes.BULLET:
                     return Create<BulletController>( new BulletModel(params_.data as BulletData), params_).gameObject;
