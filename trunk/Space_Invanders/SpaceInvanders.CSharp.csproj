@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{621046D4-0F50-E04A-38E7-D310F6CA3024}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>Android:13</UnityBuildTarget>
+    <UnityVersion>5.3.5f1</UnityVersion>
+    <RootNamespace></RootNamespace>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_3_5;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;PLATFORM_SUPPORTS_ADS_ID;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_3_5;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;PLATFORM_SUPPORTS_ADS_ID;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="Boo.Lang" />
+    <Reference Include="UnityScript.Lang" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Parse.Unity">
+      <HintPath>Assets\Parse\Parse.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="BehaviourMachineRuntime">
+      <HintPath>Assets\Plugins\BehaviourMachine\BehaviourMachineRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.SqliteClient">
+      <HintPath>Assets\Plugins\SQLiter\DLLs\Mono.Data.SqliteClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>Assets\Plugins\SQLiter\DLLs\System.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="SpaceInvanders.CSharp.Plugins.csproj">
+      <Project>{D1F1D079-57D1-DEC5-C928-26DD3955DE6A}</Project>
+      <Name>SpaceInvanders.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\JSON\JSONObject.cs" />
+    <Compile Include="Assets\JSON\JSONTemplates.cs" />
+    <Compile Include="Assets\JSON\VectorTemplates.cs" />
+    <Compile Include="Assets\Scripts\CommonComponents\StateSwitcher\BaseStateMachine.cs" />
+    <Compile Include="Assets\Scripts\CommonComponents\StateSwitcher\IBaseState.cs" />
+    <Compile Include="Assets\Scripts\Controllers\AuthController.cs" />
+    <Compile Include="Assets\Scripts\Data\Attributes\DBFieldAttribute.cs" />
+    <Compile Include="Assets\Scripts\Data\DB\IDataBaseProxy.cs" />
+    <Compile Include="Assets\Scripts\Data\DB\JSONProxy.cs" />
+    <Compile Include="Assets\Scripts\Data\DB\SQLiteProxy.cs" />
+    <Compile Include="Assets\Scripts\Data\DataController.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\JsonFactories\AbstractJsonFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\JsonFactories\BehaviourImpactJsonFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\JsonFactories\BulletJsonFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\JsonFactories\EnemyJsonFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\JsonFactories\HeroJsonFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\JsonFactories\JSONFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\JsonFactories\PeriodImpactJsonFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\JsonFactories\SkillImpactJsonFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\BulletParseFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\EnemyParseFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\HeroParseFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\IConcreteParseFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\LevelParseFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\ParseFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\UserParseFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataFactories\ParseFactories\WeaponParseFactory.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\AbstractWarriorData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\BaseData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\BonusData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\BulletData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\EnemyData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\GameData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\HeroData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\Impacts\BehaviourImpactData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\Impacts\BonusItemImpactParam.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\Impacts\Damage\SkillImpactData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\Impacts\ImpactInfo.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\Impacts\PeriodImpactData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\LevelData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\TimerData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataSource\WeaponData.cs" />
+    <Compile Include="Assets\Scripts\Data\DataStorages\BaseStorage.cs" />
+    <Compile Include="Assets\Scripts\Data\DataStorages\LevelStorage.cs" />
+    <Compile Include="Assets\Scripts\Data\DataStorages\UserStorage.cs" />
+    <Compile Include="Assets\Scripts\Data\DataTypes.cs" />
+    <Compile Include="Assets\Scripts\Data\User\UserData.cs" />
+    <Compile Include="Assets\Scripts\Events\CustomEvents\ButtonEvent.cs" />
+    <Compile Include="Assets\Scripts\Events\CustomEvents\CreateEntityEvent.cs" />
+    <Compile Include="Assets\Scripts\Events\CustomEvents\CreateObjectEvent.cs" />
+    <Compile Include="Assets\Scripts\Events\CustomEvents\DataInitCompleteEvent.cs" />
+    <Compile Include="Assets\Scripts\Events\CustomEvents\LevelStartEvent.cs" />
+    <Compile Include="Assets\Scripts\Events\CustomEvents\LoadProgressEvent.cs" />
+    <Compile Include="Assets\Scripts\Events\CustomEvents\MoveControlsEvent.cs" />
+    <Compile Include="Assets\Scripts\Events\CustomEvents\StorageLoadCompleteEvent.cs" />
+    <Compile Include="Assets\Scripts\Events\CustomEvents\StorageUpdateCompleteEvent.cs" />
+    <Compile Include="Assets\Scripts\Events\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Events\xParamEvent.cs" />
+    <Compile Include="Assets\Scripts\Extensions\ParseComExtensions.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GameObjectsBuilder\GameObjectsBuilder.cs" />
+    <Compile Include="Assets\Scripts\Input\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Input\InputStates\GameInputState.cs" />
+    <Compile Include="Assets\Scripts\Input\InputStates\IInputState.cs" />
+    <Compile Include="Assets\Scripts\Input\InputStates\UIInputState.cs" />
+    <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\BaseComponent.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Behaviours\BehaviourFactory.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Behaviours\GuidedBehaviuorComponent.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Collisions\CollisionInfo.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Common\TimerComponent.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Entities\BaseEntityModel.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Entities\BulletModel.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Entities\EnemyModel.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Entities\HeroModel.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Entities\ISkillHolder.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Equipments\IEquipmentModel.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Equipments\WeaponModel.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Impacts\BehaviourImpact.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Impacts\Impact.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Impacts\ImpactFactory.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Impacts\PeriodImpact.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Impacts\SkillImpact.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Level\ILevelState.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Level\LevelModel.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Level\LevelStatePause.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Level\LevelStatePlay.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Skills\Modifiers\ModifyStartegies\ParallelModifyStrategy.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Skills\Modifiers\ModifyStartegies\SerialModifyStrategy.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Skills\Modifiers\ModifyStartegies\SkillModifyStrategy.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Skills\Modifiers\PeriodImpactComponent.cs" />
+    <Compile Include="Assets\Scripts\ModelComponents\Skills\Skill.cs" />
+    <Compile Include="Assets\Scripts\Network\DataProxy.cs" />
+    <Compile Include="Assets\Scripts\Network\IWebDataProxy.cs" />
+    <Compile Include="Assets\Scripts\Network\ParseProxy.cs" />
+    <Compile Include="Assets\Scripts\UI\WindowManager.cs" />
+    <Compile Include="Assets\Scripts\UI\WindowParams.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\AuthWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\AuthWindowState.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\LoginAuthState.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\AuthWindow\SignupAuthState.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\BaseWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\GameOverWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\InfoWindows\InfoWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\InfoWindows\InfoWindowParams.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\LeaderboardWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\PreloaderWindow.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\BaseEntityController.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\BulletController.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\CollisionController.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\Equipment\AbstractEquipmentController.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\Equipment\AbstractEquipmentHolder.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\Equipment\EquipmentHelper.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\Equipment\Weapon\WeaponController.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\Equipment\Weapon\WeaponHolder.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\HeroController.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\LevelController.cs" />
+    <Compile Include="Assets\Scripts\ViewControllers\Spinner.cs" />
+    <Compile Include="Assets\TestParse.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\AssetStoreFiles\README.txt" />
+    <None Include="Assets\JSON\readme.txt" />
+    <None Include="Assets\Parse\Parse.Unity.xml" />
+    <None Include="Assets\Parse\README.txt" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\BehaviourMachine\Readme!!!.txt" />
+    <None Include="Assets\Plugins\SQLiter\README.txt" />
+    <None Include="Assets\link 1.xml" />
+    <None Include="Assets\link.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
+</Project>

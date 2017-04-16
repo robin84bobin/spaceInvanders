@@ -1,0 +1,13 @@
+{ "collection": [
+	{
+		"type":"Enemy",
+        "id": 1,
+		"skills":[
+			{ "name":"health", "value":100 , "maxValue":100, "minValue":0},
+			{ "name":"speed", "value":10 , "maxValue":100, "minValue":-10}
+		],
+        "weaponId": "C48VEwbhIr",
+		"bonusIds": [ "bonus1_Id" ],
+        "objectId": "qrG0UhfNu9"
+    }
+] }
