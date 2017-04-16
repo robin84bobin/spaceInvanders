@@ -1,0 +1,104 @@
+Initialize engine version: 5.1.1p4 (c439df19cd24)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 550 Ti (ID=0x1244)
+    Vendor:   NVIDIA
+    VRAM:     977 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\Parse.Unity.dll (this message is harmless)
+Loading F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\Parse.Unity.dll into Unity Child Domain
+- Completed reload, in  0.038 seconds
+desktop: 1920x1200 59Hz; virtual: 3840x1200 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: F:\DropBox\Dropbox\SpaceInvanders\test_Data\Managed\System.dll (this message is harmless)
+Parent of RectTransform is being set with parent property. Consider using the SetParent method instead, with the worldPositionStays argument set to false. This will retain local orientation and scale rather than world orientation and scale, which can prevent common UI scaling issues.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+TABLE: Level LOADED
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+=> Level : wsBDpV4hq2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+onLoadProgress:Loading: "Enemy" ...
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+TABLE: Enemy LOADED
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+=> Enemy : qrG0UhfNu9
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+onLoadProgress:Loading: "Bullet" ...
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+TABLE: Bullet LOADED
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+=> Bullet : EpWwqhWxcw
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+onLoadProgress:Loading: "Hero" ...
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+TABLE: Hero LOADED
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+=> Hero : n5TelACYrB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+onLoadProgress:Loading: "Weapon" ...
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+TABLE: Weapon LOADED
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+=> Weapon : C48VEwbhIr
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+COMPLETE!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Parent of RectTransform is being set with parent property. Consider using the SetParent method instead, with the worldPositionStays argument set to false. This will retain local orientation and scale rather than world orientation and scale, which can prevent common UI scaling issues.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.667454 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 267.
+Total: 0.217144 ms (FindLiveObjects: 0.008605 ms CreateObjectMapping: 0.009466 ms MarkObjects: 0.195631 ms  DeleteObjects: 0.002868 ms)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 21e8 -> priority: 1 
+  Thread -> id: db4 -> priority: 1 
